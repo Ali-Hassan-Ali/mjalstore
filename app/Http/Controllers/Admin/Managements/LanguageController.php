@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Managements;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,22 +13,39 @@ class LanguageController extends Controller
 {
     public function index()
     {
-        $datatableColumns = [
-            'admin'      => 'admin',
-            'name'       => 'name',
-            'status'     => 'status',
-        ];
-dd('fdf');
-        return view('admin.languages.index', compact('datatableColumns'));
+        if(!permissionAdmin('read-languages')) {
+            return abort(403);
+        }
+        $datatables = (new DatatableServices())->header(
+            [
+                'route' => route('admin.languages.data'),
+                'route_status' => route('admin.languages.status'),
+                'header'  => [
+                    'site.name',
+                    'site.logo',
+                    'site.admin',
+                    'site.status',
+                    'site.created_at',
+                ],
+                'columns' => [
+                    'name'   => 'name',
+                    'logo'   => 'logo',
+                    'admin'  => 'admin',
+                    'status' => 'status',
+                ]
+            ]
+        );
+
+        return view('admin.managements.languages.index', compact('datatableColumns'));
 
     }//end of index
 
     public function data()
     {
         $permissions = [
-            'status' => 'status-admin',
-            'edit'   => 'edit-admin',
-            'delete' => 'delete-admin',
+            'status' => 'status-languages',
+            'edit'   => 'edit-languages',
+            'delete' => 'delete-languages',
         ];
 
         $category   = Category::status();
