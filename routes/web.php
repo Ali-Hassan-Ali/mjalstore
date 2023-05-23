@@ -23,7 +23,5 @@ Auth::routes();
 
 Route::get('/test', function () {
 
-    dd(
-    file_exists()
-    );
+    dd(\App\Enums\Admin\LanguageType::array());
 });

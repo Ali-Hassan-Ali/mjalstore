@@ -54,12 +54,12 @@
                     </a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="{{ route('admin.managements.roles.index') }}">
+                    <a class="treeview-item {{ request()->is('*roles*') ? 'active' : '' }}" href="{{ route('admin.managements.roles.index') }}">
                         <i class="icon fa fa-circle-o"></i>@lang('site.roles')
                     </a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="{{ route('admin.managements.languages.index') }}">
+                    <a class="treeview-item {{ request()->is('*languages*') ? 'active' : '' }}" href="{{ route('admin.managements.languages.index') }}">
                         <i class="icon fa fa-circle-o"></i>@lang('site.languages')
                     </a>
                 </li>

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Admin;
 
 class LanguageSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class LanguageSeeder extends Seeder
                 'code'      => 'ar',
                 'default'   => 1,
                 'created_at'=> now(),
+                'admin_id'  => Admin::first()?->id,
             ],
             [
                 'name'      => 'English',
@@ -26,6 +28,7 @@ class LanguageSeeder extends Seeder
                 'code'      => 'en',
                 'default'   => 0,
                 'created_at'=> now(),
+                'admin_id'  => Admin::first()?->id,
             ],
 
         ];

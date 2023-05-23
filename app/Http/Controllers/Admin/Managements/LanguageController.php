@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 use App\Http\Request\Admin\Managements\Language\LanguageRequest;
 use App\Http\Request\Admin\Managements\Language\StatusRequest;
 use App\Http\Request\Admin\Managements\Language\DeleteRequest;
+use App\Enums\Admin\LanguageType;
 use App\Services\DatatableServices;
 use App\models\Language;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 
 class LanguageController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         if(!permissionAdmin('read-languages')) {
             return abort(403);
@@ -77,33 +84,37 @@ class LanguageController extends Controller
 
     }//end of data
 
-    public function create()
+    public function create(): View
     {
-        return view('admin.managements.languages.create');
+        $types = LanguageType::array();
+
+        return view('admin.managements.languages.create', compact('types'));
         
     }//end of create
 
-    public function store(LanguageRequest $request)
+    public function store(LanguageRequest $request): RedirectResponse
     {
         Language::create($request->validated());
 
         session()->flash('success', __('site.added_successfully'));
-        return redirect()->route('admin.languages.index');
+        return redirect()->route('admin.managements.languages.index');
 
     }//end of store
 
-    public function edit(Category $language)
+    public function edit(Language $language): View
     {
-        return view('admin.languages.create', compact('category'));
+        $types = LanguageType::array();
+
+        return view('admin.managements.languages.create', compact('language', 'types'));
 
     }//end of edit
 
-    public function update(CategoryRequest $request, Category $language)
+    public function update(CategoryRequest $request, Language $language): RedirectResponse
     {
         $language->update($request->validated());
 
         session()->flash('success', __('site.updated_successfully'));
-        return redirect()->route('admin.languages.index');
+        return redirect()->route('admin.managements.languages.index');
         
     }//end of update
 

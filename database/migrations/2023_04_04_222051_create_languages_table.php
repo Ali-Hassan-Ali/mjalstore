@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('languages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('flag')->nullable();
             $table->boolean('default')->default(0);
             $table->string('code')->unique();
             $table->enum('dir', ['RTL', 'LTR']);
             $table->boolean('status')->default(0);
+
+            $table->foreignId('admin_id')->constrained();
 
             $table->softDeletes();
             $table->timestamps();

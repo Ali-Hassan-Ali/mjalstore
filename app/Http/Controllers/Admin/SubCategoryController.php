@@ -32,7 +32,6 @@ class SubCategoryController extends Controller
                     'site.logo',
                     'site.admin',
                     'site.status',
-                    'site.created_at',
                 ],
                 'columns' => [
                     'name'   => 'name',
@@ -60,8 +59,7 @@ class SubCategoryController extends Controller
             ->addColumn('created_at', fn(Category $category) => $category->created_at->format('Y-m-d'))
             ->addColumn('admin', fn(Category $category) => $category?->admin?->name)
             ->editColumn('logo', function(Category $category) {
-                $models = $category;
-                return view('admin.dataTables.image', compact('models'));
+                return view('admin.dataTables.image', ['models' => $category]);
             })
             ->addColumn('actions', function(Category $category) use($permissions) {
                 $routeEdit   = route('admin.sub_categories.edit', $category->id);
@@ -69,8 +67,7 @@ class SubCategoryController extends Controller
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
             ->addColumn('status', function(Category $category) use($permissions) {
-                $models = $category;
-                return view('admin.dataTables.status', compact('models', 'permissions'));
+                return view('admin.dataTables.status', ['models' => $category, 'permissions' => $permissions]);
             })
             ->addColumn('name', fn(Category $category) => $category->name ?? '')
             ->rawColumns(['record_select', 'actions', 'status', 'name', 'logo'])

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AdminRequest;
-use App\Http\Requests\Admin\Auth\LoginRequest;
+use App\Http\Request\Admin\AdminRequest;
+use App\Http\Request\Admin\Auth\LoginRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
