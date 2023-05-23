@@ -53,6 +53,7 @@ Route::middleware([
             ->group(function () {
 
                 Route::get('data', 'data')->name('data');
+                Route::post('default', 'changeDefault')->name('default');
                 Route::post('status', 'status')->name('status');
                 Route::delete('bulk_delete', 'bulkDelete')->name('bulk_delete');
 

@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin\Managements;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Request\Admin\Category\CategoryRequest;
-use App\Http\Request\Admin\Category\StatusRequest;
-use App\Http\Request\Admin\Category\DeleteRequest;
+use App\Http\Request\Admin\Managements\Language\LanguageRequest;
+use App\Http\Request\Admin\Managements\Language\StatusRequest;
+use App\Http\Request\Admin\Managements\Language\DeleteRequest;
+use App\Services\DatatableServices;
 use App\models\Language;
 
 class LanguageController extends Controller
@@ -16,27 +17,31 @@ class LanguageController extends Controller
         if(!permissionAdmin('read-languages')) {
             return abort(403);
         }
+
         $datatables = (new DatatableServices())->header(
             [
-                'route' => route('admin.languages.data'),
-                'route_status' => route('admin.languages.status'),
+                'route' => route('admin.managements.languages.data'),
+                'route_status' => route('admin.managements.languages.status'),
                 'header'  => [
                     'site.name',
-                    'site.logo',
+                    'site.dir',
+                    'site.code',
+                    'site.default',
                     'site.admin',
                     'site.status',
-                    'site.created_at',
                 ],
                 'columns' => [
                     'name'   => 'name',
-                    'logo'   => 'logo',
+                    'dir'    => 'dir',
+                    'code'   => 'code',
+                    'default'=> 'default',
                     'admin'  => 'admin',
                     'status' => 'status',
                 ]
             ]
         );
 
-        return view('admin.managements.languages.index', compact('datatableColumns'));
+        return view('admin.managements.languages.index', compact('datatables'));
 
     }//end of index
 
@@ -44,25 +49,27 @@ class LanguageController extends Controller
     {
         $permissions = [
             'status' => 'status-languages',
-            'edit'   => 'edit-languages',
+            'update' => 'update-languages',
             'delete' => 'delete-languages',
         ];
 
-        $category   = Category::status();
+        $language   = Language::all();
 
-        return dataTables()->of($category)
+        return dataTables()->of($language)
             ->addColumn('record_select', 'admin.dataTables.record_select')
-            ->addColumn('created_at', fn (Category $category) => $category->created_at->format('Y-m-d'))
-            ->addColumn('admin', fn (Category $category) => $category->admin->name)
-            ->addColumn('actions', function(Category $category) use($permissions) {
-                $models      = $category;
-                $routeEdit   = route('admin.languages.edit', $category->id);
-                $routeDelete = route('admin.languages.edit', $category->id);
-                return view('admin.dataTables.actions', compact('models', 'permissions', 'routeEdit', 'routeDelete'));
+            ->addColumn('created_at', fn (Language $language) => $language?->created_at?->format('Y-m-d'))
+            ->addColumn('admin', fn (Language $language) => $language?->admin?->name)
+            ->addColumn('actions', function(Language $language) use($permissions) {
+                $routeEdit   = route('admin.managements.languages.edit', 1);
+                $routeDelete = route('admin.managements.languages.destroy', 1);
+                return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
-            ->addColumn('status', function(Category $category) use($permissions) {
-                $models = $category;
+            ->addColumn('status', function(Language $language) use($permissions) {
+                $models = $language;
                 return view('admin.dataTables.status', compact('models', 'permissions'));
+            })
+            ->addColumn('default', function(Language $language) {
+                return view('admin.managements.languages.data_tables.check_default', compact('language'));
             })
             ->rawColumns(['record_select', 'actions', 'status'])
             ->addIndexColumn()
@@ -72,27 +79,28 @@ class LanguageController extends Controller
 
     public function create()
     {
-        return view('admin.languages.create');
+        return view('admin.managements.languages.create');
         
     }//end of create
 
-    public function store(CategoryRequest $request)
+    public function store(LanguageRequest $request)
     {
-        Category::create($request->validated());
+        Language::create($request->validated());
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.languages.index');
 
     }//end of store
 
-    public function edit(Category $category)
+    public function edit(Category $language)
     {
         return view('admin.languages.create', compact('category'));
 
     }//end of edit
 
-    public function update(CategoryRequest $request, Category $category)
-    {$category->update($request->validated());
+    public function update(CategoryRequest $request, Category $language)
+    {
+        $language->update($request->validated());
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.languages.index');
@@ -115,7 +123,19 @@ class LanguageController extends Controller
 
     public function status(StatusRequest $request)
     {
-        Category::update(['status' => !$request->status]);
+        $language = Language::find($request->id);
+        $language?->update(['status' => !$language->status]);
+
+        session()->flash('success', __('site.updated_successfully'));
+        return response(__('site.updated_successfully'));
+        
+    }//end of status
+
+    public function changeDefault(StatusRequest $request)
+    {
+        $languages = Language::all();
+        $languages->each(fn ($language) => $language->update(['default' => 0]));
+        Language::find($request->id)->update(['default' => 1]);
 
         session()->flash('success', __('site.updated_successfully'));
         return response(__('site.updated_successfully'));

@@ -12,6 +12,7 @@
         @foreach($columns as $column)
             <th>{{ trans($column) }}</th>
         @endforeach
+        <th>{{ trans('site.created_at') }}</th>
         <th>{{ trans('site.action') }}</th>
     </tr>
     </thead>

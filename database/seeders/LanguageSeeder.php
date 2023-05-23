@@ -14,16 +14,18 @@ class LanguageSeeder extends Seeder
     {
         $data = [
             [
-                'name'     => 'Arabic',
-                'dir'      => 'RTL',
-                'code'     => 'ar',
-                'default'  => 1,
+                'name'      => 'Arabic',
+                'dir'       => 'RTL',
+                'code'      => 'ar',
+                'default'   => 1,
+                'created_at'=> now(),
             ],
             [
-                'name'     => 'English',
-                'dir'      => 'LTR',
-                'code'     => 'en',
-                'default'  => 0,
+                'name'      => 'English',
+                'dir'       => 'LTR',
+                'code'      => 'en',
+                'default'   => 0,
+                'created_at'=> now(),
             ],
 
         ];

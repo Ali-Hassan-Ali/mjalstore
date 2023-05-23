@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Role;
+namespace App\Http\Request\Admin\Managements\Language;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -8,16 +8,16 @@ class StatusRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return false;
+        return permissionAdmin('status-languages');
 
     }//end of authorize
 
     public function rules(): array
     {
         return [
-            'id' => ['required', 'Numeric', 'exists:categories,id'],
+            'id' => ['required', 'numeric', 'exists:languages,id'],
         ];
 
     }//end of rules
 
-}//endof class
+}//end of class
