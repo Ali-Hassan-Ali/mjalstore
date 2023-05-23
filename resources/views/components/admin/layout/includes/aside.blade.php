@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="{{ route('admin.sub_categories.index') }}">
+                    <a class="treeview-item {{ request()->is('*sub_categories*') ? 'active' : '' }}" href="{{ route('admin.sub_categories.index') }}">
                         <i class="icon fa fa-circle-o"></i>@lang('site.sub_categories')
                     </a>
                 </li>
