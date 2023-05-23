@@ -5,8 +5,8 @@
     <div class="app-sidebar__user">
         <img class="app-sidebar__user-avatar" src="{{ auth()->user()->image_path }}" alt="User Image">
         <div>
-            <h2 class="app-sidebar__user-name">{{ auth('admin')->user()->fiest_name }}</p>
-            {{-- <p class="app-sidebar__user-designation">{{ auth()->user()->roles->first()->name }}</p> --}}
+            <h2 class="app-sidebar__user-name">{{ auth('admin')->user()->name }}</p>
+            <p class="app-sidebar__user-designation">{{ auth()->user()->roles->first()->name }}</p>
         </div>
     </div>
 
@@ -65,23 +65,6 @@
                 </li>
             </ul>
         </li>
-
-        {{--equipments--}}
-        {{-- @if (auth()->user()->hasPermission('read_equipments'))
-            <li><a class="app-menu__item {{ request()->segment(2) == 'equipments' ? 'active' : '' }}" href="{{ route('admin.equipments.index') }}"><i class="app-menu__icon fas fa-tools"></i> <span class="app-menu__label">@lang('equipments.equipments')</span></a></li>
-        @endif --}}
-
-
-        {{--settings--}}
-
-
-        {{--profile--}}
-        {{-- <li class="treeview {{ request()->is('*profile*') || request()->is('*password*')  ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-circle"></i><span class="app-menu__label">@lang('users.profile')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-            <ul class="treeview-menu">
-                <li><a class="treeview-item" href="{{ route('admin.profile.edit') }}"><i class="icon fa fa-circle-o"></i>@lang('users.edit_profile')</a></li>
-                <li><a class="treeview-item" href="{{ route('admin.profile.password.edit') }}"><i class="icon fa fa-circle-o"></i>@lang('users.change_password')</a></li>
-            </ul>
-        </li> --}}
 
     </ul>
 </aside>
