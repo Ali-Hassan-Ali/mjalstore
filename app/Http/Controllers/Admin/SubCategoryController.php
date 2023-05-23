@@ -11,7 +11,6 @@ use App\Services\DatatableServices;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Response;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -134,7 +133,7 @@ class SubCategoryController extends Controller
 
     }//end of update
 
-    public function destroy(Category $category): Application | Response | Application | ResponseFactory
+    public function destroy(Category $category): Application | Response | ResponseFactory
     {
         if($category->logo) {
             Storage::disk('public')->delete($category->logo);
