@@ -106,7 +106,7 @@
             border: 3px solid #dee2e6 !important;
         }
 
-        td {
+        td, tr, th {
             text-align: center;
         }
 

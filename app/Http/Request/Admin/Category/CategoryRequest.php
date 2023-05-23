@@ -39,7 +39,7 @@ class CategoryRequest extends FormRequest
         } else {
 
             $rules['name.' . app()->getLocale()] = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')];
-            $rules['logo']                       = ['required','image'];
+            // $rules['logo']                       = ['required','image'];
 
         } //end of if
 
@@ -51,7 +51,7 @@ class CategoryRequest extends FormRequest
     {
         return request()->merge([
             'admin_id' => auth('admin')->id(),
-            'slug'     => request()->name[getLanguages('default')->code] ?? '',
+            'slug'     => str()->slug(request()->name[getLanguages('default')->code] ?? '', '-'),
             'status'   => request()->has('status'),
         ]);
 

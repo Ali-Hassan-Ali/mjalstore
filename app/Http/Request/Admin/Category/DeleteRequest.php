@@ -20,4 +20,12 @@ class DeleteRequest extends FormRequest
 
     }//end of rules
 
+    protected function prepareForValidation()
+    {
+        return request()->merge([
+            'ids'   => json_decode(request()->record_ids),
+        ]);
+
+    }//end of prepare for validation
+
 }//end of class

@@ -7,7 +7,7 @@
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item">
             <a href="{{ route('admin.index') }}">
-                {{ trans('menu.category') }}
+                {{ trans('site.home') }}
             </a>
         </li>
         <li class="breadcrumb-item">{{ trans('menu.category') }}</li>

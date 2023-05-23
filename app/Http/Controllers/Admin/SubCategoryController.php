@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Http\Request\Admin\Category\CategoryRequest;
-use App\Http\Request\Admin\Category\StatusRequest;
-use App\Http\Request\Admin\Category\DeleteRequest;
+use App\Http\Request\Admin\SubCategory\SubCategoryRequest;
+use App\Http\Request\Admin\SubCategory\StatusRequest;
+use App\Http\Request\Admin\SubCategory\DeleteRequest;
 use App\Services\DatatableServices;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -16,17 +16,18 @@ use Illuminate\Http\Response;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
-class CategoryController extends Controller
+class SubCategoryController extends Controller
 {
     public function index(): View
     {
-        if(!permissionAdmin('read-categories')) {
+        if(!permissionAdmin('read-sub_categories')) {
             return abort(403);
         }
+
         $datatables = (new DatatableServices())->header(
             [
-                'route' => route('admin.categories.data'),
-                'route_status' => route('admin.categories.status'),
+                'route' => route('admin.sub_categories.data'),
+                'route_status' => route('admin.sub_categories.status'),
                 'header'  => [
                     'site.name',
                     'site.logo',
@@ -43,16 +44,16 @@ class CategoryController extends Controller
             ]
         );
 
-        return view('admin.categories.index', compact('datatables'));
+        return view('admin.sub_categories.index', compact('datatables'));
 
     }//end of index
 
     public function data()
     {
         $permissions = [
-            'status' => permissionAdmin('status-categories'),
-            'update' => permissionAdmin('update-categories'),
-            'delete' => permissionAdmin('delete-categories'),
+            'status' => permissionAdmin('status-sub_categories'),
+            'update' => permissionAdmin('update-sub_categories'),
+            'delete' => permissionAdmin('delete-sub_categories'),
         ];
         $category = Category::all();
         return dataTables()->of($category)
@@ -64,8 +65,8 @@ class CategoryController extends Controller
                 return view('admin.dataTables.image', compact('models'));
             })
             ->addColumn('actions', function(Category $category) use($permissions) {
-                $routeEdit   = route('admin.categories.edit', $category->id);
-                $routeDelete = route('admin.categories.destroy', $category->id);
+                $routeEdit   = route('admin.sub_categories.edit', $category->id);
+                $routeDelete = route('admin.sub_categories.destroy', $category->id);
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
             ->addColumn('status', function(Category $category) use($permissions) {
@@ -81,11 +82,11 @@ class CategoryController extends Controller
 
     public function create(): View
     {
-        if(!permissionAdmin('create-categories')) {
+        if(!permissionAdmin('create-sub_categories')) {
             return abort(403);
         }
 
-        return view('admin.categories.create');
+        return view('admin.sub_categories.create');
 
     }//end of create
 
@@ -102,17 +103,17 @@ class CategoryController extends Controller
         Category::create($requestData);
 
         session()->flash('success', __('site.added_successfully'));
-        return redirect()->route('admin.categories.index');
+        return redirect()->route('admin.sub_categories.index');
 
     }//end of store
 
     public function edit(Category $category): View
     {
-        if(!permissionAdmin('update-categories')) {
+        if(!permissionAdmin('update-sub_categories')) {
             return abort(403);
         }
 
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.sub_categories.edit', compact('category'));
 
     }//end of edit
 
@@ -129,7 +130,7 @@ class CategoryController extends Controller
         $category->update($requestData);
 
         session()->flash('success', __('site.updated_successfully'));
-        return redirect()->route('admin.categories.index');
+        return redirect()->route('admin.sub_categories.index');
 
     }//end of update
 

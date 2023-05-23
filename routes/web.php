@@ -22,5 +22,8 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Auth::routes();
 
 Route::get('/test', function () {
-    dd(getLanguages());
+
+    dd(
+    file_exists()
+    );
 });
