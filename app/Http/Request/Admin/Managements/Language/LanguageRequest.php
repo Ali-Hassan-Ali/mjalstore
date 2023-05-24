@@ -25,6 +25,8 @@ class LanguageRequest extends FormRequest
 
     public function rules(): array
     {
+        // dd(request()->all());
+
         $rules = [
             'status'  => ['nullable', 'in:1,0'],
             'dir'     => ['required', 'in:RTL,LTR'],
@@ -34,13 +36,13 @@ class LanguageRequest extends FormRequest
             
             $language = request()->route()->parameter('language');
 
-            $rules['name'] = ['required','string','min:2','max:15', Rule::unique('languages')->ignore($language->id)];
-            $rules['code'] = ['required','string','min:2','max:15', Rule::unique('languages')->ignore($language->id)];
+            $rules['name'] = ['required','string','min:2','max:20', Rule::unique('languages')->ignore($language->id)];
+            $rules['code'] = ['required','string','min:2','max:6', Rule::unique('languages')->ignore($language->id)];
             $rules['flag'] = ['nullable','image'];
 
         } else {
 
-            $rules['name'] = ['required','string','min:2','max:6', 'unique:languages'];
+            $rules['name'] = ['required','string','min:2','max:20', 'unique:languages'];
             $rules['code'] = ['required','string','min:2','max:6', 'unique:languages'];
             $rules['flag'] = ['required','image'];
 

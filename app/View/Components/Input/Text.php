@@ -9,6 +9,7 @@ use Illuminate\View\Component;
 class Text extends Component
 {
     public function __construct(
+        public $col      = '',
         public $name     = '',
         public $type     = 'text',
         public $value    = '',

@@ -378,6 +378,7 @@
     $('.select2').select2({
         'width': '100%',
         'tags': true,
+        'theme': 'bootstrap',
     });
 
     $('.select2-tags-false').select2({

@@ -31,16 +31,16 @@
 
             <div class="col-12 col-md-8">
 
-                <div class="tile shadow">
+                <div class="tile shadow row">
 
 					{{--name--}}
-                    <x-input.text required="true" name="name" label="site.name" :value="old('name')"/>
+                    <x-input.text required="true" name="name" label="site.name" col="col-md-6"/>
 
                     {{--code--}}
-                    <x-input.text required="true" name="code" label="site.code" :value="old('code')"/>
+                    <x-input.text required="true" name="code" label="site.code" col="col-md-6"/>
 
                     {{--type--}}
-                    <x-input.option required="true" name="code" label="site.type" :lists="$types" :value="old('type')"/>
+                    <x-input.option required="true" name="dir" label="site.dir" :lists="$types"/>
 
                     {{--status--}}
                     <x-input.checkbox :required="true" name="status" label="admin.global.status"/>
