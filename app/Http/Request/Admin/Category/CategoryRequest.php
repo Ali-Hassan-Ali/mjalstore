@@ -26,7 +26,7 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'status'  => ['in:1,0'],
+            'status'  => ['nullable', 'in:1,0'],
         ];
 
         if (in_array(request()->method(), ['PUT', 'PATCH'])) {
@@ -39,7 +39,7 @@ class CategoryRequest extends FormRequest
         } else {
 
             $rules['name.' . app()->getLocale()] = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')];
-            // $rules['logo']                       = ['required','image'];
+            $rules['logo']                       = ['required','image'];
 
         } //end of if
 
