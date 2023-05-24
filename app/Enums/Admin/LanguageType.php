@@ -4,14 +4,14 @@ namespace App\Enums\Admin;
 
 enum LanguageType: string
 {
-    case RTL = 'RTL';
     case LTR = 'LTR';
+    case RTL = 'RTL';
 
     public static function array(): array
     {
     	return [
+    		'LTR' => 'LTR',
     		'RTL' => 'RTL',
-    		'LRT' => 'LRT',
     	];
 
     }//end of fun

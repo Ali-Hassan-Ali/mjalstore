@@ -67,13 +67,17 @@ class LanguageController extends Controller
             ->addColumn('created_at', fn (Language $language) => $language?->created_at?->format('Y-m-d'))
             ->addColumn('admin', fn (Language $language) => $language?->admin?->name)
             ->addColumn('actions', function(Language $language) use($permissions) {
-                $routeEdit   = route('admin.managements.languages.edit', 1);
-                $routeDelete = route('admin.managements.languages.destroy', 1);
+                $routeEdit   = route('admin.managements.languages.edit', $language->id);
+                $routeDelete = '';
+                if(!$language->default) {
+                    $routeDelete = route('admin.managements.languages.destroy', $language->id);
+                }
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
             ->addColumn('status', function(Language $language) use($permissions) {
-                $models = $language;
-                return view('admin.dataTables.status', compact('models', 'permissions'));
+                if(!$language->default) {
+                    return view('admin.dataTables.status', ['models' => $language, 'permissions' => $permissions]);
+                }
             })
             ->addColumn('default', function(Language $language) {
                 return view('admin.managements.languages.data_tables.check_default', compact('language'));
@@ -92,9 +96,18 @@ class LanguageController extends Controller
         
     }//end of create
 
+    //RedirectResponse
     public function store(LanguageRequest $request): RedirectResponse
     {
-        Language::create($request->validated());
+        $requestData = request()->except('flag');
+
+        if(request()->file('flag')) {
+
+            $requestData['flag'] = request()->file('flag')->store('languages', 'public');
+
+        }
+
+        Language::create($requestData);
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.managements.languages.index');
@@ -105,31 +118,53 @@ class LanguageController extends Controller
     {
         $types = LanguageType::array();
 
-        return view('admin.managements.languages.create', compact('language', 'types'));
+        return view('admin.managements.languages.edit', compact('language', 'types'));
 
     }//end of edit
 
-    public function update(CategoryRequest $request, Language $language): RedirectResponse
+    public function update(LanguageRequest $request, Language $language): RedirectResponse
     {
-        $language->update($request->validated());
+        $requestData = request()->except('flag');
+
+        if(request()->file('flag')) {
+
+            Storage::disk('public')->delete($language->flag);
+
+            $requestData['flag'] = request()->file('flag')->store('languages', 'public');
+
+        }
+
+        $language->update($requestData);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.managements.languages.index');
         
     }//end of update
 
-    public function delete()
+    public function destroy(Language $language): Application | Response | ResponseFactory
     {
-        
+        if(!$language->default) {
+
+            if($language->flag) {
+                Storage::disk('public')->delete($language->flag);
+            }
+            $language->delete();
+        }
+
+        session()->flash('success', __('site.deleted_successfully'));
+        return response(__('site.deleted_successfully'));
+
     }//end of delete
 
     public function bulkDelete(DeleteRequest $request)
     {
-        Category::destroy(json_decode(request()->record_ids));
+        $images = Language::where('default', 0)->find(request()->ids ?? [])->pluck('flag')->toArray();
+        Storage::disk('public')->delete($images) ?? '';
+        Language::where('default', 0)->destroy(request()->ids ?? []);
 
         session()->flash('success', __('site.deleted_successfully'));
         return response(__('site.deleted_successfully'));
-        
+
     }//end of bulkDelete
 
     public function status(StatusRequest $request)
@@ -146,7 +181,7 @@ class LanguageController extends Controller
     {
         $languages = Language::all();
         $languages->each(fn ($language) => $language->update(['default' => 0]));
-        Language::find($request->id)->update(['default' => 1]);
+        Language::find($request->id)->update(['default' => 1, 'status' => 1]);
 
         session()->flash('success', __('site.updated_successfully'));
         return response(__('site.updated_successfully'));

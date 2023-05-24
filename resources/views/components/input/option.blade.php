@@ -7,7 +7,7 @@
         <select name="{{ $name }}" class="form-control select2 @error(!empty($invalid) ? $invalid : $name) is-invalid @enderror" id="{{ $name }}">
             <option value="" selected disabled>@lang('site.choose')</option>
             @foreach($lists as $key=>$list)
-                <option value="{{ $key }}" {{ $list == old(!empty($invalid) ? $invalid : $name) ? 'selected' : '' }}>{{ $list }}</option>
+                <option value="{{ $key }}" {{ $list == old(!empty($invalid) ? $invalid : $name, $value) ? 'selected' : '' }}>{{ $list }}</option>
             @endforeach
         </select>
         @error(!empty($invalid) ? $invalid : $name)

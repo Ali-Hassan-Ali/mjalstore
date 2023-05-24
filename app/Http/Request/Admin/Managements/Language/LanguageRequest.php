@@ -25,8 +25,6 @@ class LanguageRequest extends FormRequest
 
     public function rules(): array
     {
-        // dd(request()->all());
-
         $rules = [
             'status'  => ['nullable', 'in:1,0'],
             'dir'     => ['required', 'in:RTL,LTR'],
