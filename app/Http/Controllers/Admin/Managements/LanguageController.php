@@ -32,6 +32,7 @@ class LanguageController extends Controller
                 'header'  => [
                     'site.name',
                     'site.dir',
+                    'site.flag',
                     'site.code',
                     'site.default',
                     'site.admin',
@@ -40,6 +41,7 @@ class LanguageController extends Controller
                 'columns' => [
                     'name'   => 'name',
                     'dir'    => 'dir',
+                    'flag'   => 'flag',
                     'code'   => 'code',
                     'default'=> 'default',
                     'admin'  => 'admin',
@@ -66,6 +68,9 @@ class LanguageController extends Controller
             ->addColumn('record_select', 'admin.dataTables.record_select')
             ->addColumn('created_at', fn (Language $language) => $language?->created_at?->format('Y-m-d'))
             ->addColumn('admin', fn (Language $language) => $language?->admin?->name)
+            ->editColumn('flag', function(Language $language) {
+                return view('admin.dataTables.image', ['models' => $language]);
+            })
             ->addColumn('actions', function(Language $language) use($permissions) {
                 $routeEdit   = route('admin.managements.languages.edit', $language->id);
                 $routeDelete = '';
@@ -126,9 +131,9 @@ class LanguageController extends Controller
     {
         $requestData = request()->except('flag');
 
-        if(request()->file('flag')) {
+        if(request()->has('flag')) {
 
-            Storage::disk('public')->delete($language->flag);
+            $language->flag ? Storage::disk('public')->delete($language->flag) : '';
 
             $requestData['flag'] = request()->file('flag')->store('languages', 'public');
 
@@ -145,9 +150,7 @@ class LanguageController extends Controller
     {
         if(!$language->default) {
 
-            if($language->flag) {
-                Storage::disk('public')->delete($language->flag);
-            }
+            $language->flag ? Storage::disk('public')->delete($language->flag) : '';
             $language->delete();
         }
 
