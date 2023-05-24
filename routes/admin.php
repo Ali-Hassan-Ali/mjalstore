@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 
 use App\Http\Controllers\Admin\Managements\LanguageController;
+use App\Http\Controllers\Admin\Managements\AdminController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 
 Route::get('login', [LoginController::class, 'index'])->name('login.index');
