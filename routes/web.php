@@ -23,5 +23,5 @@ Auth::routes();
 
 Route::get('/test', function () {
 
-    dd(\App\Enums\Admin\LanguageType::array());
+    dd(\App\Models\Role::users()->get());
 });

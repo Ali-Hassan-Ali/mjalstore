@@ -7,10 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Request\Admin\Managements\Role\RoleRequest;
 use App\Http\Request\Admin\Managements\Role\StatusRequest;
 use App\Http\Request\Admin\Managements\Role\DeleteRequest;
-use App\Enums\Admin\RoleType;
 use App\Services\DatatableServices;
 use App\models\Role;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -28,16 +26,15 @@ class RoleController extends Controller
         $datatables = (new DatatableServices())->header(
             [
                 'route' => route('admin.managements.roles.data'),
-                'route_status' => route('admin.managements.roles.status'),
                 'header'  => [
                     'site.name',
                     'site.admin',
-                    'site.admins_count',
+                    'site.admins',
                 ],
                 'columns' => [
-                    'name'         => 'name',
-                    'admin'        => 'admin',
-                    'admins_count' => 'admins_count',
+                    'name'    => 'name',
+                    'admin'   => 'admin',
+                    'admins'  => 'admins',
                 ]
             ]
         );
@@ -54,12 +51,14 @@ class RoleController extends Controller
             'delete' => 'delete-roles',
         ];
 
-        $role   = Role::all();
+        $role = Role::all();
 
         return dataTables()->of($role)
             ->addColumn('record_select', 'admin.dataTables.record_select')
             ->addColumn('created_at', fn (Role $role) => $role?->created_at?->format('Y-m-d'))
             ->addColumn('admin', fn (Role $role) => $role?->admin?->name)
+            ->addColumn('admins', fn (Role $role) => $role?->admin?->name)
+            ->addColumn('admins_count', fn (Role $role) => $role?->admins?->count())
             ->addColumn('actions', function(Role $role) use($permissions) {
                 $routeEdit   = route('admin.managements.roles.edit', $role->id);
                 $routeDelete = route('admin.managements.roles.destroy', $role->id);

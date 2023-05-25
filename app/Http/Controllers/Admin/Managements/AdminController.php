@@ -96,7 +96,7 @@ class AdminController extends Controller
     //RedirectResponse
     public function store(AdminRequest $request): RedirectResponse
     {
-        $requestData = request()->safe()->except(['image', 'roles', 'password', 'password_confirmation']);
+        $requestData = $request->safe()->except(['image', 'roles', 'password_confirmation']);
 
         if(request()->file('image')) {
 
@@ -131,7 +131,7 @@ class AdminController extends Controller
 
     public function update(AdminRequest $request, Admin $admin): RedirectResponse
     {
-        $requestData = request()->safe()->except(['image', 'roles', 'password', 'password_confirmation']);
+        $requestData = $request->safe()->except(['image', 'roles', 'password', 'password_confirmation']);
 
         if(request()->has('image')) {
 

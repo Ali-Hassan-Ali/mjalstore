@@ -31,32 +31,36 @@
         Table.search(this.value).draw();
     })
 
-    $(document).on('change', '.status', function (e) {
-        e.preventDefault();
+    if(datatable.route_status) {
 
-        let url    = datatable.route_status;
-        let method = 'post';
-        let id     = $(this).data('id');
+        $(document).on('change', '.status', function (e) {
+            e.preventDefault();
 
-        $.ajax({
-            url: url,
-            data: {id: id},
-            method: method,
-            success: function (response) {
+            let url    = datatable.route_status;
+            let method = 'post';
+            let id     = $(this).data('id');
 
-                $('.datatable').DataTable().ajax.reload();
+            $.ajax({
+                url: url,
+                data: {id: id},
+                method: method,
+                success: function (response) {
 
-                new Noty({
-                    layout: 'topRight',
-                    type: 'alert',
-                    text: response,
-                    killer: true,
-                    timeout: 2000,
-                }).show();
-            },
+                    $('.datatable').DataTable().ajax.reload();
 
-        });//end of ajax call
+                    new Noty({
+                        layout: 'topRight',
+                        type: 'alert',
+                        text: response,
+                        killer: true,
+                        timeout: 2000,
+                    }).show();
+                },
 
-    });//end of delete
+            });//end of ajax call
+
+        });//end of delete
+    }
+
 
 </script>

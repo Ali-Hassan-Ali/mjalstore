@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 use App\Models\Admin;
 
 class AdminSeeder extends Seeder
@@ -16,9 +17,13 @@ class AdminSeeder extends Seeder
             'password'  => bcrypt('password'),
         ]);
 
-        $admin->assignRole('super_admin');
+        $roleSuperAdmin = Role::create([
+            'name'       => 'super_admin',
+            'guard_name' => 'admin',
+            'admin_id'   => Admin::first()->id
+        ]);
 
-        \App\Models\Admin::factory(20)->create();
+        $admin->assignRole('super_admin');
 
     }//end of run
 

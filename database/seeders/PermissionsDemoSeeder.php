@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Models\Admin;
 use Spatie\Permission\PermissionRegistrar;
 
 class PermissionsDemoSeeder extends Seeder
@@ -22,7 +23,11 @@ class PermissionsDemoSeeder extends Seeder
         Role::create([
             'name'       => 'admin',
             'guard_name' => 'admin',
+            'admin_id'   => Admin::first()->id,
         ]);
+
+        \App\Models\Admin::factory(20)->create();
+        \App\Models\Admin::whereNot('id', 1)->each(fn($admin) => $admin->assignRole('admin'));
 
         $permissions = ['home', 'admins', 'roles', 'languages', 'settings', 'categories', 'sub_categories'];
 
@@ -38,10 +43,11 @@ class PermissionsDemoSeeder extends Seeder
 
         }//end of each
 
-        $roleSuperAdmin = Role::create([
+        $roleSuperAdmin = Role::where([
             'name'       => 'super_admin',
             'guard_name' => 'admin',
-        ]);
+            'admin_id'   => Admin::first()->id
+        ])->first();
 
         $roleSuperAdmin->givePermissionTo(Permission::all());
 
