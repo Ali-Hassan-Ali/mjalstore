@@ -34,7 +34,6 @@ class AdminController extends Controller
                     'site.email',
                     'site.image',
                     'site.roles',
-                    'site.admin',
                     'site.status',
                 ],
                 'columns' => [
@@ -42,7 +41,6 @@ class AdminController extends Controller
                     'email'  => 'email',
                     'image'  => 'image',
                     'roles'  => 'roles',
-                    'admin'  => 'admin',
                     'status' => 'status',
                 ]
             ]
@@ -65,10 +63,11 @@ class AdminController extends Controller
         return dataTables()->of($admin)
             ->addColumn('record_select', 'admin.dataTables.record_select')
             ->addColumn('created_at', fn (Admin $admin) => $admin?->created_at?->format('Y-m-d'))
-            ->addColumn('admin', fn (Admin $admin) => $admin?->admin?->name)
-            ->addColumn('roles', fn (Admin $admin) => $admin?->admin?->name)
             ->editColumn('image', function(Admin $admin) {
                 return view('admin.dataTables.image', ['models' => $admin]);
+            })
+            ->addColumn('roles', function(Admin $admin) {
+                return view('admin.managements.admins.data_tables.roles', compact('admin'));
             })
             ->addColumn('actions', function(Admin $admin) use($permissions) {
                 $routeEdit   = route('admin.managements.admins.edit', $admin->id);
@@ -83,7 +82,7 @@ class AdminController extends Controller
                     return view('admin.dataTables.status', ['models' => $admin, 'permissions' => $permissions]);
                 }
             })
-            ->rawColumns(['record_select', 'actions', 'status'])
+            ->rawColumns(['record_select', 'actions', 'status', 'roles'])
             ->addIndexColumn()
             ->toJson();
 
@@ -91,7 +90,7 @@ class AdminController extends Controller
 
     public function create(): View
     {
-        $roles = Rol::whereNotIn('name', ['super_admin'])->get();
+        $roles = Rol::whereNotIn('name', ['super_admin'])->pluck('name', 'name');
 
         return view('admin.managements.admins.create', compact('roles'));
         
@@ -100,7 +99,7 @@ class AdminController extends Controller
     //RedirectResponse
     public function store(AdminRequest $request): RedirectResponse
     {
-        $requestData = request()->except('image');
+        $requestData = request()->except('image', 'roles');
 
         if(request()->file('image')) {
 
@@ -108,7 +107,11 @@ class AdminController extends Controller
 
         }
 
-        Admin::create($requestData);
+        $admin = Admin::create($requestData);
+
+        if(request()->has('roles')) {
+            $admin->assignRole(request()->roles);
+        }
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.managements.admins.index');
@@ -117,25 +120,35 @@ class AdminController extends Controller
 
     public function edit(Admin $admin): View
     {
-        $roles = Role::all();
+        $roles = Rol::whereNotIn('name', ['super_admin'])->pluck('name', 'name');
 
-        return view('admin.managements.admins.edit', compact('language', 'roles'));
+        return view('admin.managements.admins.edit', compact('admin', 'roles'));
 
     }//end of edit
 
     public function update(AdminRequest $request, Admin $admin): RedirectResponse
     {
-        $requestData = request()->except('image');
+        $requestData = request()->except('image', 'roles', 'password', 'password_confirmation');
 
         if(request()->has('image')) {
 
             $admin->image ? Storage::disk('public')->delete($admin->image) : '';
 
-            $requestData['image'] = request()->file('image')->store('languages', 'public');
+            $requestData['image'] = request()->file('image')->store('admins', 'public');
 
         }
 
         $admin->update($requestData);
+
+        if(request()->has('roles')) {
+
+            $admin->assignRole(request()->roles);
+        }
+
+        if(request()->has('password')) {
+
+            $admin->update(['password' => bcrypt(request()->password)]);
+        }
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.managements.admins.index');
@@ -144,11 +157,8 @@ class AdminController extends Controller
 
     public function destroy(Admin $admin): Application | Response | ResponseFactory
     {
-        if(!$admin->default) {
-
-            $admin->image ? Storage::disk('public')->delete($admin->image) : '';
-            $admin->delete();
-        }
+        $admin->image ? Storage::disk('public')->delete($admin->image) : '';
+        $admin->delete();
 
         session()->flash('success', __('site.deleted_successfully'));
         return response(__('site.deleted_successfully'));

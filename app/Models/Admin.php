@@ -21,7 +21,7 @@ class Admin extends Authenticatable
     protected function imagePath(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->image == 'default.png' ? asset('admin_assets/images/default.png') : Storage::url('uploads/' . $this->image),
+            get: fn () => $this->image != 'default.png' ? asset('storage/' . $this->image) : asset('admin_assets/images/default.png'),
         );
 
     }//end of get ImagePath Attribute

@@ -4,10 +4,16 @@
         @if(!empty($label))
             <label>{{ trans($label) }} @if($required)<span class="text-danger">*</span>@endif</label>
         @endif
-        <select name="{{ $name }}" class="form-control select2 @error(!empty($invalid) ? $invalid : $name) is-invalid @enderror" id="{{ $name }}">
-            <option value="" selected disabled>@lang('site.choose')</option>
+        <select {{ $multiple ? 'multiple=multiple' : '' }} name="{{ $name }}" class="form-control select2 @error(!empty($invalid) ? $invalid : $name) is-invalid @enderror" id="{{ $name }}">
+            <option value="" disabled>@lang('site.choose')</option>
             @foreach($lists as $key=>$list)
-                <option value="{{ $key }}" {{ $list == old(!empty($invalid) ? $invalid : $name, $value) ? 'selected' : '' }}>{{ $list }}</option>
+                <option value="{{ $key }}" 
+                @if($multiple)
+                    {{ in_array($list ?? '', old(!empty($invalid) ? $invalid : $name, $value ?? []) ?? []) ? 'selected' : '' }}
+                @else
+                    {{ $list == old(!empty($invalid) ? $invalid : $name, $value) ? 'selected' : '' }}
+                @endif
+                >{{ $list }}</option>
             @endforeach
         </select>
         @error(!empty($invalid) ? $invalid : $name)

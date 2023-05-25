@@ -27,7 +27,8 @@ class AdminRequest extends FormRequest
     {
         $rules = [
             'name'       => ['required','min:2','max:30'],
-            'status'     => ['in:1,0'],
+            'status'     => ['nullable','in:1,0'],
+            'roles.*'    => ['nullable','string','exists:roles,name'],
         ];
 
         if (in_array(request()->method(), ['PUT', 'PATCH'])) {
@@ -37,14 +38,14 @@ class AdminRequest extends FormRequest
             $rules['email']                  = ['required','email','min:2','max:30', Rule::unique('admins')->ignore($admin->id)];
             $rules['image']                  = ['nullable','image'];
             $rules['password']               = ['nullable','min:6','max:30'];
-            $rules['password_confirmation']  = ['nullable', 'same:password','min:6','max:30'];
+            $rules['password_confirmation']  = ['nullable','same:password','min:6','max:30'];
 
         } else {
 
             $rules['email']                  = ['required','string','unique:admins','min:2','max:30'];
             $rules['image']                  = ['required','image'];
             $rules['password']               = ['required','min:6','max:30'];
-            $rules['password_confirmation']  = ['required', 'same:password','min:6','max:30'];
+            $rules['password_confirmation']  = ['required','same:password','min:6','max:30'];
 
         } //end of if
 

@@ -17,6 +17,7 @@ class Option extends Component
         public $required = false,
         public $invalid  = '',
         public $lists    = [],
+        public $multiple = false,
     ){}
 
     public function render(): View | Closure | string
