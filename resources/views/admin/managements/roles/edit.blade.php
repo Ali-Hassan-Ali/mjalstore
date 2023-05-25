@@ -56,7 +56,7 @@
 
                                     @php
                                         //edit_roles, read_roles, update_roles, delete_roles
-                                        $permissionMaps = ['edit', 'read', 'update', 'delete'];
+                                        $permissionMaps = ['create','read','update','delete','status'];
                                     @endphp
 
                                     @if ($model == 'statistics')

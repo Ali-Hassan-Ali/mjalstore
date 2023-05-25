@@ -9,7 +9,7 @@ use App\Http\Request\Admin\Managements\Admin\StatusRequest;
 use App\Http\Request\Admin\Managements\Admin\DeleteRequest;
 use App\Services\DatatableServices;
 use App\models\Admin;
-use App\Models\Rol;
+use App\Models\Role;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -87,7 +87,7 @@ class AdminController extends Controller
 
     public function create(): View
     {
-        $roles = Rol::whereNotIn('name', ['super_admin'])->pluck('name', 'name');
+        $roles = Role::whereNotIn('name', ['super_admin'])->pluck('name', 'name');
 
         return view('admin.managements.admins.create', compact('roles'));
         
@@ -123,7 +123,7 @@ class AdminController extends Controller
 
     public function edit(Admin $admin): View
     {
-        $roles = Rol::whereNotIn('name', ['super_admin'])->pluck('name', 'name');
+        $roles = Role::whereNotIn('name', ['super_admin'])->pluck('name', 'name');
 
         return view('admin.managements.admins.edit', compact('admin', 'roles'));
 

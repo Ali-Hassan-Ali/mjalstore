@@ -100,19 +100,12 @@ class RoleController extends Controller
 
     }//end of edit
 
-    public function update(RoleRequest $request, Role $role): RedirectResponse
+    public function update(RoleRequest $request, \Spatie\Permission\Models\Role $role): RedirectResponse
     {
-        $requestData = request()->except('flag');
+        $validated = request()->except(['permissions']);
 
-        if(request()->has('flag')) {
-
-            $role->flag ? Storage::disk('public')->delete($role->flag) : '';
-
-            $requestData['flag'] = request()->file('flag')->store('roles', 'public');
-
-        }
-
-        $role->update($requestData);
+        $role->update($validated);
+        $role->syncPermissions($request->permissions ?? []);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.managements.roles.index');
