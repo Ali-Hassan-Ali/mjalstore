@@ -1,6 +1,5 @@
 <div class="col-12 {{ $col }}">
     <div class="form-group">
-        {{ $name }}
         @if(!empty($label))
             <label>{{ trans($label) }} @if($required)<span class="text-danger">*</span>@endif</label>
         @endif

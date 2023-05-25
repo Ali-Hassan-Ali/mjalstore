@@ -58,7 +58,7 @@ class AdminController extends Controller
             'delete' => 'delete-admins',
         ];
 
-        $admin = Admin::all();
+        $admin = Admin::roleNot(['super_admin']);
 
         return dataTables()->of($admin)
             ->addColumn('record_select', 'admin.dataTables.record_select')

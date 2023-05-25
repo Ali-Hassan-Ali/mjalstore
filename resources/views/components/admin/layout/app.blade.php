@@ -32,7 +32,7 @@
                 font-family: 'cairo', 'sans-serif';
             }
             .breadcrumb-item + .breadcrumb-item {
-                padding-right: 0.5rem;
+                padding-left: 0.5rem;
             }
             .breadcrumb-item+.breadcrumb-item::before {
                 float: right;

@@ -26,4 +26,11 @@ class Admin extends Authenticatable
 
     }//end of get ImagePath Attribute
 
+    //scope
+    public function scopeRoleNot($query, $rolesName = [])
+    {
+        return $query->when($rolesName, fn ($query) => $query->whereHas('roles', fn ($query) => $query->whereNotIn('name', $rolesName)));
+
+    }// end of scope Role
+
 }//end of model
