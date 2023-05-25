@@ -9,6 +9,7 @@ use App\Http\Request\Admin\Managements\Admin\StatusRequest;
 use App\Http\Request\Admin\Managements\Admin\DeleteRequest;
 use App\Services\DatatableServices;
 use App\models\Admin;
+use App\Models\Rol;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -90,9 +91,9 @@ class AdminController extends Controller
 
     public function create(): View
     {
-        $types = AdminType::array();
+        $roles = Rol::whereNotIn('name', ['super_admin'])->get();
 
-        return view('admin.managements.admins.create', compact('types'));
+        return view('admin.managements.admins.create', compact('roles'));
         
     }//end of create
 
@@ -168,7 +169,7 @@ class AdminController extends Controller
     public function status(StatusRequest $request)
     {
         $admin = Admin::find($request->id);
-        $admin?->update(['status' => !$admin->status]);
+        $admin->update(['status' => !$admin->status]);
 
         session()->flash('success', __('site.updated_successfully'));
         return response(__('site.updated_successfully'));
