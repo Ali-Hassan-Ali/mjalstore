@@ -23,5 +23,5 @@ Auth::routes();
 
 Route::get('/test', function () {
 
-    dd(\App\Models\Role::users()->get());
+    dd(\App\Models\Admin::role('super')->get());
 });

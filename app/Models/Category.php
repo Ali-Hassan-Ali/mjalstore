@@ -36,7 +36,7 @@ class Category extends Model
 
     protected static function booted(): void
     {
-        if(!request()->routeIs('admin.categories*') || !request()->routeIs('admin.sub_categories*')) {
+        if(!request()->routeIs('admin.categories.*') || !request()->routeIs('admin.sub_categories.*')) {
            static::addGlobalScope(new StatusScope);
         }
 

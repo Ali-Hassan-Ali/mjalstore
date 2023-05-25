@@ -8,10 +8,11 @@ return [
     'sub_categories'  => 'الاقسام الفرعية',
     'admin'           => 'مشرف',
     'admins'          => 'المشرفين',
-    'Role'            => 'Role',
-    'Roles'           => 'Roles',
-    'languages'       => 'Languages',
-    'language'        => 'Language',
-    'managements'     => 'Managements',
+    'role'            => 'صلاحيه',
+    'roles'           => 'الصلاحيات',
+    'languages'       => 'اللغات',
+    'language'        => 'لغه',
+    'management'      => 'الاداراه',
+    'managements'     => 'الادارات',
 
 ];

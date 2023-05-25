@@ -57,7 +57,7 @@
                                     @foreach ($permissionMaps as $permissionMap)
                                         <div class="animated-checkbox mx-2" style="display:inline-block;">
                                             <label class="m-0">
-                                                <input type="checkbox" value="{{ $permissionMap . '_' . $model }}" name="permissions[]" {{ $role->hasPermission( $permissionMap . '_' . $model) ? 'checked' : '' }} class="role">
+                                                <input type="checkbox" value="{{ $permissionMap . '_' . $model }}" name="permissions[]" {{ $role->hasPermission($permissionMap . '-' . $model) ? 'checked' : '' }} class="role">
                                                 <span class="label-text">@lang('site.' . $permissionMap)</span>
                                             </label>
                                         </div>

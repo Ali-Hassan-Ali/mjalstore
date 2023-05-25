@@ -15,7 +15,7 @@ class Role extends Model
 
     protected $table = 'roles';
 
-    protected $guarded = [];
+    protected $fillable = ['admin_id', 'guard_name', 'name'];
 
     public function scopeRoleNot(Builder $query, $rolesName = ['super_admin']): Builder
     {

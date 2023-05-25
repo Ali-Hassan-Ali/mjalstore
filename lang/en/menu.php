@@ -12,6 +12,7 @@ return [
     'Roles'           => 'Roles',
     'languages'       => 'Languages',
     'language'        => 'Language',
+    'management'      => 'Management',
     'managements'     => 'Managements',
 
 ];

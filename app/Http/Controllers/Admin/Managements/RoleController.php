@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Admin\Managements;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Request\Admin\Managements\Role\RoleRequest;
-use App\Http\Request\Admin\Managements\Role\StatusRequest;
 use App\Http\Request\Admin\Managements\Role\DeleteRequest;
 use App\Services\DatatableServices;
+use App\models\Admin;
 use App\models\Role;
+use App\models\Permission;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -51,13 +52,13 @@ class RoleController extends Controller
             'delete' => 'delete-roles',
         ];
 
-        $role = Role::RoleNot();
+        $role = Role::roleNot();
 
         return dataTables()->of($role)
             ->addColumn('record_select', 'admin.dataTables.record_select')
             ->addColumn('created_at', fn (Role $role) => $role?->created_at?->format('Y-m-d'))
             ->addColumn('admin', fn (Role $role) => $role?->admin?->name)
-            ->addColumn('admins', fn (Role $role) => $role?->admin?->name)
+            ->addColumn('admins', fn (Role $role) => Admin::role($role->name)->count())
             ->addColumn('admins_count', fn (Role $role) => $role?->admins?->count())
             ->addColumn('actions', function(Role $role) use($permissions) {
                 $routeEdit   = route('admin.managements.roles.edit', $role->id);
@@ -81,21 +82,21 @@ class RoleController extends Controller
     //RedirectResponse
     public function store(RoleRequest $request): RedirectResponse
     {
-        $validated = request()->safe()->except(['permissions']);
+        $validated = request()->except(['permissions']);
 
-        $role = Role::create($validated);
-        $role->syncPermissions(request()->permissions);
+        $role = \Spatie\Permission\Models\Role::create($validated);
+        $role->syncPermissions($request->permissions ?? []);
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.managements.roles.index');
 
     }//end of store
 
-    public function edit(Role $role): View
+    public function edit(\Spatie\Permission\Models\Role $role): View
     {
-        $types = RoleType::pluck('name', 'name');
+        $permissions = Permission::pluck('name', 'name');
 
-        return view('admin.managements.roles.edit', compact('language', 'types'));
+        return view('admin.managements.roles.edit', compact('role', 'permissions'));
 
     }//end of edit
 
@@ -141,26 +142,5 @@ class RoleController extends Controller
         return response(__('site.deleted_successfully'));
 
     }//end of bulkDelete
-
-    public function status(StatusRequest $request)
-    {
-        $role = Role::find($request->id);
-        $role?->update(['status' => !$role->status]);
-
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
-        
-    }//end of status
-
-    public function changeDefault(StatusRequest $request)
-    {
-        $roles = Role::all();
-        $roles->each(fn ($role) => $role->update(['default' => 0]));
-        Role::find($request->id)->update(['default' => 1, 'status' => 1]);
-
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
-        
-    }//end of status
 
 }//end of controller
