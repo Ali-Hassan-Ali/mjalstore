@@ -51,8 +51,8 @@ class Category extends Model
 
     protected static function booted(): void
     {
-        if(request()->segment(2) != 'categories') {
-           // static::addGlobalScope(new StatusScope);
+        if(request()->segment(2) !== 'categories') {
+           static::addGlobalScope(new StatusScope);
         }
 
     }//end of Global Scope

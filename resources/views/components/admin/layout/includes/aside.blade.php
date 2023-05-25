@@ -20,7 +20,7 @@
         </li>
 
         {{--categories--}}
-        <li class="treeview {{ request()->is('*categories*') || request()->is('*categories*') ? 'is-expanded' : '' }}">
+        <li class="treeview {{ request()->is('*categories*') ? 'is-expanded' : '' }}">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-user-circle"></i>
                 <span class="app-menu__label">@lang('site.categories')</span>
@@ -28,12 +28,12 @@
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item {{ request()->is('*categories*') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
+                    <a class="treeview-item {{ request()->segment(2) === 'categories' ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
                         <i class="icon fa fa-circle"></i>@lang('site.categories')
                     </a>
                 </li>
                 <li>
-                    <a class="treeview-item {{ request()->is('*sub_categories*') ? 'active' : '' }}" href="{{ route('admin.sub_categories.index') }}">
+                    <a class="treeview-item {{ request()->segment(2) === 'sub_categories' ? 'active' : '' }}" href="{{ route('admin.sub_categories.index') }}">
                         <i class="icon fa fa-circle-o"></i>@lang('site.sub_categories')
                     </a>
                 </li>
