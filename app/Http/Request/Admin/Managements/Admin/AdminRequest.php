@@ -29,6 +29,7 @@ class AdminRequest extends FormRequest
             'name'       => ['required','min:2','max:30'],
             'status'     => ['nullable','in:1,0'],
             'roles.*'    => ['nullable','string','exists:roles,name'],
+            'admin_id'   => ['required','string','exists:admins,id'],
         ];
 
         if (in_array(request()->method(), ['PUT', 'PATCH'])) {
