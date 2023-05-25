@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Models\Permission;
 use \Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -15,6 +16,12 @@ class Role extends Model
     protected $table = 'roles';
 
     protected $guarded = [];
+
+    public function scopeRoleNot(Builder $query, $rolesName = ['super_admin']): Builder
+    {
+        return $query->when($rolesName, fn ($query) => $query->whereNotIn('name', $rolesName));
+
+    }// end of scope Role
 
     public function permissions(): BelongsToMany
     {

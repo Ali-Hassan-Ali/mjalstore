@@ -51,7 +51,7 @@ class RoleController extends Controller
             'delete' => 'delete-roles',
         ];
 
-        $role = Role::all();
+        $role = Role::RoleNot();
 
         return dataTables()->of($role)
             ->addColumn('record_select', 'admin.dataTables.record_select')
