@@ -12,7 +12,7 @@ class SetLocale
         if(getLanguages()->count()) {
 
             if(!session('code')) {
-                session('dir') ?? session()->put('dir', getLanguages('default')->dir);
+                session('dir') ?? session()->put('dir', getLanguages('default')?->dir);
                 session('code') ?? session()->put('code', getLanguages('default')->code);
             }
 
