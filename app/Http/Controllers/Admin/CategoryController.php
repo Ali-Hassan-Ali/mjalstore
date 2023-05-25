@@ -52,7 +52,9 @@ class CategoryController extends Controller
             'update' => permissionAdmin('update-categories'),
             'delete' => permissionAdmin('delete-categories'),
         ];
-        $category = Category::all();
+
+        $category = Category::category();
+
         return dataTables()->of($category)
             ->addColumn('record_select', 'admin.dataTables.record_select')
             ->addColumn('created_at', fn(Category $category) => $category->created_at->format('Y-m-d'))

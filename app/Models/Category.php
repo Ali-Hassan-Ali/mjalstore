@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Scopes\StatusScope;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -34,10 +35,24 @@ class Category extends Model
 
     }//end of admin
 
+    //scope
+    public function scopeCategory(Builder $query): Builder
+    {
+        return $query->whereNull('parent_id');
+
+    }// end of scope Role
+
+    public function scopeSubCategory(Builder $query): Builder
+    {
+        return $query->where('parent_id', '>' ,1);
+
+    }// end of scope Role
+
+
     protected static function booted(): void
     {
-        if(!request()->routeIs('admin.categories.*') || !request()->routeIs('admin.sub_categories.*')) {
-           static::addGlobalScope(new StatusScope);
+        if(request()->segment(2) != 'categories') {
+           // static::addGlobalScope(new StatusScope);
         }
 
     }//end of Global Scope

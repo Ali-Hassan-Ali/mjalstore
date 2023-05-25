@@ -53,7 +53,9 @@ class SubCategoryController extends Controller
             'update' => permissionAdmin('update-sub_categories'),
             'delete' => permissionAdmin('delete-sub_categories'),
         ];
-        $category = Category::all();
+        
+        $category = Category::subCategory();
+
         return dataTables()->of($category)
             ->addColumn('record_select', 'admin.dataTables.record_select')
             ->addColumn('created_at', fn(Category $category) => $category->created_at->format('Y-m-d'))
