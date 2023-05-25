@@ -71,10 +71,7 @@ class AdminController extends Controller
             })
             ->addColumn('actions', function(Admin $admin) use($permissions) {
                 $routeEdit   = route('admin.managements.admins.edit', $admin->id);
-                $routeDelete = '';
-                if(!$admin->default) {
-                    $routeDelete = route('admin.managements.admins.destroy', $admin->id);
-                }
+                $routeDelete = route('admin.managements.admins.destroy', $admin->id);
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
             ->addColumn('status', function(Admin $admin) use($permissions) {
@@ -99,7 +96,7 @@ class AdminController extends Controller
     //RedirectResponse
     public function store(AdminRequest $request): RedirectResponse
     {
-        $requestData = request()->except('image', 'roles');
+        $requestData = request()->safe()->except(['image', 'roles', 'password', 'password_confirmation']);
 
         if(request()->file('image')) {
 
@@ -107,7 +104,13 @@ class AdminController extends Controller
 
         }
 
+
         $admin = Admin::create($requestData);
+
+        if(request()->has('password')) {
+
+            $admin->update(['password' => bcrypt(request()->password)]);
+        }
 
         if(request()->has('roles')) {
             $admin->assignRole(request()->roles);
@@ -128,7 +131,7 @@ class AdminController extends Controller
 
     public function update(AdminRequest $request, Admin $admin): RedirectResponse
     {
-        $requestData = request()->except('image', 'roles', 'password', 'password_confirmation');
+        $requestData = request()->safe()->except(['image', 'roles', 'password', 'password_confirmation']);
 
         if(request()->has('image')) {
 
