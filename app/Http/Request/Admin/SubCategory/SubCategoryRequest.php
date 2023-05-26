@@ -26,7 +26,8 @@ class SubCategoryRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'status'  => ['nullable', 'in:1,0'],
+            'status'   => ['nullable', 'in:1,0'],
+            'parent_id'=> ['required', 'exists:categories,id'],
         ];
 
         if (in_array(request()->method(), ['PUT', 'PATCH'])) {

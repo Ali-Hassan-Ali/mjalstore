@@ -84,11 +84,13 @@ class SubCategoryController extends Controller
             return abort(403);
         }
 
-        return view('admin.sub_categories.create');
+        $categories = Category::category()->pluck('name', 'id');
+
+        return view('admin.sub_categories.create', compact('categories'));
 
     }//end of create
 
-    public function store(CategoryRequest $request): RedirectResponse
+    public function store(SubCategoryRequest $request): RedirectResponse
     {
         $requestData = request()->except('banner');
 
@@ -105,27 +107,29 @@ class SubCategoryController extends Controller
 
     }//end of store
 
-    public function edit(Category $category): View
+    public function edit(Category $subCategory): View
     {
         if(!permissionAdmin('update-sub_categories')) {
             return abort(403);
         }
 
-        return view('admin.sub_categories.edit', compact('category'));
+        $categories = Category::category()->pluck('name', 'id');
+
+        return view('admin.sub_categories.edit', compact('subCategory', 'categories'));
 
     }//end of edit
 
-    public function update(CategoryRequest $request, Category $category): RedirectResponse
+    public function update(SubCategoryRequest $request, Category $subCategory): RedirectResponse
     {
-        $requestData = request()->except('logo');
-        if(request()->file('logo')) {
+        $requestData = request()->except('banner');
+        if(request()->file('banner')) {
 
-            Storage::disk('public')->delete($category->logo);
+            Storage::disk('public')->delete($category->banner);
 
-            $requestData['logo'] = request()->file('logo')->store('categories', 'public');
+            $requestData['banner'] = request()->file('banner')->store('sub_categories', 'public');
 
         }
-        $category->update($requestData);
+        $subCategory->update($requestData);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.sub_categories.index');

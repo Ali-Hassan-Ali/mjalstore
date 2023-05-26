@@ -23,9 +23,18 @@ class Category extends Model
 
     protected function imagePath(): Attribute
     {
-        return Attribute::make(
-            get: fn () => $this->logo ? asset('storage/' . $this->logo) : asset('admin_assets/images/default.png'),
-        );
+        if(request()->segment(3) == 'categories') {
+
+            return Attribute::make(
+                get: fn () => $this->logo ? asset('storage/' . $this->logo) : asset('admin_assets/images/default.png'),
+            );
+
+        } else {
+
+            return Attribute::make(
+                get: fn () => $this->banner ? asset('storage/' . $this->banner) : asset('admin_assets/images/default.png'),
+            );
+        }
 
     }//end of get ImagePath Attribute
 

@@ -19,17 +19,17 @@
 
         <div class="row">
 
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-12">
 
                 <div class="tile shadow">
 
-                    @include('admin.dataTables.image_privew', ['name' => 'logo'])
+                    @include('admin.dataTables.image_privew', ['name' => 'banner'])
 
                 </div><!-- end of tile -->
 
             </div><!-- end of col -->
 
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-12">
 
                 <div class="tile shadow">
 
@@ -55,9 +55,12 @@
                                     label="site.name"
                                     invalid="{{ 'name.' . $language->code }}" />
 
+
                             </div>
                         @endforeach
                     </div>
+                    {{--categories--}}
+                    <x-input.option required="true" name="parent_id" label="site.categories" :lists="$categories"/>
 
                     {{--status--}}
                     <x-input.checkbox :required="true" name="status" label="admin.global.status"/>
