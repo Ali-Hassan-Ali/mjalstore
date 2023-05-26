@@ -1,19 +1,19 @@
 <x-admin.layout.app>
     <x-slot name="title">
-        {{ trans('site.create') . ' ' . trans('menu.category') }}
+        {{ trans('site.create') . ' ' . trans('menu.sub_categories') }}
     </x-slot>
 
     <div>
-        <h2>@lang('menu.categories')</h2>
+        <h2>@lang('menu.sub_categories')</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.categories.index') }}">@lang('menu.categories')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.sub_categories.index') }}">@lang('menu.sub_categories')</a></li>
         <li class="breadcrumb-item">@lang('site.create')</li>
     </ul>
 
-    <form method="post" action="{{ route('admin.categories.store') }}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('admin.sub_categories.store') }}" enctype="multipart/form-data">
         @csrf
         @method('post')
 
@@ -53,7 +53,6 @@
                                 <x-input.text required="{{ $loop->first ? true : false }}" 
                                     name="name[{{ $language->code }}]" 
                                     label="site.name"
-                                    value="{{ old('name.' . $language->code) }}"
                                     invalid="{{ 'name.' . $language->code }}" />
 
                             </div>

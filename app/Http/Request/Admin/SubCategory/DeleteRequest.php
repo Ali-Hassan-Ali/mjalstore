@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Request\Admin\Category;
+namespace App\Http\Request\Admin\SubCategory;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -8,7 +8,7 @@ class DeleteRequest extends FormRequest
 {
 	public function authorize(): bool
     {
-        return permissionAdmin('delete-categories');
+        return permissionAdmin('delete-sub_categories');
 
     }//end of authorize
 

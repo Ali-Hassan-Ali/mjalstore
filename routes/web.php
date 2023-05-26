@@ -23,5 +23,5 @@ Auth::routes();
 
 Route::get('/test', function () {
 
-    dd(\App\Models\Admin::role('super')->get());
+    dd(\App\Models\Category::all());
 });

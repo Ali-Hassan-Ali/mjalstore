@@ -1,8 +1,8 @@
 <x-admin.layout.app>
 
-    <x-slot name="title">{{ trans('menu-sub_categories') }}</x-slot>
+    <x-slot name="title">{{ trans('menu.sub_categories') }}</x-slot>
 
-    <div><h2>{{ trans('menu-sub_categories') }}</h2></div>
+    <div><h2>{{ trans('menu.sub_categories') }}</h2></div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item">
@@ -10,7 +10,7 @@
                 {{ trans('site.home') }}
             </a>
         </li>
-        <li class="breadcrumb-item">{{ trans('menu-sub_categories') }}</li>
+        <li class="breadcrumb-item">{{ trans('menu.sub_categories') }}</li>
     </ul>
 
     <div class="row">
@@ -24,11 +24,11 @@
                     <div class="col-md-12">
 
                         @if(permissionAdmin('create-categories'))
-                            <a href="{{ route('admin.categories.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a>
+                            <a href="{{ route('admin.sub_categories.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a>
                         @endif
 
                         @if(permissionAdmin('create-categories'))
-                            <form method="post" action="{{ route('admin.categories.bulk_delete') }}" style="display: inline-block;">
+                            <form method="post" action="{{ route('admin.sub_categories.bulk_delete') }}" style="display: inline-block;">
                                 @csrf
                                 @method('delete')
                                 <input type="hidden" name="record_ids" id="record-ids">

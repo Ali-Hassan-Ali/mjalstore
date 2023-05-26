@@ -29,13 +29,13 @@ class SubCategoryController extends Controller
                 'route_status' => route('admin.sub_categories.status'),
                 'header'  => [
                     'site.name',
-                    'site.logo',
+                    'site.banner',
                     'site.admin',
                     'site.status',
                 ],
                 'columns' => [
                     'name'   => 'name',
-                    'logo'   => 'logo',
+                    'banner' => 'banner',
                     'admin'  => 'admin',
                     'status' => 'status',
                 ]
@@ -60,7 +60,7 @@ class SubCategoryController extends Controller
             ->addColumn('record_select', 'admin.dataTables.record_select')
             ->addColumn('created_at', fn(Category $category) => $category->created_at->format('Y-m-d'))
             ->addColumn('admin', fn(Category $category) => $category?->admin?->name)
-            ->editColumn('logo', function(Category $category) {
+            ->editColumn('banner', function(Category $category) {
                 return view('admin.dataTables.image', ['models' => $category]);
             })
             ->addColumn('actions', function(Category $category) use($permissions) {
@@ -90,11 +90,11 @@ class SubCategoryController extends Controller
 
     public function store(CategoryRequest $request): RedirectResponse
     {
-        $requestData = request()->except('logo');
+        $requestData = request()->except('banner');
 
-        if(request()->file('logo')) {
+        if(request()->file('banner')) {
 
-            $requestData['logo'] = request()->file('logo')->store('categories', 'public');
+            $requestData['banner'] = request()->file('banner')->store('sub_categories', 'public');
 
         }
 
@@ -132,7 +132,7 @@ class SubCategoryController extends Controller
 
     }//end of update
 
-    public function destroy(Category $category): Application | Response | ResponseFactory
+    public function destroy(Category $subCategory): Application | Response | ResponseFactory
     {
         if($category->logo) {
             Storage::disk('public')->delete($category->logo);

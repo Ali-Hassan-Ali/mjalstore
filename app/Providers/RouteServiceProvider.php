@@ -34,9 +34,14 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web', 'SetLocale')
                 ->group(base_path('routes/web.php'));
 
+            //admin folder
             Route::middleware('web', 'SetLocale')
                 ->name('admin.')->prefix('admin')
-                ->group(base_path('routes/admin.php'));
+                ->group(base_path('routes/admin/web.php'));
+
+            Route::middleware('web', 'SetLocale', 'auth:admin')
+                ->name('admin.setting.')->prefix('admin/setting')
+                ->group(base_path('routes/admin/setting.php'));
 
         });
     }

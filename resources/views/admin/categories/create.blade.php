@@ -53,7 +53,6 @@
                                 <x-input.text required="{{ $loop->first ? true : false }}" 
                                     name="name[{{ $language->code }}]" 
                                     label="site.name"
-                                    value="{{ old('name.' . $language->code) }}"
                                     invalid="{{ 'name.' . $language->code }}" />
 
                             </div>
