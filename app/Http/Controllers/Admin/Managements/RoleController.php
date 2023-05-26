@@ -73,6 +73,10 @@ class RoleController extends Controller
 
     public function create(): View
     {
+        if(!permissionAdmin('create-roles')) {
+            return abort(403);
+        }
+
         $permissions = Permission::pluck('name', 'name');
 
         return view('admin.managements.roles.create', compact('permissions'));
@@ -94,6 +98,10 @@ class RoleController extends Controller
 
     public function edit(\Spatie\Permission\Models\Role $role): View
     {
+        if(!permissionAdmin('update-roles')) {
+            return abort(403);
+        }
+        
         $permissions = Permission::pluck('name', 'name');
 
         return view('admin.managements.roles.edit', compact('role', 'permissions'));

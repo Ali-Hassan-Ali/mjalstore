@@ -95,6 +95,10 @@ class LanguageController extends Controller
 
     public function create(): View
     {
+        if(!permissionAdmin('create-languages')) {
+            return abort(403);
+        }
+
         $types = LanguageType::array();
 
         return view('admin.managements.languages.create', compact('types'));
@@ -121,6 +125,10 @@ class LanguageController extends Controller
 
     public function edit(Language $language): View
     {
+        if(!permissionAdmin('update-languages')) {
+            return abort(403);
+        }
+        
         $types = LanguageType::array();
 
         return view('admin.managements.languages.edit', compact('language', 'types'));

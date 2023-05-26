@@ -87,6 +87,10 @@ class AdminController extends Controller
 
     public function create(): View
     {
+        if(!permissionAdmin('create-admins')) {
+            return abort(403);
+        }
+
         $roles = Role::whereNotIn('name', ['super_admin'])->pluck('name', 'name');
 
         return view('admin.managements.admins.create', compact('roles'));
@@ -123,6 +127,10 @@ class AdminController extends Controller
 
     public function edit(Admin $admin): View
     {
+        if(!permissionAdmin('update-admins')) {
+            return abort(403);
+        }
+        
         $roles = Role::whereNotIn('name', ['super_admin'])->pluck('name', 'name');
 
         return view('admin.managements.admins.edit', compact('admin', 'roles'));
