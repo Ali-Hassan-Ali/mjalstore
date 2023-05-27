@@ -6,20 +6,22 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Checkbox extends Component
+class Textarea extends Component
 {
 
     public function __construct(
+        public $col      = '',
         public $name     = '',
+        public $value    = '',
         public $label    = '',
-        public $value    = false,
         public $required = false,
+        public $invalid  = '',
+        public $rows     = '3',
     ){}
 
-    
-    public function render(): View|Closure|string
+    public function render(): View | Closure | string
     {
-        return view('components.input.checkbox');
+        return view('components.input.textarea');
 
     }//end of render
 

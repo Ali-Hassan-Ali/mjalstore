@@ -23,7 +23,7 @@ class Category extends Model
 
     protected function imagePath(): Attribute
     {
-        if(request()->segment(3) == 'categories') {
+        if(request()->segment(3) == 'categories' || $this->parent_id == '') {
 
             return Attribute::make(
                 get: fn () => $this->logo ? asset('storage/' . $this->logo) : asset('admin_assets/images/default.png'),

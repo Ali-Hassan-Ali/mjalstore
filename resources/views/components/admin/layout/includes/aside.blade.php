@@ -40,7 +40,7 @@
             </ul>
         </li>
 
-
+        {{-- managements --}}
         <li class="treeview {{ request()->is('*managements*') ? 'is-expanded' : '' }}">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-user-circle"></i>
@@ -65,6 +65,20 @@
                 </li>
             </ul>
         </li>
-
+        {{-- settings --}}
+        <li class="treeview {{ request()->is('*settings*') ? 'is-expanded' : '' }}">
+            <a class="app-menu__item" href="#" data-toggle="treeview">
+                <i class="app-menu__icon fa fa-user-circle"></i>
+                <span class="app-menu__label">@lang('site.managements')</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a class="treeview-item {{ request()->is('*meta*') ? 'active' : '' }}" href="{{ route('admin.settings.meta.index') }}">
+                        <i class="icon fa fa-circle-o"></i>@lang('settings.meta')
+                    </a>
+                </li>
+            </ul>
+        </li>
     </ul>
 </aside>

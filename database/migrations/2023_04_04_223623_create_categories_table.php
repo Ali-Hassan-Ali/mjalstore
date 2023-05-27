@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('slug')->unique()->nullable();
             $table->string('parent_id')->nullable();
             $table->boolean('status')->default(0);
+            $table->boolean('has_market')->default(0);
 
             $table->foreignId('admin_id')->constrained();
 

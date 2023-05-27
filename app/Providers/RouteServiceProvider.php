@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/admin/web.php'));
 
             Route::middleware('web', 'SetLocale', 'auth:admin')
-                ->name('admin.setting.')->prefix('admin/setting')
+                ->name('admin.settings.')->prefix('admin/settings')
                 ->group(base_path('routes/admin/setting.php'));
 
         });

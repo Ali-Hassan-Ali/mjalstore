@@ -2,7 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/test', function () {
+use App\Http\Controllers\Admin\Settings\WebsitController;
+use App\Http\Controllers\Admin\Settings\MetaController;
 
-    dd(\App\Models\Admin::role('admin')->get());
+//settings
+Route::controller(MetaController::class)->group(function () {
+
+    Route::get('meta', 'index')->name('meta.index');
+    Route::post('meta/store', 'store')->name('meta.store');
+
 });
