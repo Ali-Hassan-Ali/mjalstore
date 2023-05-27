@@ -43,6 +43,10 @@ class RouteServiceProvider extends ServiceProvider
                 ->name('admin.settings.')->prefix('admin/settings')
                 ->group(base_path('routes/admin/setting.php'));
 
+            Route::middleware('web', 'SetLocale', 'auth:admin')
+                ->name('admin.products.')->prefix('admin/products')
+                ->group(base_path('routes/admin/product.php'));
+
         });
     }
 

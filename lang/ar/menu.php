@@ -15,4 +15,12 @@ return [
     'management'      => 'الاداراه',
     'managements'     => 'الادارات',
 
+    'settings'        => 'الاعدادات',
+    
+    'managements_products' => 'اداره المنتجات',
+    'product'         => 'منتج',
+    'products'        => 'منتجات',
+    'market'          => 'متجر',
+    'markets'         => 'متاجر',
+
 ];

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Models\Scopes\StatusScope;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Category extends Model
 {

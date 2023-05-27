@@ -15,4 +15,12 @@ return [
     'management'      => 'Management',
     'managements'     => 'Managements',
 
+    'settings'        => 'Settings',
+
+    'managements_products' => 'Managements Products',
+    'product'         => 'Product',
+    'products'        => 'Products',
+    'market'          => 'Market',
+    'markets'         => 'Markets',
+
 ];

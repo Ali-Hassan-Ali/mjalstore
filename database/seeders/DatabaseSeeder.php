@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             PermissionsDemoSeeder::class,
             LanguageSeeder::class,
             CategorySeeder::class,
+            MarketSeeder::class,
         ]);
 
     }//end of run

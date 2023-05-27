@@ -4,13 +4,13 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Category;
+use App\Models\Market;
 
-class CategorySeeder extends Seeder
+class MarketSeeder extends Seeder
 {
     public function run(): void
     {
-        Category::factory(20)->create();
+        Market::factory(20)->create();
 
     }//end of run
 
