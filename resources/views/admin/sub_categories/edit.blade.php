@@ -19,7 +19,7 @@
 
         <div class="row">
 
-            <div class="col-12 col-md-12">
+            <div class="col-12 col-md-8">
 
                 <div class="tile shadow">
 
@@ -29,7 +29,7 @@
 
             </div><!-- end of col -->
 
-            <div class="col-12 col-md-12">
+            <div class="col-12 col-md-4">
 
                 <div class="tile shadow">
 
@@ -56,18 +56,31 @@
                                     :value="$subCategory->getTranslations('name')[$language->code] ?? ''"
                                     invalid="{{ 'name.' . $language->code }}" />
 
+
                             </div>
                         @endforeach
                     </div>
 
+                </div><!-- end of tile -->
+
+                <div class="tile shadow">
+
                     {{--categories--}}
                     <x-input.option required="true" name="parent_id" label="site.categories" :lists="$categories" :value="$subCategory->parent_id"/>
 
-                    {{--status--}}
-                    <x-input.checkbox :required="true" name="status" label="admin.global.status" :value="$subCategory->status"/>
+                    <div class="row">
+                        
+                        {{--status--}}
+                        <x-input.checkbox :required="true" name="status" label="admin.global.status" col="col-md" :value="$subCategory->status"/>
+
+                        {{-- has_market --}}
+                        <x-input.checkbox :required="true" name="has_market" label="admin.global.has_market" col="col-md" :value="$subCategory->has_market"/>
+                        
+                    </div>    
+
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.edit')</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
                     </div>
 
                 </div><!-- end of tile -->

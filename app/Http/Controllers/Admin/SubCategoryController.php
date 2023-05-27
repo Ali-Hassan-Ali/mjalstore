@@ -32,12 +32,14 @@ class SubCategoryController extends Controller
                     'site.banner',
                     'site.admin',
                     'site.status',
+                    'site.has_market',
                 ],
                 'columns' => [
-                    'name'   => 'name',
-                    'banner' => 'banner',
-                    'admin'  => 'admin',
-                    'status' => 'status',
+                    'name'       => 'name',
+                    'banner'     => 'banner',
+                    'admin'      => 'admin',
+                    'status'     => 'status',
+                    'has_market' => 'has_market',
                 ]
             ]
         );
@@ -71,8 +73,11 @@ class SubCategoryController extends Controller
             ->addColumn('status', function(Category $category) use($permissions) {
                 return view('admin.dataTables.status', ['models' => $category, 'permissions' => $permissions]);
             })
+            ->addColumn('has_market', function(Category $category) use($permissions) {
+                return view('admin.dataTables.status', ['models' => $category, 'permissions' => $permissions]);
+            })
             ->addColumn('name', fn(Category $category) => $category->name ?? '')
-            ->rawColumns(['record_select', 'actions', 'status', 'name', 'logo'])
+            ->rawColumns(['record_select', 'actions', 'status', 'has_market', 'name', 'logo'])
             ->addIndexColumn()
             ->toJson();
 

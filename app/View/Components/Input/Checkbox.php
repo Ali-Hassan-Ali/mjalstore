@@ -10,6 +10,7 @@ class Checkbox extends Component
 {
 
     public function __construct(
+        public $col      = '',
         public $name     = '',
         public $label    = '',
         public $value    = false,

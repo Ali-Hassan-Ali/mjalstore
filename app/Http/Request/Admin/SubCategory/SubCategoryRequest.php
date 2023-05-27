@@ -26,15 +26,16 @@ class SubCategoryRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'status'   => ['nullable', 'in:1,0'],
-            'parent_id'=> ['required', 'exists:categories,id'],
+            'status'     => ['nullable', 'in:1,0'],
+            'has_market' => ['nullable', 'in:1,0'],
+            'parent_id'  => ['required', 'exists:categories,id'],
         ];
 
         if (in_array(request()->method(), ['PUT', 'PATCH'])) {
             
-            $category = request()->route()->parameter('category');
+            $subCategory = request()->route()->parameter('sub_category');
 
-            $rules['name.' . app()->getLocale()] = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')->ignore($category?->id)];
+            $rules['name.' . app()->getLocale()] = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')->ignore($subCategory?->id)];
             $rules['banner']                     = ['nullable','image'];
 
         } else {
@@ -51,9 +52,10 @@ class SubCategoryRequest extends FormRequest
     protected function prepareForValidation()
     {
         return request()->merge([
-            'admin_id' => auth('admin')->id(),
-            'slug'     => str()->slug(request()->name[getLanguages('default')->code] ?? '', '-'),
-            'status'   => request()->has('status'),
+            'admin_id'  => auth('admin')->id(),
+            'slug'      => str()->slug(request()->name[getLanguages('default')->code] ?? '', '-'),
+            'status'    => request()->has('status'),
+            'has_market'=> request()->has('status'),
         ]);
 
     }//end of prepare for validation
