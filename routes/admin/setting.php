@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Settings\WebsitController;
 use App\Http\Controllers\Admin\Settings\MetaController;
 use App\Http\Controllers\Admin\Settings\ContactController;
+use App\Http\Controllers\Admin\Settings\MediaController;
 
 //settings meta
 Route::controller(MetaController::class)->group(function () {
@@ -27,5 +28,13 @@ Route::controller(ContactController::class)->group(function () {
 
     Route::get('contact', 'index')->name('contact.index');
     Route::post('contact/store', 'store')->name('contact.store');
+
+});
+
+//settings media
+Route::controller(MediaController::class)->group(function () {
+
+    Route::get('media', 'index')->name('media.index');
+    Route::post('media/store', 'store')->name('media.store');
 
 });

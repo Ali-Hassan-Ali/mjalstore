@@ -34,7 +34,7 @@
                 </li>
                 <li>
                     <a class="treeview-item {{ request()->segment(2) === 'sub_categories' ? 'active' : '' }}" href="{{ route('admin.sub_categories.index') }}">
-                        <i class="icon fa fa-circle-o"></i>@lang('site.sub_categories')
+                        <i class="icon fa fa-circle"></i>@lang('site.sub_categories')
                     </a>
                 </li>
             </ul>
@@ -50,17 +50,17 @@
             <ul class="treeview-menu">
                 <li>
                     <a class="treeview-item {{ request()->is('*admins*') ? 'active' : '' }}" href="{{ route('admin.managements.admins.index') }}">
-                        <i class="icon fa fa-circle-o"></i>@lang('site.admins')
+                        <i class="icon fa fa-circle"></i>@lang('site.admins')
                     </a>
                 </li>
                 <li>
                     <a class="treeview-item {{ request()->is('*roles*') ? 'active' : '' }}" href="{{ route('admin.managements.roles.index') }}">
-                        <i class="icon fa fa-circle-o"></i>@lang('site.roles')
+                        <i class="icon fa fa-circle"></i>@lang('site.roles')
                     </a>
                 </li>
                 <li>
                     <a class="treeview-item {{ request()->is('*languages*') ? 'active' : '' }}" href="{{ route('admin.managements.languages.index') }}">
-                        <i class="icon fa fa-circle-o"></i>@lang('site.languages')
+                        <i class="icon fa fa-circle"></i>@lang('site.languages')
                     </a>
                 </li>
             </ul>
@@ -76,7 +76,7 @@
             <ul class="treeview-menu">
                 <li>
                     <a class="treeview-item {{ request()->is('*markets*') ? 'active' : '' }}" href="{{ route('admin.products.markets.index') }}">
-                        <i class="icon fa fa-circle-o"></i>@lang('menu.markets')
+                        <i class="icon fa fa-circle"></i>@lang('menu.markets')
                     </a>
                 </li>
             </ul>
@@ -92,21 +92,28 @@
             <ul class="treeview-menu">
                 <li>
                     <a class="treeview-item {{ request()->is('*meta*') ? 'active' : '' }}" href="{{ route('admin.settings.meta.index') }}">
-                        <i class="icon fa fa-circle-o"></i>@lang('settings.meta')
+                        <i class="icon fa fa-circle"></i>@lang('settings.meta')
                     </a>
                 </li>
 
                 <li>
                     <a class="treeview-item {{ request()->is('*websit*') ? 'active' : '' }}" href="{{ route('admin.settings.websit.index') }}">
-                        <i class="icon fa fa-circle-o"></i>@lang('settings.websit')
+                        <i class="icon fa fa-circle"></i>@lang('settings.websit')
                     </a>
                 </li>
 
                 <li>
                     <a class="treeview-item {{ request()->is('*contact*') ? 'active' : '' }}" href="{{ route('admin.settings.contact.index') }}">
-                        <i class="icon fa fa-circle-o"></i>@lang('settings.contact')
+                        <i class="icon fa fa-circle"></i>@lang('settings.contact')
                     </a>
                 </li>
+
+                <li>
+                    <a class="treeview-item {{ request()->is('*media*') ? 'active' : '' }}" href="{{ route('admin.settings.media.index') }}">
+                        <i class="icon fa fa-circle"></i>@lang('settings.media')
+                    </a>
+                </li>
+                
             </ul>
         </li>
 

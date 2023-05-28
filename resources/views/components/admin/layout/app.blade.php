@@ -164,6 +164,8 @@
 
 <main class="app-content">
 
+    @include('partials._session')
+
     {{ $slot }}
 
 </main><!-- end of main -->
