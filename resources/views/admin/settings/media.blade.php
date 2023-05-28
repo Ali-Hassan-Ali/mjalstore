@@ -1,15 +1,15 @@
 <x-admin.layout.app>
     <x-slot name="title">
-        {{ trans('setting.setting') . ' ' . trans('setting.media') }}
+        {{ trans('settings.settings') . ' ' . trans('settings.media') }}
     </x-slot>
 
     <div>
-        <h2>@lang('setting.media')</h2>
+        <h2>@lang('settings.media')</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item">@lang('setting.media')</li>
+        <li class="breadcrumb-item">@lang('settings.media')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.settings.media.store') }}" enctype="multipart/form-data">

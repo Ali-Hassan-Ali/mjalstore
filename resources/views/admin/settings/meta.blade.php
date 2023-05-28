@@ -1,15 +1,15 @@
 <x-admin.layout.app>
     <x-slot name="title">
-        {{ trans('setting.setting') . ' ' . trans('setting.meta') }}
+        {{ trans('settings.settings') . ' ' . trans('settings.meta') }}
     </x-slot>
 
     <div>
-        <h2>@lang('setting.meta')</h2>
+        <h2>@lang('settings.meta')</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item">@lang('setting.meta')</li>
+        <li class="breadcrumb-item">@lang('settings.meta')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.settings.meta.store') }}" enctype="multipart/form-data">

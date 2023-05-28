@@ -1,15 +1,15 @@
 <x-admin.layout.app>
     <x-slot name="title">
-        {{ trans('setting.setting') . ' ' . trans('setting.contact') }}
+        {{ trans('settings.settings') . ' ' . trans('settings.contact') }}
     </x-slot>
 
     <div>
-        <h2>@lang('setting.contact')</h2>
+        <h2>@lang('settings.contact')</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item">@lang('setting.contact')</li>
+        <li class="breadcrumb-item">@lang('settings.contact')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.settings.contact.store') }}" enctype="multipart/form-data">
