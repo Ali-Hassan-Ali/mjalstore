@@ -21,7 +21,7 @@
 
             <div class="col-12 col-md-8">
 
-                <div class="tile shadow" style="height: 94%;">
+                <div class="tile shadow">
 
                     @include('admin.dataTables.image_privew', ['name' => 'banner', 'imagepath' => $subCategory->image_path])
 
@@ -53,8 +53,15 @@
                                 <x-input.text required="{{ $loop->first ? true : false }}" 
                                     name="name[{{ $language->code }}]" 
                                     label="site.name"
-                                    :value="$subCategory->getTranslations('name')[$language->code] ?? ''"
+                                    :value="old('name.' . $language->code, $subCategory->getTranslations('name')[$language->code] ?? '')"
                                     invalid="{{ 'name.' . $language->code }}" />
+
+                                {{--description--}}
+                                <x-input.textarea required="{{ $loop->first ? true : false }}" 
+                                    name="description[{{ $language->code }}]" 
+                                    label="site.description" rows='10'
+                                    :value="old('description.' . $language->code, $subCategory->getTranslations('description')[$language->code] ?? '')"
+                                    invalid="{{ 'description.' . $language->code }}" />
 
 
                             </div>
@@ -62,6 +69,10 @@
                     </div>
 
                 </div><!-- end of tile -->
+
+            </div><!-- end of col -->
+
+            <div class="col-12 col-md-12">
 
                 <div class="tile shadow">
 
@@ -94,7 +105,7 @@
 
                 </div><!-- end of tile -->
 
-            </div><!-- end of col -->
+            </div><!-- end of tile -->
 
         </div><!-- end of row -->
 

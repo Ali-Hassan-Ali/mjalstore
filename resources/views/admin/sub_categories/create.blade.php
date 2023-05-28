@@ -21,7 +21,7 @@
 
             <div class="col-12 col-md-8">
 
-                <div class="tile shadow" style="height: 94%;">
+                <div class="tile shadow">
 
                     @include('admin.dataTables.image_privew', ['name' => 'banner'])
 
@@ -48,12 +48,18 @@
                     <div class="tab-content" id="myTabContent">
                         @foreach(getLanguages() as $language)
                             <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $language->code }}" role="tabpanel" aria-labelledby="{{ $language->code }}-tab">
+                                
                                 {{--name--}}
-
                                 <x-input.text required="{{ $loop->first ? true : false }}" 
                                     name="name[{{ $language->code }}]" 
                                     label="site.name"
                                     invalid="{{ 'name.' . $language->code }}" />
+
+                                {{--description--}}
+                                <x-input.textarea required="{{ $loop->first ? true : false }}" 
+                                    name="description[{{ $language->code }}]" 
+                                    label="site.description" rows='10'
+                                    invalid="{{ 'description.' . $language->code }}" />
 
 
                             </div>
@@ -61,6 +67,10 @@
                     </div>
 
                 </div><!-- end of tile -->
+
+            </div><!-- end of col -->
+
+            <div class="col-12 col-md-12">
 
                 <div class="tile shadow">
 

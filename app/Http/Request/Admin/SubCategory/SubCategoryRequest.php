@@ -37,13 +37,15 @@ class SubCategoryRequest extends FormRequest
             
             $subCategory = request()->route()->parameter('sub_category');
 
-            $rules['name.' . app()->getLocale()] = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')->ignore($subCategory?->id)];
-            $rules['banner']                     = ['nullable','image'];
+            $rules['name.' . app()->getLocale()]        = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')->ignore($subCategory?->id)];
+            $rules['description.' . app()->getLocale()] = ['required','string','min:2','max:900'];
+            $rules['banner']                            = ['nullable','image'];
 
         } else {
 
-            $rules['name.' . app()->getLocale()] = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')];
-            $rules['banner']                     = ['required','image'];
+            $rules['name.' . app()->getLocale()]        = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')];
+            $rules['description.' . app()->getLocale()] = ['required','string','min:2','max:900'];
+            $rules['banner']                            = ['required','image'];
 
         } //end of if
 

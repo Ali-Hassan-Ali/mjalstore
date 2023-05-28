@@ -19,7 +19,7 @@ class Category extends Model
 
     protected $guarded = [];
 
-    public array $translatable = ['name'];
+    public array $translatable = ['name', 'description'];
 
     protected function imagePath(): Attribute
     {

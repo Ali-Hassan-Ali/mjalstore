@@ -23,6 +23,7 @@ return new class extends Migration
 
             $table->string('color_1')->nullable();
             $table->string('color_2')->nullable();
+            $table->longText('description')->nullable();
 
             $table->foreignId('admin_id')->constrained();
 
