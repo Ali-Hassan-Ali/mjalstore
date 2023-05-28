@@ -21,6 +21,9 @@ return new class extends Migration
             $table->boolean('status')->default(0);
             $table->boolean('has_market')->default(0);
 
+            $table->string('color_1')->nullable();
+            $table->string('color_2')->nullable();
+
             $table->foreignId('admin_id')->constrained();
 
             $table->softDeletes();

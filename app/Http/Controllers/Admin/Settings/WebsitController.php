@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Setting;
+namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Setting\WebsitRequest;
+use App\Http\Request\Admin\Settings\WebsitRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\View\View;
 
@@ -17,28 +17,28 @@ class WebsitController extends Controller
 
     public function store(WebsitRequest $request)
     {
-        if(empty($request->get('feature_title' . app()->getLocale()))) {
+        if(empty($request->get('websit_title'))) {
 
-            saveTransSetting('system_name', '');
-            saveTransSetting('system_description', '');
+            saveTransSetting('websit_title', '');
+            saveTransSetting('websit_description', '');
 
         } else {
 
-            saveTransSetting('system_name', $request->system_name);
-            saveTransSetting('system_description', $request->system_description);
+            saveTransSetting('websit_title', $request->websit_title);
+            saveTransSetting('websit_description', $request->websit_description);
         }
 
-        if(request()->file('image')) {
+        if(request()->file('websit_logo')) {
 
-            if(!empty(getSetting('system_image'))) {
+            if(!empty(getSetting('websit_logo'))) {
 
-                Storage::disk('public')->delete(getSetting('system_image'));
+                Storage::disk('public')->delete(getSetting('websit_logo'));
             }
 
 
-            $image = request()->file('image')->store('settings', 'public');
+            $logo = request()->file('websit_logo')->store('settings', 'public');
 
-            saveSetting('system_image', $image);
+            saveSetting('websit_logo', $logo);
         }
 
         session()->flash('success', __('site.updated_successfully'));

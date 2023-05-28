@@ -23,5 +23,5 @@ Auth::routes();
 
 Route::get('/test', function () {
 
-    dd(\App\Models\Category::all());
+    dd('#' . str()->random(6));
 });

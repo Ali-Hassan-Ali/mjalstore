@@ -95,6 +95,18 @@
                         <i class="icon fa fa-circle-o"></i>@lang('settings.meta')
                     </a>
                 </li>
+
+                <li>
+                    <a class="treeview-item {{ request()->is('*websit*') ? 'active' : '' }}" href="{{ route('admin.settings.websit.index') }}">
+                        <i class="icon fa fa-circle-o"></i>@lang('settings.websit')
+                    </a>
+                </li>
+
+                <li>
+                    <a class="treeview-item {{ request()->is('*contact*') ? 'active' : '' }}" href="{{ route('admin.settings.contact.index') }}">
+                        <i class="icon fa fa-circle-o"></i>@lang('settings.contact')
+                    </a>
+                </li>
             </ul>
         </li>
 

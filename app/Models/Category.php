@@ -53,7 +53,7 @@ class Category extends Model
 
     public function scopeSubCategory(Builder $query): Builder
     {
-        return $query->where('parent_id', '>' ,1);
+        return $query->where('parent_id', '>=' ,1);
 
     }// end of scope Role
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Setting\WebsitRequest;
+use App\Http\Request\Admin\Settings\MetaRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\View\View;
 
@@ -19,30 +19,30 @@ class MetaController extends Controller
 
     }//end of index
 
-    public function store(WebsitRequest $request)
+    public function store(MetaRequest $request)
     {
-        if(empty($request->get('feature_title' . app()->getLocale()))) {
+        if(empty($request->get('meta_title'))) {
 
-            saveTransSetting('system_name', '');
-            saveTransSetting('system_description', '');
+            saveTransSetting('meta_title', '');
+            saveTransSetting('meta_description', '');
 
         } else {
 
-            saveTransSetting('system_name', $request->system_name);
-            saveTransSetting('system_description', $request->system_description);
+            saveTransSetting('meta_title', $request->meta_title);
+            saveTransSetting('meta_description', $request->meta_description);
         }
 
-        if(request()->file('image')) {
+        if(request()->file('meta_logo')) {
 
-            if(!empty(getSetting('system_image'))) {
+            if(!empty(getSetting('meta_logo'))) {
 
-                Storage::disk('public')->delete(getSetting('system_image'));
+                Storage::disk('public')->delete(getSetting('meta_logo'));
             }
 
 
-            $image = request()->file('image')->store('settings', 'public');
+            $logo = request()->file('meta_logo')->store('settings', 'public');
 
-            saveSetting('system_image', $image);
+            saveSetting('meta_logo', $logo);
         }
 
         session()->flash('success', __('site.updated_successfully'));

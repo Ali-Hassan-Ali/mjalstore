@@ -12,6 +12,7 @@ class AdminFactory extends Factory
             'name'              => fake()->name(),
             'email'             => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'status'            => fake()->boolean(),
             'password'          => bcrypt('password'), // password
         ];
 

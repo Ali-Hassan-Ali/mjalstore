@@ -11,6 +11,7 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::factory(20)->create();
+        // factory(App\Model\Service::class, 1)->create();
 
     }//end of run
 

@@ -22,7 +22,7 @@
 
                 <div class="tile shadow">
 
-                    @include('admin.dataTables.image_privew', ['name' => 'image', 'imagePath' => getImageSetting('meta_image')])
+                    @include('admin.dataTables.image_privew', ['name' => 'meta_logo', 'imagepath' => getImageSetting('meta_logo')])
 
                 </div><!-- end of tile -->
 
@@ -51,12 +51,12 @@
 
                                 <x-input.text required="{{ $loop->first ? true : false }}" 
                                     name="meta_title[{{ $language->code }}]" 
-                                    label="site.meta" :value="getTransSetting('meta_title', $language->code)"
+                                    label="site.meta" :value="old('meta_title.' . $language->code, getTransSetting('meta_title', $language->code))"
                                     invalid="{{ 'meta_title.' . $language->code }}" />
 
                                 <x-input.textarea required="{{ $loop->first ? true : false }}" 
                                     name="meta_description[{{ $language->code }}]" 
-                                    label="site.meta_description" :value="getTransSetting('meta_description', $language->code)"
+                                    label="site.meta_description" :value="old('meta_description.' . $language->code, getTransSetting('meta_description', $language->code))"
                                     invalid="{{ 'meta_description.' . $language->code }}" />
 
                             </div>
@@ -75,4 +75,4 @@
 
     </form><!-- end of form -->
 
-</x-admin.layout.app>>
+</x-admin.layout.app>

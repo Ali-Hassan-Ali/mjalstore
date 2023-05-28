@@ -29,6 +29,8 @@ class SubCategoryRequest extends FormRequest
             'status'     => ['nullable', 'in:1,0'],
             'has_market' => ['nullable', 'in:1,0'],
             'parent_id'  => ['required', 'exists:categories,id'],
+            'color_1'    => ['required', 'string'],
+            'color_2'    => ['required', 'string'],
         ];
 
         if (in_array(request()->method(), ['PUT', 'PATCH'])) {

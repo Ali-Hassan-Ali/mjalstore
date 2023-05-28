@@ -16,6 +16,8 @@ class SubCategoryFactory extends Factory
             'has_market'=> fake()->boolean(),
             'parent_id' => Category::Factory(),
             'admin_id'  => Admin::Factory(),
+            'color_1'   => '#' . str()->random(6),
+            'color_2'   => '#' . str()->random(6),
         ];
 
     }//end of run

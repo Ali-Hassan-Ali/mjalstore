@@ -21,7 +21,7 @@
 
             <div class="col-12 col-md-8">
 
-                <div class="tile shadow">
+                <div class="tile shadow" style="height: 94%;">
 
                     @include('admin.dataTables.image_privew', ['name' => 'banner', 'imagepath' => $subCategory->image_path])
 
@@ -64,6 +64,15 @@
                 </div><!-- end of tile -->
 
                 <div class="tile shadow">
+
+                    <div class="row">
+                        {{-- color 1 --}}
+                        <x-input.text :required="true" name="color_1" type="color" label="site.color_1" col="col-md" :value="$subCategory->color_1"/>
+
+                        {{-- color 2 --}}
+                        <x-input.text :required="true" name="color_2" type="color" label="site.color_2" col="col-md" :value="$subCategory->color_2"/>
+
+                    </div>
 
                     {{--categories--}}
                     <x-input.option required="true" name="parent_id" label="site.categories" :lists="$categories" :value="$subCategory->parent_id"/>
