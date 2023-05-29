@@ -24,7 +24,7 @@
 
                 	<div class="row">
 
-                        @php($items = ['facebook', 'twitter', 'instagram', 'video_links'])
+                        @php($items = ['facebook', 'twitter', 'instagram', 'video_links', 'google_play', 'apple_store'])
 
                         @foreach($items as $item)
 

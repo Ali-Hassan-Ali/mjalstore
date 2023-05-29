@@ -16,9 +16,9 @@ class ContactRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-        	'contact_phone'    		=> ['required', 'string','min:2','max:50'],
-        	'contact_email'    		=> ['required', 'email','min:2','max:50'],
-        	'contact_address'  		=> ['required', 'string','min:2','max:255'],
+        	'contact_phone'    		=> ['required', 'string', 'min:2', 'max:50'],
+        	'contact_email'    		=> ['required', 'email', 'min:2', 'max:50'],
+        	'contact_address'  		=> ['required', 'string', 'min:2', 'max:255'],
         	'contact_address_link'  => ['required', 'string', 'url'],
         ];
 

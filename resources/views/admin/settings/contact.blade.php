@@ -23,18 +23,15 @@
                 <div class="tile shadow">
 
                 	<div class="row">
-                		
-	                	{{--phone--}}
-	                    <x-input.text required="true" name="contact_phone" label="site.phone" :value="getSetting('contact_phone')" col="col-md-6"/>
 
-	                    {{--email--}}
-	                    <x-input.text required="true" name="contact_email" label="site.email" :value="getSetting('contact_email')" col="col-md-6" type="email"/>
+                        @php($items = ['phone', 'email', 'address', 'address_link'])
 
-	                    {{--address--}}
-	                    <x-input.text required="true" name="contact_address" label="site.address" :value="getSetting('contact_address')" col="col-md-6"/>
+                        @foreach($items as $item)
 
-	                    {{--address link--}}
-	                    <x-input.text required="true" name="contact_address_link" label="site.address_link" :value="getSetting('contact_address_link')" col="col-md-6"/>
+                            {{--$item--}}
+                            <x-input.text required="true" :name="'contact_' . $item" :label="'site.' . $item" :value="getSetting('contact_' . $item)" col="col-md-6"/>
+
+                        @endforeach
 
                 	</div>
 

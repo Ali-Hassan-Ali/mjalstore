@@ -24,6 +24,8 @@ class MediaController extends Controller
         saveTransSetting('media_twitter', $request->media_twitter ?? '');
         saveTransSetting('media_instagram', $request->media_instagram ?? '');
         saveTransSetting('media_video_links', $request->media_video_links ?? '');
+        saveTransSetting('media_google_play', $request->media_google_play ?? '');
+        saveTransSetting('media_apple_store', $request->media_apple_store ?? '');
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->back();
