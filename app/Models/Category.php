@@ -10,6 +10,7 @@ use App\Models\Scopes\StatusScope;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Category extends Model
 {
@@ -43,6 +44,12 @@ class Category extends Model
         return $this->belongsTo(Admin::class);
 
     }//end of admin
+
+    public function markets(): BelongsToMany
+    {
+        return $this->belongsToMany(Market::class, 'category_markets');
+
+    }//end of markets
 
     //scope
     public function scopeCategory(Builder $query): Builder

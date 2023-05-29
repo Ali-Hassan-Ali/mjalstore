@@ -19,104 +19,132 @@
             </a>
         </li>
 
-        {{--categories--}}
-        <li class="treeview {{ request()->is('*categories*') ? 'is-expanded' : '' }}">
-            <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-user-circle"></i>
-                <span class="app-menu__label">@lang('site.categories')</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item {{ request()->segment(2) === 'categories' ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
-                        <i class="icon fa fa-circle"></i>@lang('site.categories')
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item {{ request()->segment(2) === 'sub_categories' ? 'active' : '' }}" href="{{ route('admin.sub_categories.index') }}">
-                        <i class="icon fa fa-circle"></i>@lang('site.sub_categories')
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @if(permissionAdmin('read-categories') || permissionAdmin('read-sub_categories'))
+            {{--categories--}}
+            <li class="treeview {{ request()->is('*categories*') ? 'is-expanded' : '' }}">
+                <a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-user-circle"></i>
+                    <span class="app-menu__label">@lang('site.categories')</span>
+                    <i class="treeview-indicator fa fa-angle-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    @if(permissionAdmin('read-categories'))
+                        <li>
+                            <a class="treeview-item {{ request()->segment(2) === 'categories' ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
+                                <i class="icon fa fa-circle"></i>@lang('site.categories')
+                            </a>
+                        </li>
+                    @endif
 
-        {{-- managements --}}
-        <li class="treeview {{ request()->is('*managements*') ? 'is-expanded' : '' }}">
-            <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-user-circle"></i>
-                <span class="app-menu__label">@lang('site.managements')</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item {{ request()->is('*admins*') ? 'active' : '' }}" href="{{ route('admin.managements.admins.index') }}">
-                        <i class="icon fa fa-circle"></i>@lang('site.admins')
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item {{ request()->is('*roles*') ? 'active' : '' }}" href="{{ route('admin.managements.roles.index') }}">
-                        <i class="icon fa fa-circle"></i>@lang('site.roles')
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item {{ request()->is('*languages*') ? 'active' : '' }}" href="{{ route('admin.managements.languages.index') }}">
-                        <i class="icon fa fa-circle"></i>@lang('site.languages')
-                    </a>
-                </li>
-            </ul>
-        </li>
+                    @if(permissionAdmin('read-sub_categories'))
+                        <li>
+                            <a class="treeview-item {{ request()->segment(2) === 'sub_categories' ? 'active' : '' }}" href="{{ route('admin.sub_categories.index') }}">
+                                <i class="icon fa fa-circle"></i>@lang('site.sub_categories')
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        @endif
 
-        {{-- products --}}
-        <li class="treeview {{ request()->is('*products*') ? 'is-expanded' : '' }}">
-            <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-user-circle"></i>
-                <span class="app-menu__label">@lang('menu.managements_products')</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item {{ request()->is('*markets*') ? 'active' : '' }}" href="{{ route('admin.products.markets.index') }}">
-                        <i class="icon fa fa-circle"></i>@lang('menu.markets')
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @if(permissionAdmin('read-admins') || permissionAdmin('read-roles') || permissionAdmin('read-languages'))
+            {{-- managements --}}
+            <li class="treeview {{ request()->is('*managements*') ? 'is-expanded' : '' }}">
+                <a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-user-circle"></i>
+                    <span class="app-menu__label">@lang('site.managements')</span>
+                    <i class="treeview-indicator fa fa-angle-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    @if(permissionAdmin('read-admins'))
+                        <li>
+                            <a class="treeview-item {{ request()->is('*admins*') ? 'active' : '' }}" href="{{ route('admin.managements.admins.index') }}">
+                                <i class="icon fa fa-circle"></i>@lang('site.admins')
+                            </a>
+                        </li>
+                    @endif
+                    @if(permissionAdmin('read-roles'))
+                        <li>
+                            <a class="treeview-item {{ request()->is('*roles*') ? 'active' : '' }}" href="{{ route('admin.managements.roles.index') }}">
+                                <i class="icon fa fa-circle"></i>@lang('site.roles')
+                            </a>
+                        </li>
+                    @endif
+                    @if(permissionAdmin('read-languages'))
+                        <li>
+                            <a class="treeview-item {{ request()->is('*languages*') ? 'active' : '' }}" href="{{ route('admin.managements.languages.index') }}">
+                                <i class="icon fa fa-circle"></i>@lang('site.languages')
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        @endif
 
-        {{-- settings --}}
-        <li class="treeview {{ request()->is('*settings*') ? 'is-expanded' : '' }}">
-            <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-user-circle"></i>
-                <span class="app-menu__label">@lang('menu.settings')</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item {{ request()->is('*meta*') ? 'active' : '' }}" href="{{ route('admin.settings.meta.index') }}">
-                        <i class="icon fa fa-circle"></i>@lang('settings.meta')
-                    </a>
-                </li>
+        @if(permissionAdmin('read-cards') || permissionAdmin('read-markets'))
+            {{-- products --}}
+            <li class="treeview {{ request()->is('*products*') ? 'is-expanded' : '' }}">
+                <a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-user-circle"></i>
+                    <span class="app-menu__label">@lang('menu.managements_products')</span>
+                    <i class="treeview-indicator fa fa-angle-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    @if(permissionAdmin('read-cards'))
+                        <li>
+                            <a class="treeview-item {{ request()->is('*cards*') ? 'active' : '' }}" href="{{ route('admin.products.cards.index') }}">
+                                <i class="icon fa fa-circle"></i>@lang('menu.cards')
+                            </a>
+                        </li>
+                    @endif
 
-                <li>
-                    <a class="treeview-item {{ request()->is('*websit*') ? 'active' : '' }}" href="{{ route('admin.settings.websit.index') }}">
-                        <i class="icon fa fa-circle"></i>@lang('settings.websit')
-                    </a>
-                </li>
+                    @if(permissionAdmin('read-markets'))
+                        <li>
+                            <a class="treeview-item {{ request()->is('*markets*') ? 'active' : '' }}" href="{{ route('admin.products.markets.index') }}">
+                                <i class="icon fa fa-circle"></i>@lang('menu.markets')
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        @endif
 
-                <li>
-                    <a class="treeview-item {{ request()->is('*contact*') ? 'active' : '' }}" href="{{ route('admin.settings.contact.index') }}">
-                        <i class="icon fa fa-circle"></i>@lang('settings.contact')
-                    </a>
-                </li>
+        @if(permissionAdmin('read-settings'))
+            {{-- settings --}}
+            <li class="treeview {{ request()->is('*settings*') ? 'is-expanded' : '' }}">
+                <a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-user-circle"></i>
+                    <span class="app-menu__label">@lang('menu.settings')</span>
+                    <i class="treeview-indicator fa fa-angle-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a class="treeview-item {{ request()->is('*meta*') ? 'active' : '' }}" href="{{ route('admin.settings.meta.index') }}">
+                            <i class="icon fa fa-circle"></i>@lang('settings.meta')
+                        </a>
+                    </li>
 
-                <li>
-                    <a class="treeview-item {{ request()->is('*media*') ? 'active' : '' }}" href="{{ route('admin.settings.media.index') }}">
-                        <i class="icon fa fa-circle"></i>@lang('settings.media')
-                    </a>
-                </li>
-                
-            </ul>
-        </li>
+                    <li>
+                        <a class="treeview-item {{ request()->is('*websit*') ? 'active' : '' }}" href="{{ route('admin.settings.websit.index') }}">
+                            <i class="icon fa fa-circle"></i>@lang('settings.websit')
+                        </a>
+                    </li>
 
+                    <li>
+                        <a class="treeview-item {{ request()->is('*contact*') ? 'active' : '' }}" href="{{ route('admin.settings.contact.index') }}">
+                            <i class="icon fa fa-circle"></i>@lang('settings.contact')
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="treeview-item {{ request()->is('*media*') ? 'active' : '' }}" href="{{ route('admin.settings.media.index') }}">
+                            <i class="icon fa fa-circle"></i>@lang('settings.media')
+                        </a>
+                    </li>
+                    
+                </ul>
+            </li>
+        @endif
 
     </ul>
 </aside>

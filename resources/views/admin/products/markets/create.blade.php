@@ -51,10 +51,7 @@
                             <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $language->code }}" role="tabpanel" aria-labelledby="{{ $language->code }}-tab">
 
                                 {{--name--}}
-                                <x-input.text required="{{ $loop->first ? true : false }}" 
-                                    name="name[{{ $language->code }}]" 
-                                    label="site.name"
-                                    invalid="{{ 'name.' . $language->code }}" />
+                                <x-input.text required="{{ $loop->first ? true : false }}" name="name[{{ $language->code }}]" label="site.name"invalid="{{ 'name.' . $language->code }}" />
 
                             </div>
                         @endforeach
@@ -65,7 +62,7 @@
                 <div class="tile shadow">
 
                     {{--categories--}}
-                    <x-input.option required="true" name="category_id" label="site.sub_categories" :lists="$subCategories"/>
+                    <x-input.option required="true" name="sub_categories[]" label="site.sub_categories" :lists="$subCategories" :multiple="true" :value="old('sub_categories')"/>
 
                     {{--status--}}
                     <x-input.checkbox :required="true" name="status" label="admin.global.status" col="col-md"/>

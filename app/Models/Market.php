@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Market extends Model
 {
@@ -40,10 +41,10 @@ class Market extends Model
 
     }//end of subCategory
 
-    public function products(): HasMany
+    public function subCategories(): BelongsToMany
     {
-        return $this->hasMany(Admin::class);
+        return $this->belongsToMany(Category::class, 'category_markets');
 
-    }//end of products
+    }//end of subCategories
 
 }//end of model

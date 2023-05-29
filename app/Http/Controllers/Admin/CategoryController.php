@@ -57,7 +57,7 @@ class CategoryController extends Controller
 
         return dataTables()->of($category)
             ->addColumn('record_select', 'admin.dataTables.record_select')
-            ->addColumn('created_at', fn(Category $category) => $category->created_at->format('Y-m-d'))
+            ->addColumn('created_at', fn(Category $category) => $category->created_at?->format('Y-m-d'))
             ->addColumn('admin', fn(Category $category) => $category?->admin?->name)
             ->editColumn('logo', function(Category $category) {
                 return view('admin.dataTables.image', ['models' => $category]);

@@ -20,6 +20,8 @@ return [
     'managements_products' => 'اداره المنتجات',
     'product'         => 'منتج',
     'products'        => 'منتجات',
+    'card'            => 'بطاقه',
+    'cards'           => 'بطاقات',
     'market'          => 'متجر',
     'markets'         => 'متاجر',
 

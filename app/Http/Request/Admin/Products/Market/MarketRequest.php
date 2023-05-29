@@ -26,8 +26,8 @@ class MarketRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'status'      => ['nullable', 'in:1,0'],
-            'category_id' => ['required', 'exists:categories,id'],
+            'status'           => ['nullable', 'in:1,0'],
+            'sub_categories.*' => ['required', 'exists:categories,id'],
         ];
 
         if (in_array(request()->method(), ['PUT', 'PATCH'])) {

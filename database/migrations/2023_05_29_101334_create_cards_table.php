@@ -11,13 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('markets', function (Blueprint $table) {
+        Schema::create('cards', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('flag')->nullable();
+
+            $table->double('quantity')->default(0);
+            $table->double('balance')->default(0);
+            $table->integer('rating')->nullable();
+            $table->double('count_of_buy')->default(0);
+            $table->double('price');
+
             $table->string('slug')->unique()->nullable();
             $table->boolean('status')->default(0);
 
+            $table->foreignId('category_id')->constrained();
+            $table->foreignId('market_id')->constrained()->nullable();
             $table->foreignId('admin_id')->constrained();
 
             $table->softDeletes();
@@ -30,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('markets');
+        Schema::dropIfExists('cards');
     }
 };

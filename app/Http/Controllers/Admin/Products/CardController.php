@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin\Products;
 
 use App\Http\Controllers\Controller;
-use App\Models\Market;
+use App\Models\Card;
 use App\Models\Category;
-use App\Http\Request\Admin\Products\Market\MarketRequest;
-use App\Http\Request\Admin\Products\Market\StatusRequest;
-use App\Http\Request\Admin\Products\Market\DeleteRequest;
+use App\Http\Request\Admin\Products\Card\CardRequest;
+use App\Http\Request\Admin\Products\Card\StatusRequest;
+use App\Http\Request\Admin\Products\Card\DeleteRequest;
 use App\Services\DatatableServices;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -16,7 +16,7 @@ use Illuminate\Http\Response;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
-class MarketController extends Controller
+class CardController extends Controller
 {
     public function index(): View
     {
@@ -56,27 +56,25 @@ class MarketController extends Controller
             'delete' => permissionAdmin('delete-markets'),
         ];
 
-        $market = Market::query();
+        $card = Card::query();
 
-        return dataTables()->of($market)
+        return dataTables()->of($card)
             ->addColumn('record_select', 'admin.dataTables.record_select')
-            ->addColumn('created_at', fn(Market $market) => $market->created_at->format('Y-m-d'))
-            ->addColumn('admin', fn(Market $market) => $market?->admin?->name)
-            ->addColumn('sub_category', function(Market $market) {
-                return view('admin.products.markets.data_tables.sub_categories', compact('market'));
+            ->addColumn('created_at', fn(Card $card) => $card->created_at->format('Y-m-d'))
+            ->addColumn('admin', fn(Card $card) => $card?->admin?->name)
+            ->addColumn('sub_category', fn(Card $card) => $card?->subCategory?->name)
+            ->editColumn('flag', function(Card $card) {
+                return view('admin.dataTables.image', ['models' => $card]);
             })
-            ->editColumn('flag', function(Market $market) {
-                return view('admin.dataTables.image', ['models' => $market]);
-            })
-            ->addColumn('actions', function(Market $market) use($permissions) {
-                $routeEdit   = route('admin.products.markets.edit', $market->id);
-                $routeDelete = route('admin.products.markets.destroy', $market->id);
+            ->addColumn('actions', function(Card $card) use($permissions) {
+                $routeEdit   = route('admin.products.markets.edit', $card->id);
+                $routeDelete = route('admin.products.markets.destroy', $card->id);
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
-            ->addColumn('status', function(Market $market) use($permissions) {
-                return view('admin.dataTables.status', ['models' => $market, 'permissions' => $permissions]);
+            ->addColumn('status', function(Card $card) use($permissions) {
+                return view('admin.dataTables.status', ['models' => $card, 'permissions' => $permissions]);
             })
-            ->addColumn('name', fn(Market $market) => $market->name ?? '')
+            ->addColumn('name', fn(Card $card) => $card->name ?? '')
             ->rawColumns(['record_select', 'actions', 'status', 'name', 'flag'])
             ->addIndexColumn()
             ->toJson();
@@ -95,25 +93,16 @@ class MarketController extends Controller
 
     }//end of create
 
-    public function store(MarketRequest $request): RedirectResponse
+    public function store(CardRequest $request): RedirectResponse
     {
-        $requestData = request()->except('flag', 'sub_categories');
-
-        if(request()->file('flag')) {
-
-            $requestData['flag'] = request()->file('flag')->store('markets', 'public');
-
-        }
-
-        $market = Market::create($requestData);
-        $market->subCategories()->sync($request->sub_categories);
+        Card::create($requestData);
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.products.markets.index');
 
     }//end of store
 
-    public function edit(Market $market): View
+    public function edit(Card $card): View
     {
         if(!permissionAdmin('update-markets')) {
             return abort(403);
@@ -125,30 +114,29 @@ class MarketController extends Controller
 
     }//end of edit
 
-    public function update(MarketRequest $request, Market $market): RedirectResponse
+    public function update(CardRequest $request, Card $card): RedirectResponse
     {
-        $requestData = request()->except('flag', 'sub_categories');
+        $requestData = request()->except('flag');
         if(request()->file('flag')) {
 
-            Storage::disk('public')->delete($market->flag);
+            Storage::disk('public')->delete($card->flag);
 
             $requestData['flag'] = request()->file('flag')->store('markets', 'public');
 
         }
-        $market->update($requestData);
-        $market->subCategories()->sync($request->sub_categories);
+        $card->update($requestData);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.products.markets.index');
 
     }//end of update
 
-    public function destroy(Market $market): Application | Response | ResponseFactory
+    public function destroy(Card $card): Application | Response | ResponseFactory
     {
-        if($market->flag) {
-            Storage::disk('public')->delete($market->flag);
+        if($card->flag) {
+            Storage::disk('public')->delete($card->flag);
         }
-        $market->delete();
+        $card->delete();
 
         session()->flash('success', __('site.deleted_successfully'));
         return response(__('site.deleted_successfully'));
@@ -157,9 +145,9 @@ class MarketController extends Controller
 
     public function bulkDelete(DeleteRequest $request)
     {
-        $images = Market::find(request()->ids ?? [])->pluck('flag')->toArray();
+        $images = Card::find(request()->ids ?? [])->pluck('flag')->toArray();
         Storage::disk('public')->delete($images) ?? '';
-        Market::destroy(request()->ids ?? []);
+        Card::destroy(request()->ids ?? []);
 
         session()->flash('success', __('site.deleted_successfully'));
         return response(__('site.deleted_successfully'));
@@ -168,8 +156,8 @@ class MarketController extends Controller
 
     public function status(StatusRequest $request)
     {
-        $market = Market::find($request->id);
-        $market->update(['status' => !$market->status]);
+        $card = Card::find($request->id);
+        $card->update(['status' => !$card->status]);
 
         session()->flash('success', __('site.updated_successfully'));
         return response(__('site.updated_successfully'));

@@ -5,27 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Scopes\StatusScope;
 
-class Language extends Model
+class Card extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $guarded = [];
 
-    protected function imagePath(): Attribute
+    public function admin(): BelongsTo
     {
-        return Attribute::make(
-            get: fn () => $this->flag ? asset('storage/' . $this->flag) : asset('admin_assets/images/default.png'),
-        );
+        return $this->belongsTo(Admin::class);
 
-    }//end of get ImagePath Attribute
+    }//end of admin
 
     protected static function booted(): void
     {
-        if(!request()->is('*languages*')) {
+        if(!request()->is('*cards*')) {
            static::addGlobalScope(new StatusScope);
         }
 

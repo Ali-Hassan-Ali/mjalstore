@@ -15,7 +15,6 @@ class MarketFactory extends Factory
             'slug'         => str()->slug(fake()->name(), '-'),
             'status'       => fake()->boolean(),
             'admin_id'     => Admin::Factory(),
-            'category_id'  => Category::Factory(),
         ];
 
     }//end of run

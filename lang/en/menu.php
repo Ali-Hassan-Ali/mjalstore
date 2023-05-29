@@ -20,6 +20,8 @@ return [
     'managements_products' => 'Managements Products',
     'product'         => 'Product',
     'products'        => 'Products',
+    'card'            => 'Card',
+    'cards'           => 'Cards',
     'market'          => 'Market',
     'markets'         => 'Markets',
 

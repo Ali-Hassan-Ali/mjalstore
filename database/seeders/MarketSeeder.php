@@ -10,7 +10,7 @@ class MarketSeeder extends Seeder
 {
     public function run(): void
     {
-        Market::factory(20)->create();
+        // Market::factory(20)->create();
 
     }//end of run
 

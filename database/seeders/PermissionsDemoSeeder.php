@@ -29,7 +29,7 @@ class PermissionsDemoSeeder extends Seeder
         \App\Models\Admin::factory(20)->create();
         \App\Models\Admin::whereNot('id', 1)->each(fn($admin) => $admin->assignRole('admin'));
 
-        $permissions = ['home', 'admins', 'roles', 'languages', 'settings', 'categories', 'sub_categories', 'markets'];
+        $permissions = ['home', 'admins', 'roles', 'languages', 'settings', 'categories', 'sub_categories', 'markets', 'cards'];
 
         foreach ($permissions as $data) {
 
@@ -37,7 +37,7 @@ class PermissionsDemoSeeder extends Seeder
 
             foreach ($cruds as $crud) {
 
-                Permission::create(['guard_name' => 'admin', 'name' => $crud .'-' . $data]);
+                Permission::updateOrCreate(['guard_name' => 'admin', 'name' => $crud .'-' . $data]);
 
             }//end of each
 

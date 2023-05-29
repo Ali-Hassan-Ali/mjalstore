@@ -48,7 +48,7 @@
                     <x-input.text required="true" name="password_confirmation" label="site.password_confirmation" col="col-md-6" type="password"/>
 
                     {{--roles--}}
-                    <x-input.option required="true" name="roles[]" invalid="roles" label="site.roles" :lists="$roles" :multiple="true" :value="$admin->roles->pluck('name')->toArray()"/>
+                    <x-input.option required="true" name="roles[]" invalid="roles" label="site.roles" :lists="$roles" :multiple="true" :value="old('roles', $admin->roles->pluck('name')->toArray())"/>
 
                     {{--status--}}
                     <x-input.checkbox :required="true" name="status" label="admin.global.status" :value="$admin->status"/>

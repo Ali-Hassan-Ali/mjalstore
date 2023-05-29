@@ -53,8 +53,7 @@
                                 {{--name--}}
                                 <x-input.text required="{{ $loop->first ? true : false }}" 
                                     name="name[{{ $language->code }}]" 
-                                    label="site.name"
-                                    :value="$market->getTranslations('name')[$language->code] ?? ''"
+                                    label="site.name" :value="$market->getTranslations('name')[$language->code] ?? ''"
                                     invalid="{{ 'name.' . $language->code }}" />
 
                             </div>
@@ -66,7 +65,7 @@
                 <div class="tile shadow">
 
                     {{--categories--}}
-                    <x-input.option required="true" name="category_id" label="site.sub_categories" :lists="$subCategories" :value="$market->category_id"/>
+                    <x-input.option required="true" name="sub_categories[]" label="site.sub_categories" :lists="$subCategories" multiple="true" :value="old('sub_categories', $market->subCategories->pluck('id')->toArray())"/>
 
                     {{--status--}}
                     <x-input.checkbox :required="true" name="status" label="admin.global.status" col="col-md" :value="$market->status"/>
