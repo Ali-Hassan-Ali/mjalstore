@@ -30,8 +30,8 @@ class CardRequest extends FormRequest
             'quantity'   => ['required', 'numeric'],
             'balance'    => ['required', 'numeric'],
             'price'      => ['required', 'numeric'],
-            'rating'     => ['required', 'numeric', 'min:2', 'max:7'],
-            'market_id'  => ['required', 'exists:markets,id'],
+            'rating'     => ['required', 'numeric', 'min:0', 'max:7'],
+            'market_id'  => ['nullable', 'exists:markets,id'],
             'category_id'=> ['required', 'exists:categories,id'],
         ];
 

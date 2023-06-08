@@ -1,4 +1,4 @@
-<div class="col-12 {{ $col }}" id="{{ $name }}-hidden" {{ $hidden ? 'hidden=hidden' : '' }}>
+<div class="{{ $col }}" id="{{ $name }}-hidden" {{ $hidden ? 'hidden=hidden' : '' }}>
     <div class="form-group">
         @if(!empty($label))
             <label for="{{ !empty($invalid) ? $invalid : $name }}">{{ trans($label) }} @if($required)<span class="text-danger">*</span>@endif</label>

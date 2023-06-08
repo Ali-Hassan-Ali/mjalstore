@@ -21,6 +21,18 @@ class Card extends Model
 
     }//end of admin
 
+    public function subCategory(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+
+    }//end of Category
+
+    public function market(): BelongsTo
+    {
+        return $this->belongsTo(Market::class);
+
+    }//end of Category
+
     protected static function booted(): void
     {
         if(!request()->is('*cards*')) {

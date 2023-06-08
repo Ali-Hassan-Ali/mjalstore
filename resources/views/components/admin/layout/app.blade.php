@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}" dir="{{ session('dir') }}">
 <head>
-    <title>{{ getTransSetting('websit_title', app()->getLocale()) . '  ' . $title ?? '' }}</title>
+    <title>{{ getTransSetting('websit_title', app()->getLocale()) . ' - ' . $title ?? '' }}</title>
     <meta name="description" content="">
 
     <meta charset="utf-8">

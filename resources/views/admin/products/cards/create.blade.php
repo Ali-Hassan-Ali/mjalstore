@@ -1,7 +1,7 @@
 <x-admin.layout.app>
 
     <x-slot name="title">
-        {{ trans('site.create') . ' ' . trans('menu.cards') }}
+        {{ trans('site.create') . ' - ' . trans('menu.cards') }}
     </x-slot>
 
     <x-slot name="style">
@@ -29,7 +29,11 @@
 
                 <div class="tile shadow">
 
-                    @include('admin.sub_categories.components.cards', ['color1' => '#199afe', 'color2' => '#8f06fa'])
+                    @include('admin.sub_categories.components.cards', ['color1' => '#199afe', 'color2' => '#8f06fa', 
+                            'subCategory' => old('name.' . getLanguages('default')->code, 'GOOGLE GM'), 
+                            'title'       => old('title_card.' . getLanguages('default')->code, 'حمل ما تريد من ألعاب PC المدفوعة'),
+                            'market'      => old('market_id', 'المتجر'),
+                            'price'       => old('price', '0000')])
 
                 </div><!-- end of tile -->
 
@@ -45,19 +49,19 @@
                         <x-input.option required="true" name="category_id" label="site.sub_categories" :lists="$categories" :value="old('category')" col="col-md"/>
 
                         {{--sub categories--}}
-                        <x-input.option required="true" name="sub_category" :disabled='true' label="site.sub_categories" :lists="$subCategories" :value="old('sub_category')" col="col-md"/>
+                        <x-input.option required="true" name="sub_category" :disabled='old("sub_category") ? false : true' label="site.sub_categories" :lists="[]" :value="old('sub_category')" col="col-md"/>
 
                         {{--markets--}}
-                        <x-input.option name="market_id" label="site.markets" :lists="$markets" :hidden='true' :value="old('market_id')" col="col-md"/>
+                        <x-input.option name="market_id" label="site.markets" :lists="[]" :hidden='old("market_id") ? false : true' :value="old('market_id')" col="col-md"/>
 
                         {{--price--}}
-                        <x-input.text type="number" required="true" name="price" label="site.price" :value="old('price')" col="col-md-6"/>
+                        <x-input.text type="number" required="true" name="price" label="site.price" col="col-md-6"/>
 
                         {{--quantity--}}
-                        <x-input.text type="number" required="true" name="quantity" label="site.quantity" :value="old('quantity')" col="col-md-6"/>
+                        <x-input.text type="number" required="true" name="quantity" label="site.quantity" col="col-md-6"/>
 
                         {{--balance--}}
-                        <x-input.text type="number" required="true" name="balance" label="site.balance" :value="old('balance')" col="col-md-6"/>
+                        <x-input.text type="number" required="true" name="balance" label="site.balance" col="col-md-6"/>
 
                         {{--rating--}}
                         <x-input.option required="true" name="rating" label="site.rating" :lists="[1,2,3,4,5,6,7]" :value="old('rating')" col="col-md-6"/>

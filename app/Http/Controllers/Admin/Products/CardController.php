@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Http\Collection;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
@@ -87,16 +88,16 @@ class CardController extends Controller
             return abort(403);
         }
 
-        $subCategories = Category::subCategory()->pluck('name', 'id');
-        $categories    = Category::category()->pluck('name', 'id');
-        $markets       = Category::category()->pluck('name', 'id');
+        $categories = Category::category()->pluck('name', 'id');
 
-        return view('admin.products.cards.create', compact('subCategories', 'categories', 'markets'));
+        return view('admin.products.cards.create', compact('categories'));
 
     }//end of create
 
     public function store(CardRequest $request): RedirectResponse
     {
+        $requestData = request()->except('category_id', 'sub_category');
+        $requestData['category_id'] = request()->sub_category;
         Card::create($requestData);
 
         session()->flash('success', __('site.added_successfully'));
@@ -109,24 +110,20 @@ class CardController extends Controller
         if(!permissionAdmin('update-cards')) {
             return abort(403);
         }
+        $categoryId = $card?->subCategory?->parent_id;
 
-        $subCategories = Category::subCategory()->pluck('name', 'id');
         $categories    = Category::category()->pluck('name', 'id');
+        $subCategories = Category::find($categoryId)?->subCategoriesRelation()->pluck('name', 'id');
+        $markets       = old('market_id') ? Category::find($card?->category_id)->markets->pluck('name', 'id')->toArray() : [];
 
-        return view('admin.products.cards.edit', compact('market', 'subCategories', 'categories'));
+        return view('admin.products.cards.edit', compact('markets', 'subCategories', 'categories', 'categoryId', 'card'));
 
     }//end of edit
 
     public function update(CardRequest $request, Card $card): RedirectResponse
     {
-        $requestData = request()->except('flag');
-        if(request()->file('flag')) {
-
-            Storage::disk('public')->delete($card->flag);
-
-            $requestData['flag'] = request()->file('flag')->store('cards', 'public');
-
-        }
+        $requestData = request()->except('category_id', 'sub_category');
+        $requestData['category_id'] = request()->sub_category;
         $card->update($requestData);
 
         session()->flash('success', __('site.updated_successfully'));
@@ -167,15 +164,20 @@ class CardController extends Controller
 
     }//end of status
 
-    public function category(Category $category)
+    public function category(Category $category): Application | Response | ResponseFactory
     {
-        return $category->subCategoriesRelation()->pluck('name', 'id')->toArray();
+        return response($category->subCategoriesRelation()->pluck('name', 'id')->toArray());
 
     }//end of get sub category
 
-    public function markets(Category $subCategory)
+    public function markets(Category $subCategory): Application | Response | ResponseFactory
     {
-        return $subCategory->markets->pluck('name', 'id')->toArray();
+        return response([
+            'items'     => $subCategory->markets->pluck('name', 'id')->toArray(),
+            'color1'    =>  ,
+            'color2'    => $subCategory->color_2,
+            'titleCard' => $subCategory->title_card,
+        ]);
 
     }//end of get markets from sub category
 

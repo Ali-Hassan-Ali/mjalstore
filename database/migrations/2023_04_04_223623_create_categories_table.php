@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
-            $table->string('title_card')->nullable();
+            $table->text('title_card')->nullable();
 
             $table->string('logo')->nullable();
             $table->string('banner')->nullable();

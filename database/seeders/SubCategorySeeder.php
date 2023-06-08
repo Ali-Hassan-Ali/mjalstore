@@ -16,6 +16,7 @@ class SubCategorySeeder extends Seeder
         $data = [
             [
                 'name'	        => json_encode(['ar' => 'آيتونز', 'en' => 'آيتونز']),
+                'title_card'    => json_encode(['ar' => 'حمل ما تريد من ألعاب PC المدفوعة', 'en' => 'حمل ما تريد من ألعاب PC المدفوعة']),
                 'description' 	=> json_encode(['ar' => $description, 'en' => $description]),
                 'color_1'		=> '#199afe',
                 'color_2'		=> '#8f06fa',
@@ -28,6 +29,7 @@ class SubCategorySeeder extends Seeder
 
             [
                 'name'	        => json_encode(['ar' => 'قوقل بلاي', 'en' => 'قوقل بلاي']),
+                'title_card'    => json_encode(['ar' => 'حمل ما تريد من ألعاب PC المدفوعة', 'en' => 'حمل ما تريد من ألعاب PC المدفوعة']),
                 'description'  	=> json_encode(['ar' => $description, 'en' => $description]),
                 'color_1'		=> '#199afe',
                 'color_2'		=> '#8f06fa',
@@ -40,6 +42,7 @@ class SubCategorySeeder extends Seeder
 
             [
                 'name'	        => json_encode(['ar' => 'هواوي', 'en' => 'هواوي']),
+                'title_card'    => json_encode(['ar' => 'حمل ما تريد من ألعاب PC المدفوعة', 'en' => 'حمل ما تريد من ألعاب PC المدفوعة']),
                 'description'  	=> json_encode(['ar' => $description, 'en' => $description]),
                 'color_1'		=> '#199afe',
                 'color_2'		=> '#8f06fa',
@@ -56,6 +59,7 @@ class SubCategorySeeder extends Seeder
         $data = [
             [
                 'name'	        => json_encode(['ar' => 'ببجي', 'en' => 'ببجي']),
+                'title_card'    => json_encode(['ar' => 'حمل ما تريد من ألعاب PC المدفوعة', 'en' => 'حمل ما تريد من ألعاب PC المدفوعة']),
                 'description'  	=> json_encode(['ar' => $description, 'en' => $description]),
                 'color_1'		=> '#000000',
                 'color_2'		=> '#ca48c6',
@@ -68,6 +72,7 @@ class SubCategorySeeder extends Seeder
 
             [
                 'name'	        => json_encode(['ar' => 'بلايستيشن', 'en' => 'بلايستيشن']),
+                'title_card'    => json_encode(['ar' => 'حمل ما تريد من ألعاب PC المدفوعة', 'en' => 'حمل ما تريد من ألعاب PC المدفوعة']),
                 'description'  	=> json_encode(['ar' => $description, 'en' => $description]),
                 'color_1'		=> '#000000',
                 'color_2'		=> '#ca48c6',
@@ -80,6 +85,7 @@ class SubCategorySeeder extends Seeder
 
             [
                 'name'	        => json_encode(['ar' => 'فري فاير', 'en' => 'فري فاير']),
+                'title_card'    => json_encode(['ar' => 'حمل ما تريد من ألعاب PC المدفوعة', 'en' => 'حمل ما تريد من ألعاب PC المدفوعة']),
                 'description'  	=> json_encode(['ar' => $description, 'en' => $description]),
                 'color_1'		=> '#000000',
                 'color_2'		=> '#ca48c6',

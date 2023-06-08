@@ -1,4 +1,4 @@
-<div class="col-12 {{ $col }}" id="{{ $name }}-hidden" {{ $hidden ? 'hidden=hidden' : '' }}>
+<div class="{{ $col }}" id="{{ $name }}-hidden" {{ $hidden ? 'hidden=hidden' : '' }}>
     @if($label)
         <label class="form-check-label" for="{{ $name }}">{{ trans($label) }}</label>
     @endif
