@@ -7,13 +7,16 @@ use App\Http\Request\Admin\AdminRequest;
 use App\Http\Request\Admin\Auth\LoginRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Admin;
 
 class LoginController extends Controller
 {
     public function index(): RedirectResponse | View
     {
         if (auth('admin')->check()) {
+
             return redirect()->route('admin.index');
+
         } else {
 
             return view('admin.auth.login');
@@ -31,7 +34,7 @@ class LoginController extends Controller
 
         $credentials = $request->only($login_type, 'password');
 
-        if (auth('admin')->attempt($credentials, $request->remember)) {
+        if (auth('admin')->attempt($credentials, request()->has('remember'))) {
 
             session()->flash('success', __('site.login_successfully'));
 
@@ -39,7 +42,7 @@ class LoginController extends Controller
 
         } else {
 
-            return redirect()->back()->with(['password' => __('auth.no_data_found')])->withInput();
+            return redirect()->back()->with(['password' => __('auth.password_invalid')])->withInput();
 
         }//end of if
 

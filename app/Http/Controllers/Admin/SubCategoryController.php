@@ -50,7 +50,7 @@ class SubCategoryController extends Controller
 
     }//end of index
 
-    public function data()
+    public function data(): object
     {
         $permissions = [
             'status' => permissionAdmin('status-sub_categories'),

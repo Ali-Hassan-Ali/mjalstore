@@ -44,7 +44,7 @@ class RoleController extends Controller
 
     }//end of index
 
-    public function data()
+    public function data(): object
     {
         $permissions = [
             'status' => 'status-roles',
@@ -133,7 +133,7 @@ class RoleController extends Controller
 
     }//end of delete
 
-    public function bulkDelete(DeleteRequest $request)
+    public function bulkDelete(DeleteRequest $request): Application | Response | ResponseFactory
     {
         $images = Role::where('default', 0)->find(request()->ids ?? [])->pluck('flag')->toArray();
         Storage::disk('public')->delete($images) ?? '';

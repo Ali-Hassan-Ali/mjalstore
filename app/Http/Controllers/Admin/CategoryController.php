@@ -45,7 +45,7 @@ class CategoryController extends Controller
 
     }//end of index
 
-    public function data()
+    public function data(): object
     {
         $permissions = [
             'status' => permissionAdmin('status-categories'),
@@ -154,7 +154,7 @@ class CategoryController extends Controller
 
     }//end of bulkDelete
 
-    public function status(StatusRequest $request)
+    public function status(StatusRequest $request): Application | Response | ResponseFactory
     {
         $slider = Category::find($request->id);
         $slider->update(['status' => !$slider->status]);

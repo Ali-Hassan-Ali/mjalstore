@@ -48,7 +48,7 @@ class MarketController extends Controller
 
     }//end of index
 
-    public function data()
+    public function data(): object
     {
         $permissions = [
             'status' => permissionAdmin('status-markets'),
@@ -155,7 +155,7 @@ class MarketController extends Controller
 
     }//end of delete
 
-    public function bulkDelete(DeleteRequest $request)
+    public function bulkDelete(DeleteRequest $request): Application | Response | ResponseFactory
     {
         $images = Market::find(request()->ids ?? [])->pluck('flag')->toArray();
         Storage::disk('public')->delete($images) ?? '';
@@ -166,7 +166,7 @@ class MarketController extends Controller
 
     }//end of bulkDelete
 
-    public function status(StatusRequest $request)
+    public function status(StatusRequest $request): Application | Response | ResponseFactory
     {
         $market = Market::find($request->id);
         $market->update(['status' => !$market->status]);

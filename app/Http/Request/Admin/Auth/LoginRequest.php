@@ -14,8 +14,7 @@ class LoginRequest extends FormRequest
 
     public function rules(): array
     {
-        
-        $loginType = filter_var(request()->get('login'), FILTER_VALIDATE_EMAIL)? 'email' : 'string';
+        $loginType = filter_var(request()->get('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
 
         $rules = [
             'password'   => ['required', 'string','min:2','max:255'],
@@ -27,12 +26,22 @@ class LoginRequest extends FormRequest
 
         } else {
 
-            $rules['name']  = ['required','min:2','max:255'];
+            $rules['login'] = ['required', 'min:2', 'max:255', 'exists:admins,name'];
 
         }//end of if
 
         return $rules;
 
     }//end of rules
+
+    public function attributes(): array
+    {
+        $loginType = filter_var(request()->get('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+
+        return [
+            'login'    => $loginType == 'email' ? trans('auth.email') : trans('auth.name'),
+        ];
+
+    }//end of attributes
 
 }//end of Request

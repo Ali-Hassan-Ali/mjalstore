@@ -39,7 +39,7 @@
 
                     {{-- Email --}}
                     <div class="form-group">
-                        <label class="control-label">@lang('auth.email')</label>
+                        <label class="control-label">@lang('auth.email_or_name')</label>
                         <input id="login" type="text" name="login" class="form-control @error('login') is-invalid @enderror" value="{{ old('login','super_admin@app.com') }}" required autofocus>
                         @error('login')
                             <span class="invalid-feedback" role="alert">
@@ -51,12 +51,12 @@
                     {{-- password --}}
                     <div class="form-group">
                         <label class="control-label">@lang('auth.password')</label>
-                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password','password') }}" required autofocus>
-                        @error('password')
+                        <input type="password" name="password" class="form-control {{ session('password') ? 'is-invalid' : '' }}" value="{{ old('password','password') }}" required autofocus>
+                        @if(session('password'))
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                                <strong>{{ session('password') }}</strong>
                             </span>
-                        @enderror
+                        @endif
                     </div>
 
                     {{-- remember me --}}

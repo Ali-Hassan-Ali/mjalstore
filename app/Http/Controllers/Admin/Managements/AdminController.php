@@ -50,7 +50,7 @@ class AdminController extends Controller
 
     }//end of index
 
-    public function data()
+    public function data(): object
     {
         $permissions = [
             'status' => 'status-admins',
@@ -176,7 +176,7 @@ class AdminController extends Controller
 
     }//end of delete
 
-    public function bulkDelete(DeleteRequest $request)
+    public function bulkDelete(DeleteRequest $request): Application | Response | ResponseFactory
     {
         $images = Admin::where('default', 0)->find(request()->ids ?? [])->pluck('image')->toArray();
         Storage::disk('public')->delete($images) ?? '';
@@ -187,7 +187,7 @@ class AdminController extends Controller
 
     }//end of bulkDelete
 
-    public function status(StatusRequest $request)
+    public function status(StatusRequest $request): Application | Response | ResponseFactory
     {
         $admin = Admin::find($request->id);
         $admin->update(['status' => !$admin->status]);

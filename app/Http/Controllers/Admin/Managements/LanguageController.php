@@ -54,7 +54,7 @@ class LanguageController extends Controller
 
     }//end of index
 
-    public function data()
+    public function data(): object
     {
         $permissions = [
             'status' => 'status-languages',
@@ -178,7 +178,7 @@ class LanguageController extends Controller
 
     }//end of bulkDelete
 
-    public function status(StatusRequest $request)
+    public function status(StatusRequest $request): Application | Response | ResponseFactory
     {
         $language = Language::find($request->id);
         $language?->update(['status' => !$language->status]);
@@ -188,7 +188,7 @@ class LanguageController extends Controller
         
     }//end of status
 
-    public function changeDefault(StatusRequest $request)
+    public function changeDefault(StatusRequest $request): Application | Response | ResponseFactory
     {
         $languages = Language::all();
         $languages->each(fn ($language) => $language->update(['default' => 0]));
