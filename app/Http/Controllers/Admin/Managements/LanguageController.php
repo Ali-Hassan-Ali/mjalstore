@@ -108,7 +108,7 @@ class LanguageController extends Controller
     //RedirectResponse
     public function store(LanguageRequest $request): RedirectResponse
     {
-        $requestData = $request->safe()->except(['flag']);
+        $requestData = request()->except(['flag']);
 
         if(request()->file('flag')) {
 
@@ -137,7 +137,7 @@ class LanguageController extends Controller
 
     public function update(LanguageRequest $request, Language $language): RedirectResponse
     {
-        $requestData = $request->safe()->except(['flag']);
+        $requestData = request()->except(['flag']);
 
         if(request()->has('flag')) {
 

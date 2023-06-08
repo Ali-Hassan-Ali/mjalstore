@@ -26,7 +26,6 @@ class AdminRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name'       => ['required','min:2','max:30'],
             'status'     => ['nullable','in:1,0'],
             'roles.*'    => ['nullable','string','exists:roles,name'],
             'admin_id'   => ['nullable','string','exists:admins,id'],
@@ -36,6 +35,7 @@ class AdminRequest extends FormRequest
 
             $admin = request()->route()->parameter('admin');
 
+            $rules['name']                   = ['required','string','min:2','max:30', Rule::unique('admins')->ignore($admin->id)];
             $rules['email']                  = ['required','email','min:2','max:30', Rule::unique('admins')->ignore($admin->id)];
             $rules['image']                  = ['nullable','image'];
             $rules['password']               = ['nullable','min:6','max:30'];
@@ -43,6 +43,7 @@ class AdminRequest extends FormRequest
 
         } else {
 
+            $rules['name']                   = ['required','string','unique:admins','min:2','max:30'];
             $rules['email']                  = ['required','string','unique:admins','min:2','max:30'];
             $rules['image']                  = ['required','image'];
             $rules['password']               = ['required','min:6','max:30'];

@@ -17,7 +17,7 @@ class Admin extends Authenticatable
 
     protected $fillable = ['name','email','password', 'status', 'image'];
 
-    protected $hidden   = ['password'];
+    protected $hidden   = ['password', 'remember_token'];
 
     protected function imagePath(): Attribute
     {

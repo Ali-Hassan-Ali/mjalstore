@@ -29,6 +29,7 @@ class SubCategoryController extends Controller
                 'route_status' => route('admin.sub_categories.status'),
                 'header'  => [
                     'site.name',
+                    'site.category',
                     'site.banner',
                     'site.admin',
                     'site.status',
@@ -36,6 +37,7 @@ class SubCategoryController extends Controller
                 ],
                 'columns' => [
                     'name'       => 'name',
+                    'category'   => 'category',
                     'banner'     => 'banner',
                     'admin'      => 'admin',
                     'status'     => 'status',
@@ -62,6 +64,7 @@ class SubCategoryController extends Controller
             ->addColumn('record_select', 'admin.dataTables.record_select')
             ->addColumn('created_at', fn(Category $category) => $category->created_at->format('Y-m-d'))
             ->addColumn('admin', fn(Category $category) => $category?->admin?->name)
+            ->addColumn('category', fn(Category $category) => $category?->categoryRelation?->name)
             ->editColumn('banner', function(Category $category) {
                 return view('admin.dataTables.image', ['models' => $category]);
             })
@@ -153,7 +156,7 @@ class SubCategoryController extends Controller
 
     }//end of delete
 
-    public function bulkDelete(DeleteRequest $request)
+    public function bulkDelete(DeleteRequest $request): Response | ResponseFactory
     {
         $images = Category::find(request()->ids ?? [])->pluck('logo')->toArray();
         Storage::disk('public')->delete($images) ?? '';
@@ -164,7 +167,7 @@ class SubCategoryController extends Controller
 
     }//end of bulkDelete
 
-    public function status(StatusRequest $request)
+    public function status(StatusRequest $request): Application | Response | ResponseFactory
     {
         $slider = Category::find($request->id);
         $slider->update(['status' => !$slider->status]);

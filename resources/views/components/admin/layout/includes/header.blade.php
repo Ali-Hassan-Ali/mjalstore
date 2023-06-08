@@ -1,7 +1,7 @@
 <!-- Navbar-->
 <header class="app-header">
     <a class="app-header__logo" style="font-family: 'Cairo', 'sans-serif';" href="{{ route('admin.index') }}">
-        {{ config('app.name') }}
+        {{ getTransSetting('websit_title', app()->getLocale()) }}
     </a>
 
     <!-- Sidebar toggle button-->

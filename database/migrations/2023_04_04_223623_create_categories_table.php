@@ -13,11 +13,16 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+
             $table->string('name');
+            $table->string('title_card')->nullable();
+
             $table->string('logo')->nullable();
             $table->string('banner')->nullable();
+
             $table->string('slug')->unique()->nullable();
             $table->string('parent_id')->nullable();
+
             $table->boolean('status')->default(0);
             $table->boolean('has_market')->default(0);
 

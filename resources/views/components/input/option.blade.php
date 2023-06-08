@@ -1,9 +1,9 @@
-<div class="col-12 {{ $col }}">
+<div class="{{ $col }}" id="{{ $name }}-hidden" {{ $hidden ? 'hidden=hidden' : '' }}>
     <div class="form-group">
         @if(!empty($label))
             <label for="{{ $name }}">{{ trans($label) }} @if($required)<span class="text-danger">*</span>@endif</label>
         @endif
-        <select {{ $multiple ? 'multiple=multiple' : '' }} name="{{ $name }}" class="form-control select2 @error(!empty($invalid) ? $invalid : $name) is-invalid @enderror" id="{{ $name }}">
+        <select {{ $multiple ? 'multiple=multiple' : '' }} {{ $disabled ? 'disabled=disabled' : '' }} name="{{ $name }}" class="form-control select2 @error(!empty($invalid) ? $invalid : $name) is-invalid @enderror" id="{{ $name }}">
             <option value="">@lang('site.choose')</option>
             @foreach($lists as $key=>$list)
                 <option value="{{ $key }}" 

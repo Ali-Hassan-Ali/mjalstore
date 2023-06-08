@@ -14,9 +14,7 @@
         scrollCollapse: true,
         serverSide: true,
         processing: true,
-        language: {
-            url: "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
-        },
+        language: {url: "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"},
         ajax: {url: datatable.route},
         columns: myColumns,
         drawCallback: function (settings) {
@@ -60,7 +58,7 @@
             });//end of ajax call
 
         });//end of delete
-    }
 
+    }//end of check route status
 
 </script>

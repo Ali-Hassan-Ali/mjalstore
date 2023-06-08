@@ -14,6 +14,7 @@ class AdminFactory extends Factory
             'email_verified_at' => now(),
             'status'            => fake()->boolean(),
             'password'          => bcrypt('password'), // password
+            'remember_token'    => str()->random(10)
         ];
 
     }//end of run

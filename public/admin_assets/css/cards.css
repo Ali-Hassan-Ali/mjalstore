@@ -1,0 +1,119 @@
+
+/*header*/
+
+
+/*section_best_sellers*/
+
+.section_best_sellers {
+    position: relative;
+    margin-top: -400px;
+}
+.box-card {
+/*    background: linear-gradient(180deg, rgba(25,154,254,1) 0%, rgba(143,6,250,1) 100%);*/
+    padding: 40px 20px 10px;
+    border-radius: 20px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    box-shadow: 0 0 3px 2px rgb(179 179 179 / .4);
+}
+.box-card:before {
+    content: "";
+    background: #fff;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 5px;
+}
+.box-card h2 {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+.box-card p {
+    margin-bottom: 10px; 
+    padding-bottom: 10px;
+    position: relative;
+}
+.box-card p:before {
+    content: "";
+    background: #EDEDED;
+    width: 60%;
+    height: 1px;
+    margin: auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%)
+}
+.box-card strong {
+    display: block;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 20px 0;
+}
+.option-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F2F2F2;
+    border-radius: 15px;
+    padding: 8px;
+}
+.option-card li {
+    width: 50%;
+    position: relative;
+}
+.option-card li:before {
+    content: "";
+    background: #E3E3E3;
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.option-card li a, .option-card li a:hover {
+    color: #535353;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+.option-card li a img {
+    max-width: 20px;
+    margin-left: 5px;
+}
+#card-sellers-slider .owl-nav {
+    display: block !important
+}
+#card-sellers-slider .owl-nav > button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    margin: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #505050;
+    background: #EFEFEF;
+    font-size: 28px;
+    line-height: 40px;
+    text-align: center;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+#card-sellers-slider .owl-nav > button.owl-prev {
+    left: -70px;
+}
+#card-sellers-slider .owl-nav > button.owl-next{
+    right: -70px;
+}

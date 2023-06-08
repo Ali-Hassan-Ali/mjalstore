@@ -25,6 +25,8 @@ Route::controller(CardController::class)
         Route::get('data', 'data')->name('data');
         Route::post('status', 'status')->name('status');
         Route::delete('bulk_delete', 'bulkDelete')->name('bulk_delete');
+        Route::get('sub_categories/{category}', 'category')->name('get.sub_categories');
+        Route::get('markets/{sub_category}', 'markets')->name('get.markets');
 
     });
 Route::resource('cards', CardController::class);

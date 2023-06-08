@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('email')->unique();
             $table->string('image')->default('default.png');
             $table->timestamp('email_verified_at')->nullable();
@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('status')->default(0);
             
             $table->softDeletes();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

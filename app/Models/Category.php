@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Models\Scopes\StatusScope;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -20,7 +21,7 @@ class Category extends Model
 
     protected $guarded = [];
 
-    public array $translatable = ['name', 'description'];
+    public array $translatable = ['name', 'title_card', 'description'];
 
     protected function imagePath(): Attribute
     {
@@ -44,6 +45,18 @@ class Category extends Model
         return $this->belongsTo(Admin::class);
 
     }//end of admin
+
+    public function categoryRelation(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+
+    }//end of category
+
+    public function subCategoriesRelation(): HasMany
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+
+    }//end of subCategories
 
     public function markets(): BelongsToMany
     {

@@ -154,6 +154,9 @@
             }
         }
     </style>
+
+    {{ $style ?? '' }}
+    
 </head>
 
 <body class="app sidebar-mini">

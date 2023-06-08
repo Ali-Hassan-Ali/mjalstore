@@ -23,5 +23,8 @@ Auth::routes();
 
 Route::get('/test', function () {
 
-    dd('#' . str()->random(6));
+    dd(str_replace('.', '-', 'fgsfg.sf'));
+    $subCategories = \App\Models\Category::subCategory()->get()->random(rand(2, 6))->pluck('id')->toArray();
+
+    dd($subCategories);
 });

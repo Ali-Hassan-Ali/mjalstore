@@ -20,40 +20,42 @@ class CardController extends Controller
 {
     public function index(): View
     {
-        if(!permissionAdmin('read-markets')) {
+        if(!permissionAdmin('read-cards')) {
             return abort(403);
         }
         $datatables = (new DatatableServices())->header(
             [
-                'route' => route('admin.products.markets.data'),
-                'route_status' => route('admin.products.markets.status'),
+                'route' => route('admin.products.cards.data'),
+                'route_status' => route('admin.products.cards.status'),
                 'header'  => [
-                    'site.name',
-                    'site.flag',
-                    'site.admin',
                     'site.sub_category',
+                    'site.market',
+                    'site.rating',
+                    'site.price',
+                    'site.admin',
                     'site.status',
                 ],
                 'columns' => [
-                    'name'   => 'name',
-                    'flag'   => 'flag',
-                    'admin'  => 'admin',
                     'sub_category' => 'sub_category',
-                    'status' => 'status',
+                    'market'       => 'market',
+                    'rating'       => 'rating',
+                    'price'        => 'price',
+                    'admin'        => 'admin',
+                    'status'       => 'status',
                 ]
             ]
         );
 
-        return view('admin.products.markets.index', compact('datatables'));
+        return view('admin.products.cards.index', compact('datatables'));
 
     }//end of index
 
     public function data()
     {
         $permissions = [
-            'status' => permissionAdmin('status-markets'),
-            'update' => permissionAdmin('update-markets'),
-            'delete' => permissionAdmin('delete-markets'),
+            'status' => permissionAdmin('status-cards'),
+            'update' => permissionAdmin('update-cards'),
+            'delete' => permissionAdmin('delete-cards'),
         ];
 
         $card = Card::query();
@@ -63,19 +65,17 @@ class CardController extends Controller
             ->addColumn('created_at', fn(Card $card) => $card->created_at->format('Y-m-d'))
             ->addColumn('admin', fn(Card $card) => $card?->admin?->name)
             ->addColumn('sub_category', fn(Card $card) => $card?->subCategory?->name)
-            ->editColumn('flag', function(Card $card) {
-                return view('admin.dataTables.image', ['models' => $card]);
-            })
+            ->addColumn('market', fn(Card $card) => $card?->market?->name)
             ->addColumn('actions', function(Card $card) use($permissions) {
-                $routeEdit   = route('admin.products.markets.edit', $card->id);
-                $routeDelete = route('admin.products.markets.destroy', $card->id);
+                $routeEdit   = route('admin.products.cards.edit', $card->id);
+                $routeDelete = route('admin.products.cards.destroy', $card->id);
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
             ->addColumn('status', function(Card $card) use($permissions) {
                 return view('admin.dataTables.status', ['models' => $card, 'permissions' => $permissions]);
             })
             ->addColumn('name', fn(Card $card) => $card->name ?? '')
-            ->rawColumns(['record_select', 'actions', 'status', 'name', 'flag'])
+            ->rawColumns(['record_select', 'actions', 'status'])
             ->addIndexColumn()
             ->toJson();
 
@@ -83,13 +83,15 @@ class CardController extends Controller
 
     public function create(): View
     {
-        if(!permissionAdmin('create-markets')) {
+        if(!permissionAdmin('create-cards')) {
             return abort(403);
         }
 
         $subCategories = Category::subCategory()->pluck('name', 'id');
+        $categories    = Category::category()->pluck('name', 'id');
+        $markets       = Category::category()->pluck('name', 'id');
 
-        return view('admin.products.markets.create', compact('subCategories'));
+        return view('admin.products.cards.create', compact('subCategories', 'categories', 'markets'));
 
     }//end of create
 
@@ -98,19 +100,20 @@ class CardController extends Controller
         Card::create($requestData);
 
         session()->flash('success', __('site.added_successfully'));
-        return redirect()->route('admin.products.markets.index');
+        return redirect()->route('admin.products.cards.index');
 
     }//end of store
 
     public function edit(Card $card): View
     {
-        if(!permissionAdmin('update-markets')) {
+        if(!permissionAdmin('update-cards')) {
             return abort(403);
         }
 
         $subCategories = Category::subCategory()->pluck('name', 'id');
+        $categories    = Category::category()->pluck('name', 'id');
 
-        return view('admin.products.markets.edit', compact('market', 'subCategories'));
+        return view('admin.products.cards.edit', compact('market', 'subCategories', 'categories'));
 
     }//end of edit
 
@@ -121,13 +124,13 @@ class CardController extends Controller
 
             Storage::disk('public')->delete($card->flag);
 
-            $requestData['flag'] = request()->file('flag')->store('markets', 'public');
+            $requestData['flag'] = request()->file('flag')->store('cards', 'public');
 
         }
         $card->update($requestData);
 
         session()->flash('success', __('site.updated_successfully'));
-        return redirect()->route('admin.products.markets.index');
+        return redirect()->route('admin.products.cards.index');
 
     }//end of update
 
@@ -163,5 +166,17 @@ class CardController extends Controller
         return response(__('site.updated_successfully'));
 
     }//end of status
+
+    public function category(Category $category)
+    {
+        return $category->subCategoriesRelation()->pluck('name', 'id')->toArray();
+
+    }//end of get sub category
+
+    public function markets(Category $subCategory)
+    {
+        return $subCategory->markets->pluck('name', 'id')->toArray();
+
+    }//end of get markets from sub category
 
 }//end of controller

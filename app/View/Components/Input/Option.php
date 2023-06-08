@@ -15,9 +15,11 @@ class Option extends Component
         public $value    = '',
         public $label    = '',
         public $required = false,
+        public $disabled = false,
+        public $hidden   = false,
+        public $multiple = false,
         public $invalid  = '',
         public $lists    = [],
-        public $multiple = false,
     ){}
 
     public function render(): View | Closure | string

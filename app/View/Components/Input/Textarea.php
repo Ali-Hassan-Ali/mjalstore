@@ -15,6 +15,8 @@ class Textarea extends Component
         public $value    = '',
         public $label    = '',
         public $required = false,
+        public $disabled = false,
+        public $hidden   = false,
         public $invalid  = '',
         public $rows     = '3',
     ){}

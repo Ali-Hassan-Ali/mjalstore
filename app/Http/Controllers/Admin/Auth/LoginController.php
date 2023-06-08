@@ -23,18 +23,15 @@ class LoginController extends Controller
 
     public function store(LoginRequest $request)
     {
-
         $login_type = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
 
         $request->merge([
             $login_type => $request->input('login')
         ]);
 
-        $remember = true;
-
         $credentials = $request->only($login_type, 'password');
 
-        if (auth('admin')->attempt($credentials)) {
+        if (auth('admin')->attempt($credentials, $request->remember)) {
 
             session()->flash('success', __('site.login_successfully'));
 
@@ -42,7 +39,7 @@ class LoginController extends Controller
 
         } else {
 
-            return redirect()->back()->with(['login' => __('auth.no_data_found')])->withInput();
+            return redirect()->back()->with(['password' => __('auth.no_data_found')])->withInput();
 
         }//end of if
 

@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             PermissionsDemoSeeder::class,
             LanguageSeeder::class,
+            SettingSeeder::class,
             CategorySeeder::class,
             SubCategorySeeder::class,
             MarketSeeder::class,

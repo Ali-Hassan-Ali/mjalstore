@@ -38,12 +38,14 @@ class SubCategoryRequest extends FormRequest
             $subCategory = request()->route()->parameter('sub_category');
 
             $rules['name.' . app()->getLocale()]        = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')->ignore($subCategory?->id)];
+            $rules['title_card.' . app()->getLocale()]  = ['required','string','min:2','max:255', UniqueTranslationRule::for('categories', 'title_card')->ignore($subCategory?->id)];
             $rules['description.' . app()->getLocale()] = ['required','string','min:2','max:900'];
             $rules['banner']                            = ['nullable','image'];
 
         } else {
 
             $rules['name.' . app()->getLocale()]        = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')];
+            $rules['title_card.' . app()->getLocale()]  = ['required','string','min:2','max:255', UniqueTranslationRule::for('categories', 'title_card')];
             $rules['description.' . app()->getLocale()] = ['required','string','min:2','max:900'];
             $rules['banner']                            = ['required','image'];
 
