@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('languages', function (Blueprint $table) {
+        Schema::create('currencies', function (Blueprint $table) {
             $table->id();
             
-            $table->string('name');
-            $table->string('flag')->nullable();
+            $table->string('name')->unique();
             $table->string('code')->unique();
-
-            $table->enum('dir', ['RTL', 'LTR']);
-
+            $table->string('flag')->nullable();
+            
             $table->boolean('default')->default(0);
             $table->boolean('status')->default(0);
 
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('languages');
+        Schema::dropIfExists('currencies');
     }
 };

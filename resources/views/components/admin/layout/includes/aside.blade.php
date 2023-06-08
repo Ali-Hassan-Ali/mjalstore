@@ -81,7 +81,7 @@
             </li>
         @endif
 
-        @if(permissionAdmin('read-cards') || permissionAdmin('read-markets'))
+        @if(permissionAdmin('read-cards') || permissionAdmin('read-markets') || permissionAdmin('read-currencies'))
             {{-- products --}}
             <li class="treeview {{ request()->is('*products*') ? 'is-expanded' : '' }}">
                 <a class="app-menu__item" href="#" data-toggle="treeview">
@@ -102,6 +102,14 @@
                         <li>
                             <a class="treeview-item {{ request()->is('*markets*') ? 'active' : '' }}" href="{{ route('admin.products.markets.index') }}">
                                 <i class="icon fa fa-circle"></i>@lang('menu.markets')
+                            </a>
+                        </li>
+                    @endif
+
+                    @if(permissionAdmin('read-currencies'))
+                        <li>
+                            <a class="treeview-item {{ request()->is('*currencies*') ? 'active' : '' }}" href="{{ route('admin.products.currencies.index') }}">
+                                <i class="icon fa fa-circle"></i>@lang('menu.currencies')
                             </a>
                         </li>
                     @endif

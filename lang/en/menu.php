@@ -24,5 +24,7 @@ return [
     'cards'           => 'Cards',
     'market'          => 'Market',
     'markets'         => 'Markets',
+    'currencies'      => 'Currencies',
+    'currency'        => 'Currency',
 
 ];

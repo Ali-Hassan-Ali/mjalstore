@@ -29,7 +29,7 @@ class PermissionsDemoSeeder extends Seeder
         \App\Models\Admin::factory(20)->create();
         \App\Models\Admin::whereNot('id', 1)->each(fn($admin) => $admin->assignRole('admin'));
 
-        $permissions = ['home', 'admins', 'roles', 'languages', 'settings', 'categories', 'sub_categories', 'markets', 'cards'];
+        $permissions = ['home', 'admins', 'roles', 'languages', 'settings', 'categories', 'sub_categories', 'markets', 'cards', 'currencies'];
 
         foreach ($permissions as $data) {
 

@@ -24,5 +24,7 @@ return [
     'cards'           => 'بطاقات',
     'market'          => 'متجر',
     'markets'         => 'متاجر',
+    'currencies'      => 'العملات',
+    'currency'        => 'عملة',
 
 ];
