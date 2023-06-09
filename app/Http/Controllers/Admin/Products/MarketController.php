@@ -130,7 +130,7 @@ class MarketController extends Controller
         $requestData = request()->except('flag', 'sub_categories');
         if(request()->file('flag')) {
 
-            Storage::disk('public')->delete($market->flag);
+            $market->flag ? Storage::disk('public')->delete($market->flag) : '';
 
             $requestData['flag'] = request()->file('flag')->store('markets', 'public');
 
@@ -145,9 +145,7 @@ class MarketController extends Controller
 
     public function destroy(Market $market): Application | Response | ResponseFactory
     {
-        if($market->flag) {
-            Storage::disk('public')->delete($market->flag);
-        }
+        $market->flag ? Storage::disk('public')->delete($market->flag) : '';
         $market->delete();
 
         session()->flash('success', __('site.deleted_successfully'));
@@ -157,8 +155,8 @@ class MarketController extends Controller
 
     public function bulkDelete(DeleteRequest $request): Application | Response | ResponseFactory
     {
-        $images = Market::find(request()->ids ?? [])->pluck('flag')->toArray();
-        Storage::disk('public')->delete($images) ?? '';
+        $images = Market::find(request()->ids ?? [])->whereNotNull('flag')->pluck('flag')->toArray();
+        count($images) > 0 ? Storage::disk('public')->delete($images) : '';
         Market::destroy(request()->ids ?? []);
 
         session()->flash('success', __('site.deleted_successfully'));

@@ -178,9 +178,9 @@ class AdminController extends Controller
 
     public function bulkDelete(DeleteRequest $request): Application | Response | ResponseFactory
     {
-        $images = Admin::where('default', 0)->find(request()->ids ?? [])->pluck('image')->toArray();
-        Storage::disk('public')->delete($images) ?? '';
-        Admin::where('default', 0)->destroy(request()->ids ?? []);
+        $images = Admin::find(request()->ids ?? [])->whereNotNull('image')->pluck('image')->toArray();
+        count($images) > 0 ? Storage::disk('public')->delete($images) : '';
+        Admin::destroy(request()->ids ?? []);
 
         session()->flash('success', __('site.deleted_successfully'));
         return response(__('site.deleted_successfully'));

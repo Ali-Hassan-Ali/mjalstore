@@ -15,7 +15,7 @@ class DeleteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'record_ids.*' => ['required', 'numeric', 'exists:admins,id'],
+            'ids.*' => ['required', 'numeric', 'exists:admins,id'],
         ];
 
     }//end of rules

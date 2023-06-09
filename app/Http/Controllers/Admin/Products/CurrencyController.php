@@ -58,16 +58,13 @@ class CurrencyController extends Controller
             'delete' => 'delete-currencies',
         ];
 
-        $currency   = Currency::all();
+        $currency = Currency::query();
 
         return dataTables()->of($currency)
             ->addColumn('record_select', 'admin.dataTables.record_select')
             ->addColumn('created_at', fn (Currency $currency) => $currency?->created_at?->format('Y-m-d'))
             ->addColumn('admin', fn (Currency $currency) => $currency?->admin?->name)
             ->addColumn('name', fn (Currency $currency) => $currency?->name)
-            ->editColumn('flag', function(Currency $currency) {
-                return view('admin.dataTables.image', ['models' => $currency]);
-            })
             ->addColumn('actions', function(Currency $currency) use($permissions) {
                 $routeEdit   = route('admin.products.currencies.edit', $currency->id);
                 $routeDelete = '';
@@ -144,9 +141,9 @@ class CurrencyController extends Controller
 
     public function bulkDelete(DeleteRequest $request)
     {
-        $images = Currency::where('default', 0)->find(request()->ids ?? [])->pluck('flag')->toArray();
-        Storage::disk('public')->delete($images) ?? '';
-        Currency::where('default', 0)->destroy(request()->ids ?? []);
+        // $images = Currency::where('default', 0)->find(request()->ids ?? [])->pluck('flag')->toArray();
+        // Storage::disk('public')->delete($images) ?? '';
+        Currency::destroy(request()->ids ?? []);
 
         session()->flash('success', __('site.deleted_successfully'));
         return response(__('site.deleted_successfully'));
@@ -165,8 +162,7 @@ class CurrencyController extends Controller
 
     public function changeDefault(StatusRequest $request): Application | Response | ResponseFactory
     {
-        $currencys = Currency::all();
-        $currencys->each(fn ($currency) => $currency->update(['default' => 0]));
+        Currency::each(fn ($currency) => $currency->update(['default' => 0]));
         Currency::find($request->id)->update(['default' => 1, 'status' => 1]);
 
         session()->flash('success', __('site.updated_successfully'));

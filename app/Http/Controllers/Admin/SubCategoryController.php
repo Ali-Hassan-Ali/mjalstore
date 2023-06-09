@@ -80,7 +80,7 @@ class SubCategoryController extends Controller
                 return view('admin.dataTables.status', ['models' => $category, 'permissions' => $permissions]);
             })
             ->addColumn('name', fn(Category $category) => $category->name ?? '')
-            ->rawColumns(['record_select', 'actions', 'status', 'has_market', 'name', 'logo'])
+            ->rawColumns(['record_select', 'actions', 'status', 'has_market', 'name', 'banner'])
             ->addIndexColumn()
             ->toJson();
 
@@ -132,7 +132,7 @@ class SubCategoryController extends Controller
         $requestData = request()->except('banner');
         if(request()->file('banner')) {
 
-            Storage::disk('public')->delete($category->banner);
+            $subCategory->banner ? Storage::disk('public')->delete($subCategory->banner) : '';
 
             $requestData['banner'] = request()->file('banner')->store('sub_categories', 'public');
 
@@ -146,10 +146,8 @@ class SubCategoryController extends Controller
 
     public function destroy(Category $subCategory): Application | Response | ResponseFactory
     {
-        if($category->logo) {
-            Storage::disk('public')->delete($category->logo);
-        }
-        $category->delete();
+        $subCategory->banner ? Storage::disk('public')->delete($subCategory->banner) : '';
+        $subCategory->delete();
 
         session()->flash('success', __('site.deleted_successfully'));
         return response(__('site.deleted_successfully'));
@@ -158,8 +156,8 @@ class SubCategoryController extends Controller
 
     public function bulkDelete(DeleteRequest $request): Response | ResponseFactory
     {
-        $images = Category::find(request()->ids ?? [])->pluck('logo')->toArray();
-        Storage::disk('public')->delete($images) ?? '';
+        $images = Category::find(request()->ids ?? [])->whereNotNull('banner')->pluck('banner')->toArray();
+        count($images) ? Storage::disk('public')->delete($images) : '';
         Category::destroy(request()->ids ?? []);
 
         session()->flash('success', __('site.deleted_successfully'));
@@ -169,8 +167,8 @@ class SubCategoryController extends Controller
 
     public function status(StatusRequest $request): Application | Response | ResponseFactory
     {
-        $slider = Category::find($request->id);
-        $slider->update(['status' => !$slider->status]);
+        $subCategory = Category::find($request->id);
+        $subCategory->update(['status' => !$subCategory->status]);
 
         session()->flash('success', __('site.updated_successfully'));
         return response(__('site.updated_successfully'));

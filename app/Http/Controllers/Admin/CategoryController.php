@@ -119,7 +119,7 @@ class CategoryController extends Controller
         $requestData = request()->except('logo');
         if(request()->file('logo')) {
 
-            Storage::disk('public')->delete($category->logo);
+            $category->logo ? Storage::disk('public')->delete($category->logo) : '';
 
             $requestData['logo'] = request()->file('logo')->store('categories', 'public');
 
@@ -133,9 +133,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category): Application | Response | ResponseFactory
     {
-        if($category->logo) {
-            Storage::disk('public')->delete($category->logo);
-        }
+        $category->logo ? Storage::disk('public')->delete($category->logo) : '';
         $category->delete();
 
         session()->flash('success', __('site.deleted_successfully'));
@@ -145,8 +143,8 @@ class CategoryController extends Controller
 
     public function bulkDelete(DeleteRequest $request)
     {
-        $images = Category::find(request()->ids ?? [])->pluck('logo')->toArray();
-        Storage::disk('public')->delete($images) ?? '';
+        $images = Category::find(request()->ids ?? [])->whereNotNull('logo')->pluck('logo')->toArray();
+        count($images) > 0 ? Storage::disk('public')->delete($images) : '';
         Category::destroy(request()->ids ?? []);
 
         session()->flash('success', __('site.deleted_successfully'));

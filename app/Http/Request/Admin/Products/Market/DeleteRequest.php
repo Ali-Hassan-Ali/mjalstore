@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Request\Admin\SubCategory;
+namespace App\Http\Request\Admin\Products\Market;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -15,7 +15,7 @@ class DeleteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'record_ids.*' => ['required', 'numeric', 'exists:markets,id'],
+            'ids.*' => ['required', 'numeric', 'exists:markets,id'],
         ];
 
     }//end of rules

@@ -56,9 +56,15 @@
         <div class="col-12 col-md-12">
 
             <div class="tile shadow">
+                <div class="row">
 
-                {{--code--}}
-                <x-input.text required="true" name="code" label="site.code" :value='$currency->code'/>
+                    {{--code--}}
+                    <x-input.text required="true" name="code" label="site.code" col="col-md" :value='$currency->code'/>
+
+                    {{--flag--}}
+                    <x-input.text required="true" name="flag" label="site.flag" col="col-md" :value='$currency->flag'/>
+
+                </div>
 
                 <div class="row">
 

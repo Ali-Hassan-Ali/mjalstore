@@ -169,9 +169,9 @@ class LanguageController extends Controller
 
     public function bulkDelete(DeleteRequest $request)
     {
-        $images = Language::where('default', 0)->find(request()->ids ?? [])->pluck('flag')->toArray();
-        Storage::disk('public')->delete($images) ?? '';
-        Language::where('default', 0)->destroy(request()->ids ?? []);
+        $images = Language::where('default', 0)->find(request()->ids ?? [])->whereNotNull('flag')->pluck('flag')->toArray();
+        count($images) > 0 ? Storage::disk('public')->delete($images) : '';
+        Language::destroy(request()->ids ?? []);
 
         session()->flash('success', __('site.deleted_successfully'));
         return response(__('site.deleted_successfully'));
@@ -190,8 +190,7 @@ class LanguageController extends Controller
 
     public function changeDefault(StatusRequest $request): Application | Response | ResponseFactory
     {
-        $languages = Language::all();
-        $languages->each(fn ($language) => $language->update(['default' => 0]));
+        Language::each(fn ($language) => $language->update(['default' => 0]));
         Language::find($request->id)->update(['default' => 1, 'status' => 1]);
 
         session()->flash('success', __('site.updated_successfully'));

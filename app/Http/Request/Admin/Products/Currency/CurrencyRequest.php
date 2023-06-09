@@ -28,7 +28,7 @@ class CurrencyRequest extends FormRequest
         $rules = [
             'status'  => ['nullable', 'in:1,0'],
             'default' => ['nullable', 'in:1,0'],
-            'flag'    => ['nullable', 'string'],
+            'flag'    => ['required', 'string','min:1','max:5'],
         ];
 
         if (in_array(request()->method(), ['PUT', 'PATCH'])) {

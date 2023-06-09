@@ -54,8 +54,14 @@
 
             <div class="tile shadow">
 
-                {{--code--}}
-                <x-input.text required="true" name="code" label="site.code"/>
+                <div class="row">
+                    {{--code--}}
+                    <x-input.text required="true" name="code" label="site.code" col="col-md"/>
+
+                    {{--flag--}}
+                    <x-input.text required="true" name="flag" label="site.flag" col="col-md"/>
+
+                </div>
 
                 <div class="row">
 
