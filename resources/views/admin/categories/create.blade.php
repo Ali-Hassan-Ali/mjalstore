@@ -23,7 +23,7 @@
 
                 <div class="tile shadow">
 
-                    @include('admin.dataTables.image_privew', ['name' => 'logo'])
+                    @include('admin.dataTables.image_privew', ['name' => 'logo', 'label' => 'logo', 'required' => true])
 
                 </div><!-- end of tile -->
 

@@ -27,7 +27,7 @@
 
                 <div class="tile shadow">
 
-                    @include('admin.dataTables.image_privew', ['name' => 'banner', 'imagepath' => $subCategory->image_path])
+                    @include('admin.dataTables.image_privew', ['name' => 'banner', 'imagepath' => $subCategory->image_path, 'label' => 'banner'])
 
                 </div><!-- end of tile -->
 

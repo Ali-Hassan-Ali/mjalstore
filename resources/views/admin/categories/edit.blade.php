@@ -23,7 +23,7 @@
 
                 <div class="tile shadow">
 
-                    @include('admin.dataTables.image_privew', ['name' => 'logo', 'imagepath' => $category->image_path])
+                    @include('admin.dataTables.image_privew', ['name' => 'logo', 'imagepath' => $category->image_path, 'label' => 'logo'])
 
                 </div><!-- end of tile -->
 

@@ -24,7 +24,7 @@
 
                 <div class="tile shadow">
 
-                    @include('admin.dataTables.image_privew', ['name' => 'flag'])
+                    @include('admin.dataTables.image_privew', ['name' => 'flag', 'label' => 'flag', 'required' => true])
 
                 </div><!-- end of tile -->
 
@@ -51,7 +51,7 @@
                             <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $language->code }}" role="tabpanel" aria-labelledby="{{ $language->code }}-tab">
 
                                 {{--name--}}
-                                <x-input.text required="{{ $loop->first ? true : false }}" name="name[{{ $language->code }}]" label="site.name"invalid="{{ 'name.' . $language->code }}" />
+                                <x-input.text required="{{ $loop->first ? true : false }}" name="name[{{ $language->code }}]" label="site.name" invalid="{{ 'name.' . $language->code }}" />
 
                             </div>
                         @endforeach

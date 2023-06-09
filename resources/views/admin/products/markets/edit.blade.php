@@ -24,7 +24,7 @@
 
                 <div class="tile shadow">
 
-                    @include('admin.dataTables.image_privew', ['name' => 'flag', 'imagepath' => $market->image_path])
+                    @include('admin.dataTables.image_privew', ['name' => 'flag', 'imagepath' => $market->image_path, 'label' => 'flag'])
 
                 </div><!-- end of tile -->
 
