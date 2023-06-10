@@ -92,10 +92,12 @@
 
     $('#price-card').text($('#price').val() + '$');
 
-    let color1 = "{{ $card->subCategory?->color_1 }}";
-    let color2 = "{{ $card->subCategory?->color_2 }}";
-    let style  = `background: linear-gradient(180deg, ${color1} 0%, ${color2} 100%)`;
+    @if(!empty($card))
+        let color1 = "{{ $card->subCategory?->color_1 }}";
+        let color2 = "{{ $card->subCategory?->color_2 }}";
+        let style  = `background: linear-gradient(180deg, ${color1} 0%, ${color2} 100%)`;
 
-    $('.box-card').attr('style', style);
+        $('.box-card').attr('style', style);
+    @endif
 
 </script>

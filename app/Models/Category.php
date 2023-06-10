@@ -54,7 +54,7 @@ class Category extends Model
 
     public function subCategoriesRelation(): HasMany
     {
-        return $this->hasMany(Category::class, 'parent_id');
+        return $this->hasMany(Category::class, 'parent_id', 'id');
 
     }//end of subCategories
 
@@ -80,7 +80,7 @@ class Category extends Model
 
     protected static function booted(): void
     {
-        if(in_array(request()->segment(3), ['categories', 'sub_categories'])) {
+        if(empty(request()->segment(3)) || in_array(request()->segment(3), ['categories', 'sub_categories'])) {
            static::addGlobalScope(new StatusScope);
         }
 

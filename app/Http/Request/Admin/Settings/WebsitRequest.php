@@ -19,7 +19,7 @@ class WebsitRequest extends FormRequest
 
         $rules['websit_title.'. app()->getLocale()]        = ['required','string','min:2','max:50'];
         $rules['websit_description.' . app()->getLocale()] = ['required','string','min:2'];
-        $rules['websit_logo']                              = ['required','image'];
+        $rules['websit_logo']                              = ['nullable','image'];
 
         return $rules;
 

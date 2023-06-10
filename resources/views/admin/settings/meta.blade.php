@@ -22,7 +22,7 @@
 
                 <div class="tile shadow">
 
-                    @include('admin.dataTables.image_privew', ['name' => 'meta_logo', 'imagepath' => getImageSetting('meta_logo')])
+                    @include('admin.dataTables.image_privew', ['name' => 'meta_logo', 'imagepath' => getImageSetting('meta_logo'), 'label' => 'site.logo'])
 
                 </div><!-- end of tile -->
 

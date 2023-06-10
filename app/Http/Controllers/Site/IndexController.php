@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Language;
@@ -9,7 +9,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-    	return view('admin.home');
+    	return view('site.index.index');
 
     }//end of index
 

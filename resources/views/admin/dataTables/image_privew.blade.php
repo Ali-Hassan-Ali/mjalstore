@@ -84,7 +84,7 @@
 </style>
 
 <div class="container">
-<label>{{ trans($label) }} @if($required)<span class="text-danger">*</span>@endif</label>
+<label>{{ trans($label) }} @if(!empty($required))<span class="text-danger">*</span>@endif</label>
 @error($name)
       <strong class="text-danger">{{ $message }}</strong>
 @enderror

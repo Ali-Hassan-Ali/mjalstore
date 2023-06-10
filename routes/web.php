@@ -1,28 +1,26 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Site\IndexController;
 
-use App\Http\Controllers\Admin\Auth\LoginController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+//index
+Route::controller(IndexController::class)
+    ->name('site.')->group(function () {
 
-// Route::get('login', 'admin.auth.login')->name('login');
+        Route::get('/', 'index')->name('index');
+        Route::get('language/{language:code}', 'changeLanguage')->name('changeLanguage');
 
-Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+    });
 
-Auth::routes();
+// Route::get('language/{language:code}', [IndexController::class, 'changeLanguage'])->name('changeLanguage');
+
+// Route::get('/', [IndexController::class, 'index'])->name('index');
 
 Route::get('/test', function () {
 
+return \App\Models\Category::query()->with('subCategoriesRelation')->get();
+dd(\App\Models\Category::query()->with('subCategoriesRelation')->pluck('name', 'id'));
     dd(str_replace('.', '-', 'fgsfg.sf'));
     $subCategories = \App\Models\Category::subCategory()->get()->random(rand(2, 6))->pluck('id')->toArray();
 
