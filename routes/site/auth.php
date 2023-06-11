@@ -18,6 +18,6 @@ Route::controller(AuthController::class)
 Route::controller(ProfileController::class)->group(function () {
 
         Route::get('profile/{user:username}', 'index')->name('profile');
-        Route::get('profile/update/{user:username}', 'update')->name('profile.update');
+        Route::post('profile/update', 'update')->name('profile.update');
 
     });

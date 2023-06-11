@@ -12,7 +12,7 @@
                 <h2>معلومات الحساب</h2>
             </div>
             <div class="content-profile">
-                <form class="form-profile">
+                <div class="form-profile">
 
                     <x-site.layout.sections.auth.profile.main-data/>
                     <!--main data-->
@@ -20,7 +20,7 @@
                     <x-site.layout.sections.auth.profile.setting-data/>
                     <!--setting data-->
 
-                </form>
+                </div>
             </div>
         </div>
     </section> 

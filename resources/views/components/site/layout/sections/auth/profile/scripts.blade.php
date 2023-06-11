@@ -13,5 +13,59 @@
     $("#imageUpload").change(function() {
         readURL(this);
     });
+
+    $(document).on('submit', '#profile-main', function (e) {
+        e.preventDefault();
+
+        let url      = $(this).attr('action');
+        let method   = $(this).attr('method');
+        var items    = $(this).serializeArray();
+        var formData = new FormData(this);
+
+        $.each(items, function(index, item) {
+
+            $('#error-profile-main-' + item.name).removeClass('is-invalid');
+            $('#error-profile-main-' + item.name).css('border', '1px solid #E3E3E3');
+            $('#error-profile-main-' + item.name).css('background-image', 'url()');
+            $('#error-profile-main-' + item.name + '-message').text('');
+
+        }); //end of each
+
+        $.ajax({
+            url: url,
+            data: formData,
+            method: method,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+
+                if(data.login) {
+                    location.reload();
+                }
+
+                if(data.password) {
+                    $('#error-profile-main--password').addClass('is-invalid');
+                    $('#error-password').css('border', '1px solid red');
+                    $('#error-password').css('background-image', 'url()');
+                    $('#error-password-message').text(data.password_message);
+                }
+
+            },
+            error: function(data) {
+
+                $.each(data.responseJSON.errors, function(name, message) {
+
+                    $('#error-profile-main-' + name).addClass('is-invalid');
+                    $('#error-profile-main-' + name).css('border', '1px solid red');
+                    $('#error-profile-main-' + name).css('background-image', 'url()');
+                    $('#error-profile-main-' + name + '-message').text(message);
+
+                }); //end of each
+
+            }, //end of success
+            
+        });//end of ajax
+
+    });//end of submit login
     
 </script>

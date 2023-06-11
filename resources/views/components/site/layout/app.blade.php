@@ -44,8 +44,10 @@
         <!--footer-->
     </div>
 
-    <x-site.layout.includes.model-auth/>
-    <!--model-auth-->
+    @if(!auth('web')->check())
+        <x-site.layout.includes.model-auth/>
+        <!--model-auth-->
+    @endif
 
     <!--main-wrapper--> 
     <script src="{{ asset('site_assets/js/popper.min.js') }}"></script>
@@ -56,11 +58,20 @@
     <script src="{{ asset('site_assets/js/script.js') }}"></script>
     
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         new WOW().init();
     </script>
 
-    <x-site.layout.sections.auth.scripts/>
+    @if(!auth('web')->check())
+        <x-site.layout.sections.auth.scripts/>
+        <!--scriptsl-auth-->
+    @endif
 
     {{ $scripts ?? '' }}
+
 </body>
 </html> 
