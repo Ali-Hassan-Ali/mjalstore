@@ -58,6 +58,12 @@ class Category extends Model
 
     }//end of subCategories
 
+    public function cards(): HasMany
+    {
+        return $this->hasMany(Card::class);
+
+    }//end of cards
+
     public function markets(): BelongsToMany
     {
         return $this->belongsToMany(Market::class, 'category_markets');

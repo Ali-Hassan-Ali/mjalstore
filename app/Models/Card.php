@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +16,15 @@ class Card extends Model
 
     protected $guarded = [];
 
+    protected function newPrice(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->price,
+            // get: fn () => session('currency_code') == getCurrency('default')?->code ? $this->price : (number_format($this->price * session('currency'), 2)),
+        );
+
+    }//end of get new price Attribute
+
     public function admin(): BelongsTo
     {
         return $this->belongsTo(Admin::class);
@@ -25,13 +35,13 @@ class Card extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
 
-    }//end of Category
+    }//end of sub Category
 
     public function market(): BelongsTo
     {
         return $this->belongsTo(Market::class);
 
-    }//end of Category
+    }//end of market
 
     protected static function booted(): void
     {

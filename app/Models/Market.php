@@ -47,4 +47,10 @@ class Market extends Model
 
     }//end of subCategories
 
+    public function cards(): HasMany
+    {
+        return $this->hasMany(Card::class);
+
+    }//end of cards
+
 }//end of model

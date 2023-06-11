@@ -1,24 +1,33 @@
 <x-site.layout.app>
 
-<x-slot name="title">{{ trans('site.home') }}</x-slot>
+<x-slot name="title">{{ trans('menu.sub_categories') }}</x-slot>
 
-    
-    <x-site.layout.sections.index.home/>
-    <!--section_home-->
+    <x-site.layout.sections.card.banner :image="$subCategory->image_path"/>
+    <!--banner_page-->
 
-    <x-site.layout.sections.index.best-sellers/>
-    <!--section_best_sellers-->
+    <x-site.layout.includes.breadcrumb :breadcrumb="$breadcrumb"/>
+    <!--breadcrumb-->
 
-    <x-site.layout.sections.index.about/>
-    <!--section_about-->
+    <div class="container"> 
 
-    <x-site.layout.sections.index.what-site/>
-    <!--section_what_site-->
+        <div class="row">
+            @if($subCategory->has_market)
 
-    <x-site.layout.sections.index.subscriber-ratings/>
-    <!--section_subscriber_ratings-->
+                @foreach($subCategory->markets as $market)
+                    <x-site.layout.sections.card.market :sub-category="$subCategory" :market="$market"/>
+                    <!--market-->
+                @endforeach
 
-    <x-site.layout.sections.index.download-app/>
-    <!--section_download_app-->
+            @else
+
+                @foreach($subCategory->cards as $card)
+                    <x-site.layout.sections.card.card :sub-category="$subCategory" :card="$card"/>
+                    <!--card-->
+                @endforeach
+
+            @endif
+        </div>{{-- row --}}
+
+    </div>{{-- container --}}
 
 </x-site.layout.app>

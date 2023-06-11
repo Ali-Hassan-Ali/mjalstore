@@ -122,7 +122,7 @@ class CardController extends Controller
 
     public function update(CardRequest $request, Card $card): RedirectResponse
     {
-        $requestData = request()->except('category_id', 'sub_category');
+        $requestData = request()->except('category_id', 'sub_category', 'slug');
         $requestData['category_id'] = request()->sub_category;
         $card->update($requestData);
 

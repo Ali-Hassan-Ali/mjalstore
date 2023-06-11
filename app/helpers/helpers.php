@@ -21,9 +21,22 @@ if (!function_exists('getLanguages')) {
     function getLanguages($default = false)
     {
         if($default) {
-            return \App\Models\Language::where('default' , '1')->first();
+            return \App\Models\Language::where('default' , 1)->first();
         }
         return \App\Models\Language::all();
+
+    }//en dof fun
+
+}//end of exists
+
+if (!function_exists('getCurrency')) {
+
+    function getCurrency($default = false)
+    {
+        if($default) {
+            return \App\Models\Currency::where('default' , 1)->first();
+        }
+        return \App\Models\Currency::all();
 
     }//en dof fun
 

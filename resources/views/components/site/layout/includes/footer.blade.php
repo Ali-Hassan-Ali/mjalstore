@@ -21,10 +21,8 @@
                             <p>{{ getTransSetting('websit_description', app()->getLocale()) }}</p>
                         </div>
                         <ul class="social-media">
-                            <li class="twitter"><a href=""><i class="zmdi zmdi-twitter"></i></a></li>
-                            <li class="facebook"><a href=""><i class="zmdi zmdi-facebook"></i></a></li>
-                            <li class="instagram"><a href=""><i class="fa fa-youtube-play"></i></a></li>
-                            <li class="youtube"><a href=""><i class="fa fa-rss"></i></a></li>
+                            <x-site.layout.includes.social-media/>
+                            <!--social-media-->
                         </ul>
                     </div>
                 </div>

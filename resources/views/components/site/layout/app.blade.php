@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     
     <title>{{ getTransSetting('websit_title', app()->getLocale()) . ' - ' . $title ?? '' }}</title>
+    <meta content="{{ getTransSetting('websit_description', app()->getLocale()) }}" name="description">
+    <meta content="{{ getTransSetting('websit_description', app()->getLocale()) }}" name="keywords">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
@@ -20,7 +22,7 @@
     <link href="{{ asset('site_assets/css/style.css') }}" rel="stylesheet">
     <!-- Responsive -->
     <link href="{{ asset('site_assets/css/responsive.css') }}" rel="stylesheet">
-
+    
     <script src="{{ asset('site_assets/js/jquery-3.2.1.min.js') }}"></script>
 
     {{ $style ?? '' }}
@@ -56,6 +58,8 @@
     <script>
         new WOW().init();
     </script>
+
+    <x-site.layout.sections.auth.scripts/>
 
     {{ $scripts ?? '' }}
 </body>

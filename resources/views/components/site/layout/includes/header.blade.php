@@ -2,30 +2,8 @@
     <div class="header-top">
         <div class="container">
             <ul class="social-media topHmenu-right clearfix">
-                @if(!empty(getSetting('media_facebook')))
-                    <li>
-                        <a href="{{ getSetting('media_facebook') }}" target="_blank">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                    </li>
-                @endif
-
-                @if(!empty(getSetting('media_twitter')))
-                    <li>
-                        <a href="{{ getSetting('media_twitter') }}" target="_blank">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                    </li>
-                @endif
-
-                @if(!empty(getSetting('media_instagram')))
-                    <li>
-                        <a href="{{ getSetting('media_instagram') }}" target="_blank">
-                            <i class="fa fa-instagram"></i>
-                        </a>
-                    </li>
-                @endif
-                <li><a href=""><i class="fa fa-rss"></i></a></li>
+                <x-site.layout.includes.social-media/>
+                <!--social-media-->
             </ul>
             <ul class="topHmenu-left clearfix">
                 @if($languages)
@@ -43,7 +21,7 @@
                         <a href="product-page.html" data-toggle="dropdown">{{ trans('menu.currency') }}</a>
                         <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                             @foreach($currencies as $code=>$name)
-                                <li><a href="{{ $code }}">{{ $name }}</a></li>
+                                <li><a href="{{ route('site.changeCurrency', $code) }}">{{ $name }}</a></li>
                             @endforeach
                         </ul>
                     </li>
@@ -127,11 +105,31 @@
                                     </div>
                                 </ul>
                             </li>
-                            <li class="login-btn">
-                                <img src="{{ asset('site_assets/images/icon-user.svg') }}" alt="" />
-                                <a data-toggle="modal" data-target="#exampleModal">تسجيل الدخول</a>
-                                <a data-toggle="modal" data-target="#exampleModal">انشاء حساب</a>
-                            </li>
+                            @auth
+                                <li class="login-btn pro-btn dropdown">
+                                    <img src="{{ auth()->user()->image_path }}" alt="{{ auth()->user()->name }}" />
+                                    <a data-toggle="dropdown">{{ auth()->user()->email }}</a>
+                                    <ul class="dropdown-menu drop-profile multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                        <li><a href="{{ route('site.auth.profile', auth()->user()->username) }}">{{ trans('auth.profile') }}</a></li>
+                                        {{-- <li><a href="cart.html">مشترياتي</a></li> --}}
+                                        {{-- <li><a href="ticit-list-supports.html">تذاكر الدعم الفني</a></li> --}}
+                                        <li>
+                                            <a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                                @lang('auth.logout')
+                                                <form id="logout-form" action="{{ route('site.auth.logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @else
+                                <li class="login-btn">
+                                    <img src="{{ asset('site_assets/images/icon-user.svg') }}" alt="{{ getTransSetting('websit_title', app()->getLocale()) }}" />
+                                    <a data-toggle="modal" data-target="#exampleModal">{{ trans('auth.sign_in') }}</a>
+                                    <a data-toggle="modal" data-target="#exampleModal">{{ trans('auth.create_acount') }}</a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -157,7 +155,7 @@
                                 @if($category->subCategoriesRelation)
                                     <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                                         @foreach($category->subCategoriesRelation as $subCategory)
-                                            <li><a href="#">{{ $subCategory->name }}</a></li>
+                                            <li><a href="{{ route('site.sub_category', $subCategory->slug) }}">{{ $subCategory->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 @endif

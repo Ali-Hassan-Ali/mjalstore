@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('status')->default(0);
 
             $table->foreignId('category_id')->constrained();
-            $table->foreignId('market_id')->constrained()->nullable();
+            $table->foreignId('market_id')->nullable()->constrained();
             $table->foreignId('admin_id')->constrained();
 
             $table->softDeletes();

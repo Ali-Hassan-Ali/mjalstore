@@ -19,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        session()->has('currency_code') ? '' : session()->put([
+            'currency_code' => getCurrency('default')?->code,
+            'currency_name' => getCurrency('default')?->name,
+            'currency_flag' => getCurrency('default')?->flag,
+        ]);
     }
 }

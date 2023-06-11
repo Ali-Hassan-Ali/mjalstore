@@ -31,8 +31,14 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
+            //site folder
             Route::middleware('web', 'SetLocale')
-                ->group(base_path('routes/web.php'));
+                ->name('site.')
+                ->group(base_path('routes/site/web.php'));
+
+            Route::middleware('web', 'SetLocale')
+                ->name('site.auth.')
+                ->group(base_path('routes/site/auth.php'));
 
             //admin folder
             Route::middleware('web', 'SetLocale')

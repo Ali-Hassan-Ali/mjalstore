@@ -3,13 +3,18 @@
 return [
 
     'sign_in'           => 'SIGN IN',
+    'sign_up'           => 'SIGN Up',
     'email_or_name'     => 'Email Or Name 😏',
     'email'             => 'Email',
+    'name'              => 'username',
     'remember_me'       => 'Remember Me',
     'password'          => 'Password',
     'forgot_password'   => 'Forgot Password ?',
     'password_invalid'  => 'Password Invalid',
     'reset'             => 'RESET',
     'back_login'        => 'Back to Login',
+    'create_acount'     => 'Create Acount',
+    'logout'            => 'Logout',
+    'profile'           => 'Profile',
 
 ];

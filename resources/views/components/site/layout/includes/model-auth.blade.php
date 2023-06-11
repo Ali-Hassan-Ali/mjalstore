@@ -15,7 +15,7 @@
                         <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">إنشاء حساب</a>
                     </li>
                 </ul>
-                <form class="form-reg">
+                <div class="form-reg">
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
                             <x-site.layout.sections.auth.login/>
@@ -24,7 +24,7 @@
                             <x-site.layout.sections.auth.register/>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
