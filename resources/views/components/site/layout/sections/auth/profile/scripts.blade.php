@@ -39,16 +39,13 @@
             processData: false,
             success: function (data) {
 
-                if(data.login) {
-                    location.reload();
-                }
-
-                if(data.password) {
-                    $('#error-profile-main--password').addClass('is-invalid');
-                    $('#error-password').css('border', '1px solid red');
-                    $('#error-password').css('background-image', 'url()');
-                    $('#error-password-message').text(data.password_message);
-                }
+                swal({
+                    title: data,
+                    type: "success",
+                    icon: 'success',
+                    buttons: false,
+                    timer: 1000
+                }); //end of swal
 
             },
             error: function(data) {

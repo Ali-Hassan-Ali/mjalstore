@@ -24,7 +24,14 @@
     <link href="{{ asset('site_assets/css/responsive.css') }}" rel="stylesheet">
     
     <script src="{{ asset('site_assets/js/jquery-3.2.1.min.js') }}"></script>
+    {{-- sweetalert2 --}}
+    <link href="{{ asset('site_assets/plugins/sweetalert/sweetalert2.min.css') }}" rel="stylesheet">
 
+    <style type="text/css">
+        .swal-title:not(:first-child) {
+            padding-bottom: 35px;
+        }
+    </style>
     {{ $style ?? '' }}
 
 </head>
@@ -56,6 +63,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
     <script src="{{ asset('site_assets/js/wow.js') }}"></script>
     <script src="{{ asset('site_assets/js/script.js') }}"></script>
+    <script src="{{ asset('site_assets/plugins/sweetalert/sweetalert2.all.min.js') }}"></script>
+    {{-- sweetalert2 --}}
     
     <script>
         $.ajaxSetup({
