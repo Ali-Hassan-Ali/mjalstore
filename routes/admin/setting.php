@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Settings\WebsitController;
 use App\Http\Controllers\Admin\Settings\MetaController;
 use App\Http\Controllers\Admin\Settings\ContactController;
 use App\Http\Controllers\Admin\Settings\MediaController;
+use App\Http\Controllers\Admin\Settings\FooterController;
 
 //settings meta
 Route::controller(MetaController::class)->group(function () {
@@ -36,5 +37,13 @@ Route::controller(MediaController::class)->group(function () {
 
     Route::get('media', 'index')->name('media.index');
     Route::post('media/store', 'store')->name('media.store');
+
+});
+
+//settings footer
+Route::controller(FooterController::class)->group(function () {
+
+    Route::get('about_page', 'aboutPage')->name('about_page.index');
+    Route::post('about_page/store', 'aboutPageStore')->name('about_page.store');
 
 });

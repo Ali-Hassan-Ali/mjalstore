@@ -13,7 +13,7 @@ class ProfileController extends Controller
     {
         if(auth('web')->check()) {
 
-            $breadcrumb = ['#' => trans('auth.profile')];
+            $breadcrumb = ['#' => trans('auth.profile'), "$user->username" => $user->username];
 
             return view('site.auth.profile', compact('breadcrumb'));
 

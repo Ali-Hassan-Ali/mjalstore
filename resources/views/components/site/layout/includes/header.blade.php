@@ -136,7 +136,7 @@
             </div>
         </div>
     </div>
-    @if($categories->count() > 0)
+    @if($categories->count())
         <div class="header-bottom">
             <div class="container">
                 <div class="hb-right clearfix">
@@ -152,7 +152,7 @@
 
                             <li class="dropdown {{ 'active' }}">
                                 <a href="product-page.html" data-toggle="dropdown"><img src="{{ $category->image_path }}" width="22" height="20" /><span>{{ $category->name }}</span></a>
-                                @if($category->subCategoriesRelation)
+                                @if($category->subCategoriesRelation->count())
                                     <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                                         @foreach($category->subCategoriesRelation as $subCategory)
                                             <li><a href="{{ route('site.sub_category', $subCategory->slug) }}">{{ $subCategory->name }}</a></li>

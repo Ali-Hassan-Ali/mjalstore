@@ -149,6 +149,12 @@
                             <i class="icon fa fa-circle"></i>@lang('settings.media')
                         </a>
                     </li>
+
+                    <li>
+                        <a class="treeview-item {{ request()->is('*about_page*') ? 'active' : '' }}" href="{{ route('admin.settings.about_page.index') }}">
+                            <i class="icon fa fa-circle"></i>@lang('settings.about_page')
+                        </a>
+                    </li>
                     
                 </ul>
             </li>
