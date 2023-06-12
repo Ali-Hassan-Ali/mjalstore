@@ -63,6 +63,6 @@
             
         });//end of ajax
 
-    });//end of submit login
+    });//end of submit profile main
     
 </script>

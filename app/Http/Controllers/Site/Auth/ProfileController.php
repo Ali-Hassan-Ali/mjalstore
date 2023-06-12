@@ -11,9 +11,16 @@ class ProfileController extends Controller
 {
     public function index(User $user)
     {
-        $breadcrumb = ['#' => trans('auth.profile')];
+        if(auth('web')->check()) {
 
-        return view('site.auth.profile', compact('breadcrumb'));
+            $breadcrumb = ['#' => trans('auth.profile')];
+
+            return view('site.auth.profile', compact('breadcrumb'));
+
+        } else {
+
+            return redirect()->route('site.auth.login.index');
+        }
 
     }//end of index
 

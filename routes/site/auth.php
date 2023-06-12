@@ -6,10 +6,11 @@ use App\Http\Controllers\Site\Auth\ProfileController;
 
 
 //auth
-Route::controller(AuthController::class)
-        ->prefix('site/auth')->group(function () {
+Route::controller(AuthController::class)->group(function () {
 
+        Route::get('login', 'loginPage')->name('login.index');
         Route::post('login', 'login')->name('login');
+        Route::post('register', 'register')->name('register');
         Route::post('logout', 'logout')->name('logout');
 
     });

@@ -28,30 +28,36 @@
                 </div>
                 <div class="col-md-3">
                     <ul class="list-contact">
-                        <li>
-                            <img src="{{ asset('site_assets/images/phone-call.svg') }}"/>
-                            <p>
-                                <a href="tel:{{ getSetting('contact_phone') }}" class="text-dark">
-                                    {{ getSetting('contact_phone') }}
-                                </a>
-                            </p>
-                        </li>
-                        <li>    
-                            <img src="{{ asset('site_assets/images/email.svg') }}"/>
-                            <p class="text-dark">
-                                <a href="mailto:{{ getSetting('contact_email') }}" class="text-dark"> 
-                                    {{ getSetting('contact_email') }}
-                                </a>
-                            </p>
-                        </li>
-                        <li>
-                            <img src="{{ asset('site_assets/images/pin.svg') }}"/>
-                            <p>
-                                <a href="{{ getSetting('contact_address_link') }}" target="_blank" class="text-dark">
-                                    {{ getSetting('contact_address') }}
-                                </a>
-                            </p>
-                        </li>
+                        @if(!empty(getSetting('contact_phone')))
+                            <li>
+                                <img src="{{ asset('site_assets/images/phone-call.svg') }}"/>
+                                <p>
+                                    <a href="tel:{{ getSetting('contact_phone') }}" class="text-dark">
+                                        {{ getSetting('contact_phone') }}
+                                    </a>
+                                </p>
+                            </li>
+                        @endif
+                        @if(!empty(getSetting('contact_email')))
+                            <li>    
+                                <img src="{{ asset('site_assets/images/email.svg') }}"/>
+                                <p class="text-dark">
+                                    <a href="mailto:{{ getSetting('contact_email') }}" class="text-dark"> 
+                                        {{ getSetting('contact_email') }}
+                                    </a>
+                                </p>
+                            </li>
+                        @endif
+                        @if(!empty(getSetting('contact_address_link')))
+                            <li>
+                                <img src="{{ asset('site_assets/images/pin.svg') }}"/>
+                                <p>
+                                    <a href="{{ getSetting('contact_address_link') }}" target="_blank" class="text-dark">
+                                        {{ getSetting('contact_address') }}
+                                    </a>
+                                </p>
+                            </li>
+                        @endif
                     </ul>
                 </div>
                 <div class="col-md-5">

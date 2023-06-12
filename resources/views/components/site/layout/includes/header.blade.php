@@ -126,8 +126,8 @@
                             @else
                                 <li class="login-btn">
                                     <img src="{{ asset('site_assets/images/icon-user.svg') }}" alt="{{ getTransSetting('websit_title', app()->getLocale()) }}" />
-                                    <a data-toggle="modal" data-target="#exampleModal">{{ trans('auth.sign_in') }}</a>
-                                    <a data-toggle="modal" data-target="#exampleModal">{{ trans('auth.create_acount') }}</a>
+                                    <a class="model-auth" data-type="login" data-toggle="modal" data-target="#exampleModal">{{ trans('auth.sign_in') }}</a>
+                                    <a class="model-auth" data-type="register" data-toggle="modal" data-target="#exampleModal">{{ trans('auth.create_acount') }}</a>
                                 </li>
                             @endif
                         </ul>
