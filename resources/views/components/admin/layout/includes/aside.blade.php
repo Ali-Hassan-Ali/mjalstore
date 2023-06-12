@@ -155,6 +155,12 @@
                             <i class="icon fa fa-circle"></i>@lang('settings.about_page')
                         </a>
                     </li>
+
+                    <li>
+                        <a class="treeview-item {{ request()->is('*faq*') ? 'active' : '' }}" href="{{ route('admin.settings.faq.index') }}">
+                            <i class="icon fa fa-circle"></i>@lang('settings.faq')
+                        </a>
+                    </li>
                     
                 </ul>
             </li>

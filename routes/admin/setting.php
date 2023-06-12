@@ -43,7 +43,12 @@ Route::controller(MediaController::class)->group(function () {
 //settings footer
 Route::controller(FooterController::class)->group(function () {
 
+    //about_page
     Route::get('about_page', 'aboutPage')->name('about_page.index');
     Route::post('about_page/store', 'aboutPageStore')->name('about_page.store');
+
+    //faq
+    Route::get('faq', 'faqPage')->name('faq.index');
+    Route::post('faq/store', 'faqStore')->name('faq.store');
 
 });
