@@ -75,4 +75,4 @@
 
     </form><!-- end of form -->
 
-</x-admin.layout.app>>
+</x-admin.layout.app>

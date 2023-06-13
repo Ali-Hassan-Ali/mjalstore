@@ -26,5 +26,7 @@ return [
     'markets'         => 'متاجر',
     'currencies'      => 'العملات',
     'currency'        => 'عملة',
+    'footers'         => 'Footers',
+    'pages'           => 'الصفحات',
 
 ];

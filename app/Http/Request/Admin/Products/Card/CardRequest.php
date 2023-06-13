@@ -43,7 +43,7 @@ class CardRequest extends FormRequest
     {
         return request()->merge([
             'admin_id'  => auth('admin')->id(),
-            'slug'      => str()->uuid(),
+            'slug'      => str()->random(12),
             'status'    => request()->has('status'),
         ]);
 

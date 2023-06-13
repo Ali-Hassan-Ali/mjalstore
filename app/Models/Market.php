@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\Scopes\StatusScope;
 
 class Market extends Model
 {
@@ -52,5 +53,13 @@ class Market extends Model
         return $this->hasMany(Card::class);
 
     }//end of cards
+
+    protected static function booted(): void
+    {
+        if(!request()->is('*markets*')) {
+           static::addGlobalScope(new StatusScope);
+        }
+
+    }//end of Global Scope
 
 }//end of model

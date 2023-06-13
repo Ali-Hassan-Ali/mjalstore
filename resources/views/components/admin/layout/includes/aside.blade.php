@@ -117,6 +117,26 @@
             </li>
         @endif
 
+        @if(permissionAdmin('read-pages'))
+            {{-- footers --}}
+            <li class="treeview {{ request()->is('*footers*') ? 'is-expanded' : '' }}">
+                <a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-user-circle"></i>
+                    <span class="app-menu__label">@lang('menu.footers')</span>
+                    <i class="treeview-indicator fa fa-angle-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    
+                    <li>
+                        <a class="treeview-item {{ request()->is('*pages*') ? 'active' : '' }}" href="{{ route('admin.footers.pages.index') }}">
+                            <i class="icon fa fa-circle"></i>@lang('menu.pages')
+                        </a>
+                    </li>
+                    
+                </ul>
+            </li>
+        @endif
+
         @if(permissionAdmin('read-settings'))
             {{-- settings --}}
             <li class="treeview {{ request()->is('*settings*') ? 'is-expanded' : '' }}">

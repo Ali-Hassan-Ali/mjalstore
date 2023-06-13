@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             SubCategorySeeder::class,
             MarketSeeder::class,
             CurrencySeeder::class,
+            PageSeeder::class,
         ]);
 
     }//end of run

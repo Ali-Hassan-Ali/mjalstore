@@ -26,5 +26,7 @@ return [
     'markets'         => 'Markets',
     'currencies'      => 'Currencies',
     'currency'        => 'Currency',
+    'footers'         => 'Footers',
+    'pages'           => 'Pages',
 
 ];
