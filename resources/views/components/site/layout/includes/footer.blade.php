@@ -2,12 +2,16 @@
     <div class="top-ft">
         <div class="container">
             <ul class="menu-ft">
-                <li><a href="policy.html">سياسة الاستخدام</a></li>
-                <li><a href="privacy.html">سياسة الخصوصية</a></li>
-                <li><a href="recovery.html">سياسة الاسترجاع</a></li>
-                <li><a href="faq.html">الأسئلة الشائعة</a></li>
-                <li><a href="about.html">من نحن</a></li>
-                <li><a href="contact.html">تواصل معنا</a></li>
+                @if(count($pages))
+                    @foreach($pages as $slug=>$name)
+                        <li>
+                            <a href="{{ route('site.page.index', $slug) }}">{{ $name }}</a>
+                        </li>
+                    @endforeach
+                @endif
+                <li><a href="{{ route('site.faq.index') }}">{{ trans('settings.faq') }}</a></li>
+                <li><a href="{{ route('site.about.index') }}">{{ trans('settings.about_page') }}</a></li>
+                <li><a href="{{ route('site.contact.index') }}">{{ trans('settings.contact') }}</a></li>
             </ul>
         </div>
     </div>

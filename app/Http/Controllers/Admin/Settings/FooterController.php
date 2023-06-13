@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Request\Admin\Settings\AboutPageRequest;
 use App\Http\Request\Admin\Settings\FaqRequest;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\View\View;
 
 class FooterController extends Controller
@@ -21,6 +22,18 @@ class FooterController extends Controller
 
     public function aboutPageStore(AboutPageRequest $request)
     {
+        if(request()->file('about_page_image')) {
+
+            if(!empty(getSetting('about_page_image'))) {
+
+                Storage::disk('public')->delete(getSetting('about_page_image'));
+            }
+
+
+            $image = request()->file('about_page_image')->store('settings', 'public');
+
+            saveSetting('about_page_image', $image);
+        }
         saveTransSetting('about_page_title', $request->about_page_title ?? '');
         saveTransSetting('about_page_description', $request->about_page_description ?? '');
 

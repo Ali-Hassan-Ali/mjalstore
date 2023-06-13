@@ -18,7 +18,17 @@
 
         <div class="row">
 
-            <div class="col-12 col-md-12">
+            <div class="col-12 col-md-4">
+
+                <div class="tile shadow">
+
+                    @include('admin.dataTables.image_privew', ['name' => 'about_page_image', 'imagepath' => getImageSetting('about_page_image'), 'label' => 'site.image'])
+
+                </div><!-- end of tile -->
+
+            </div><!-- end of col -->
+
+            <div class="col-12 col-md-8">
 
                 <div class="tile shadow">
 
@@ -48,7 +58,7 @@
                                 {{--description--}}
                                 <x-input.textarea required="{{ $loop->first ? true : false }}" 
                                     name="about_page_description[{{ $language->code }}]" 
-                                    label="site.about_page_description" rows='6'
+                                    label="site.about_page_description" rows='6' :ckeditor="true"
                                     :value="old('about_page_description.' . $language->code, getTransSetting('about_page_description', $language->code) ?? '')"
                                     invalid="{{ 'about_page_description.' . $language->code }}" />
 
