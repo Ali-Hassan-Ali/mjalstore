@@ -117,7 +117,7 @@
             </li>
         @endif
 
-        @if(permissionAdmin('read-pages'))
+        @if(permissionAdmin('read-pages') || permissionAdmin('read-payment_methods'))
             {{-- footers --}}
             <li class="treeview {{ request()->is('*footers*') ? 'is-expanded' : '' }}">
                 <a class="app-menu__item" href="#" data-toggle="treeview">
@@ -130,6 +130,12 @@
                     <li>
                         <a class="treeview-item {{ request()->is('*pages*') ? 'active' : '' }}" href="{{ route('admin.footers.pages.index') }}">
                             <i class="icon fa fa-circle"></i>@lang('menu.pages')
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="treeview-item {{ request()->is('*payment_methods*') ? 'active' : '' }}" href="{{ route('admin.footers.payment_methods.index') }}">
+                            <i class="icon fa fa-circle"></i>@lang('menu.payment_methods')
                         </a>
                     </li>
                     

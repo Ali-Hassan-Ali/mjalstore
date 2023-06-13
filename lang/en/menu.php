@@ -28,5 +28,6 @@ return [
     'currency'        => 'Currency',
     'footers'         => 'Footers',
     'pages'           => 'Pages',
+    'payment_methods' => 'Payment Methods',
 
 ];

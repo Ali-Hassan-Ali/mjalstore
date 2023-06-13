@@ -64,23 +64,25 @@
                         @endif
                     </ul>
                 </div>
-                <div class="col-md-5">
-                    <div class="payment">
-                        <p>وسائل الدفع</p>
-                        <ul>
-                            <li><img src="images/master_card.png" /></li>
-                            <li><img src="images/paypal.png" /></li>
-                            <li><img src="images/visa.png" /></li>
-                        </ul>
+                @if(!empty($paymentMethods))
+                    <div class="col-md-5">
+                        <div class="payment">
+                            <p>{{ trans('menu.payment_methods') }}</p>
+                            <ul>
+                                @foreach($paymentMethods as $image)
+                                    <li><img src="{{ asset('storage/' . $image) }}" width="40" /></li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>
     <div class="bottom-ft">
         <div class="container">
             <div class="copyright">
-                <p>Copyright © 2020 , MJAL STORE</p>
+                <p>Copyright © {{ now()->month }} , MJAL STORE</p>
             </div>
         </div>
     </div>

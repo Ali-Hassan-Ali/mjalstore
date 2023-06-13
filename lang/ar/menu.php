@@ -28,5 +28,6 @@ return [
     'currency'        => 'عملة',
     'footers'         => 'Footers',
     'pages'           => 'الصفحات',
+    'payment_methods' => 'وسائل الدفع',
 
 ];

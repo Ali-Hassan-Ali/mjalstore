@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
 
-            $table->text('title')->nullable();
-            $table->longText('description_one')->nullable();
-            $table->longText('description_tow')->nullable();
-
-            $table->string('slug')->unique();
-            $table->boolean('status')->default(0);
+            $table->string('image');
             $table->integer('order')->nullable();
+
+            $table->boolean('status')->default(0);
 
             $table->foreignId('admin_id')->constrained();
 
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('payment_methods');
     }
 };
