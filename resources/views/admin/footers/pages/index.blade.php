@@ -1,8 +1,8 @@
 <x-admin.layout.app>
 
-    <x-slot name="title">{{ trans('menu.page') }}</x-slot>
+    <x-slot name="title">{{ trans('menu.pages') }}</x-slot>
 
-    <div><h2>{{ trans('menu.page') }}</h2></div>
+    <div><h2>{{ trans('menu.pages') }}</h2></div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item">
@@ -10,7 +10,7 @@
                 {{ trans('site.home') }}
             </a>
         </li>
-        <li class="breadcrumb-item">{{ trans('menu.page') }}</li>
+        <li class="breadcrumb-item">{{ trans('menu.pages') }}</li>
     </ul>
 
     <div class="row">
