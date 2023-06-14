@@ -20,6 +20,14 @@ class DeleteRequest extends FormRequest
 
     }//end of rules
 
+    public function attributes(): array
+    {
+        return [
+            'ids.*' => trans('admin.global.items'),
+        ];        
+
+    }//end of attributes
+
     protected function prepareForValidation()
     {
         return request()->merge([

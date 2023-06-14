@@ -27,7 +27,7 @@
 
                 <div class="tile shadow">
 
-                    @include('admin.dataTables.image_privew', ['name' => 'banner', 'imagepath' => $subCategory->image_path, 'label' => 'banner'])
+                    @include('admin.dataTables.image_privew', ['name' => 'banner', 'imagepath' => $subCategory->image_path, 'label' => 'admin.sub_category.banner'])
 
                 </div><!-- end of tile -->
 
@@ -70,21 +70,21 @@
                                 {{--name--}}
                                 <x-input.text required="{{ $loop->first ? true : false }}" 
                                     name="name[{{ $language->code }}]" 
-                                    label="site.name"
+                                    label="admin.global.name"
                                     :value="old('name.' . $language->code, $subCategory->getTranslations('name')[$language->code] ?? '')"
                                     invalid="{{ 'name.' . $language->code }}" />
 
                                 {{--title_card--}}
                                 <x-input.text required="{{ $loop->first ? true : false }}" 
                                     name="title_card[{{ $language->code }}]" 
-                                    label="site.title_card"
+                                    label="admin.sub_category.title_card"
                                     :value="old('title_card.' . $language->code, $subCategory->getTranslations('title_card')[$language->code] ?? '')"
                                     invalid="{{ 'title_card.' . $language->code }}" />
 
                                 {{--description--}}
                                 <x-input.textarea required="{{ $loop->first ? true : false }}" 
                                     name="description[{{ $language->code }}]" 
-                                    label="site.description" rows='6'
+                                    label="admin.global.description" rows='6'
                                     :value="old('description.' . $language->code, $subCategory->getTranslations('description')[$language->code] ?? '')"
                                     invalid="{{ 'description.' . $language->code }}" />
 
@@ -104,15 +104,15 @@
                     <div class="row">
  
                         {{-- color 1 --}}
-                        <x-input.text :required="true" name="color_1" type="color" label="site.color_1" col="col-md" :value="$subCategory->color_1"/>
+                        <x-input.text :required="true" name="color_1" type="color" label="admin.sub_category.color_1" col="col-md" :value="$subCategory->color_1"/>
 
                         {{-- color 2 --}}
-                        <x-input.text :required="true" name="color_2" type="color" label="site.color_2" col="col-md" :value="$subCategory->color_2"/>
+                        <x-input.text :required="true" name="color_2" type="color" label="admin.sub_category.color_2" col="col-md" :value="$subCategory->color_2"/>
 
                     </div>
 
                     {{--categories--}}
-                    <x-input.option required="true" name="parent_id" label="site.categories" :lists="$categories" :value="$subCategory->parent_id"/>
+                    <x-input.option required="true" name="parent_id" label="menu.categories" :lists="$categories" :value="$subCategory->parent_id"/>
 
                     <div class="row">
                         
@@ -120,13 +120,13 @@
                         <x-input.checkbox :required="true" name="status" label="admin.global.status" col="col-md" :value="$subCategory->status"/>
 
                         {{-- has_market --}}
-                        <x-input.checkbox :required="true" name="has_market" label="admin.global.has_market" col="col-md" :value="$subCategory->has_market"/>
+                        <x-input.checkbox :required="true" name="has_market" label="admin.sub_category.has_market" col="col-md" :value="$subCategory->has_market"/>
                         
                     </div>    
 
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('admin.global.edit')</button>
                     </div>
 
                 </div><!-- end of tile -->

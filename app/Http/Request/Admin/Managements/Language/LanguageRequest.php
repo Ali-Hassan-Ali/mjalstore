@@ -51,6 +51,18 @@ class LanguageRequest extends FormRequest
 
     }//end of rules
 
+    public function attributes(): array
+    {
+        return [
+            'name'   => trans('admin.global.name'), 
+            'status' => trans('admin.global.status'), 
+            'dir'    => trans('admin.managements.languages.dir'), 
+            'code'   => trans('admin.managements.languages.code'), 
+            'flag'   => trans('admin.managements.languages.flag'), 
+        ];
+
+    }//end of attributes
+
     protected function prepareForValidation()
     {
         return request()->merge([

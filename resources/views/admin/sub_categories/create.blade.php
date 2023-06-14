@@ -1,6 +1,6 @@
 <x-admin.layout.app>
     <x-slot name="title">
-        {{ trans('site.create') . ' ' . trans('menu.sub_categories') }}
+        {{ trans('admin.global.create') . ' ' . trans('menu.sub_categories') }}
     </x-slot>
 
     <x-slot name="style">
@@ -12,9 +12,9 @@
     </div>
 
     <ul class="breadcrumb mt-2">
-        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('admin.global.home')</a></li>
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.sub_categories.index') }}">@lang('menu.sub_categories')</a></li>
-        <li class="breadcrumb-item">@lang('site.create')</li>
+        <li class="breadcrumb-item">@lang('admin.global.create')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.sub_categories.store') }}" enctype="multipart/form-data">
@@ -27,7 +27,7 @@
 
                 <div class="tile shadow">
 
-                    @include('admin.dataTables.image_privew', ['name' => 'banner', 'label' => 'banner', 'required' => true])
+                    @include('admin.dataTables.image_privew', ['name' => 'banner', 'label' => 'admin.sub_category.banner', 'required' => true])
 
                 </div><!-- end of tile -->
 
@@ -70,19 +70,19 @@
                                 {{--name--}}
                                 <x-input.text required="{{ $loop->first ? true : false }}" 
                                     name="name[{{ $language->code }}]" 
-                                    label="site.name"
+                                    label="admin.global.name"
                                     invalid="{{ 'name.' . $language->code }}" />
 
                                 {{--title_card--}}
                                 <x-input.text required="{{ $loop->first ? true : false }}" 
                                     name="title_card[{{ $language->code }}]" 
-                                    label="site.title_card"
+                                    label="admin.sub_category.title_card"
                                     invalid="{{ 'title_card.' . $language->code }}" />
 
                                 {{--description--}}
                                 <x-input.textarea required="{{ $loop->first ? true : false }}" 
                                     name="description[{{ $language->code }}]" 
-                                    label="site.description" rows='6'
+                                    label="admin.global.description" rows='6'
                                     invalid="{{ 'description.' . $language->code }}" />
 
 
@@ -100,28 +100,28 @@
 
                     <div class="row">
                         {{-- color 1 --}}
-                        <x-input.text :required="true" name="color_1" type="color" label="site.color_1" col="col-md"/>
+                        <x-input.text :required="true" name="color_1" type="color" label="admin.sub_category.color_1" col="col-md"/>
 
                         {{-- color 2 --}}
-                        <x-input.text :required="true" name="color_2" type="color" label="site.color_2" col="col-md"/>
+                        <x-input.text :required="true" name="color_2" type="color" label="admin.sub_category.color_2" col="col-md"/>
 
                     </div>
 
                     {{--categories--}}
-                    <x-input.option required="true" name="parent_id" label="site.categories" :lists="$categories"/>
+                    <x-input.option required="true" name="parent_id" label="menu.categories" :lists="$categories"/>
 
                     <div class="row">
                         {{--status--}}
                         <x-input.checkbox :required="true" name="status" label="admin.global.status" col="col-md"/>
 
                         {{-- has_market --}}
-                        <x-input.checkbox :required="true" name="has_market" label="admin.global.has_market" col="col-md"/>
+                        <x-input.checkbox :required="true" name="has_market" label="admin.sub_category.has_market" col="col-md"/>
                         
                     </div>    
 
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('admin.global.create')</button>
                     </div>
 
                 </div><!-- end of tile -->

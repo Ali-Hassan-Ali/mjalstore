@@ -9,10 +9,10 @@
             <div class="modal-body">
                 <ul class="nav nav-tabs" id="myTab" role="tablist" style="width: 100%; padding: 3px 0;">
                     <li class="nav-item">
-                        <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">تسجيل الدخول</a>
+                        <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">{{ trans('auth.sign_in') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">إنشاء حساب</a>
+                        <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">{{ trans('auth.sign_up') }}</a>
                     </li>
                 </ul>
                 <div class="form-reg">

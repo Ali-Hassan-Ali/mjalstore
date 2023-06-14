@@ -15,7 +15,7 @@
         <li>
             <a class="app-menu__item {{ request()->is('*home*') ? 'active' : '' }}" href="{{ route('admin.index') }}">
                 <i class="app-menu__icon fa fa-home"></i>
-                <span class="app-menu__label">@lang('site.home')</span>
+                <span class="app-menu__label">@lang('menu.home')</span>
             </a>
         </li>
 
@@ -24,14 +24,14 @@
             <li class="treeview {{ request()->is('*categories*') ? 'is-expanded' : '' }}">
                 <a class="app-menu__item" href="#" data-toggle="treeview">
                     <i class="app-menu__icon fa fa-user-circle"></i>
-                    <span class="app-menu__label">@lang('site.categories')</span>
+                    <span class="app-menu__label">@lang('menu.categories')</span>
                     <i class="treeview-indicator fa fa-angle-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     @if(permissionAdmin('read-categories'))
                         <li>
                             <a class="treeview-item {{ request()->segment(2) === 'categories' ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
-                                <i class="icon fa fa-circle"></i>@lang('site.categories')
+                                <i class="icon fa fa-circle"></i>@lang('menu.categories')
                             </a>
                         </li>
                     @endif
@@ -39,7 +39,7 @@
                     @if(permissionAdmin('read-sub_categories'))
                         <li>
                             <a class="treeview-item {{ request()->segment(2) === 'sub_categories' ? 'active' : '' }}" href="{{ route('admin.sub_categories.index') }}">
-                                <i class="icon fa fa-circle"></i>@lang('site.sub_categories')
+                                <i class="icon fa fa-circle"></i>@lang('menu.sub_categories')
                             </a>
                         </li>
                     @endif
@@ -52,28 +52,28 @@
             <li class="treeview {{ request()->is('*managements*') ? 'is-expanded' : '' }}">
                 <a class="app-menu__item" href="#" data-toggle="treeview">
                     <i class="app-menu__icon fa fa-user-circle"></i>
-                    <span class="app-menu__label">@lang('site.managements')</span>
+                    <span class="app-menu__label">@lang('menu.managements')</span>
                     <i class="treeview-indicator fa fa-angle-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     @if(permissionAdmin('read-admins'))
                         <li>
                             <a class="treeview-item {{ request()->is('*admins*') ? 'active' : '' }}" href="{{ route('admin.managements.admins.index') }}">
-                                <i class="icon fa fa-circle"></i>@lang('site.admins')
+                                <i class="icon fa fa-circle"></i>@lang('menu.admins')
                             </a>
                         </li>
                     @endif
                     @if(permissionAdmin('read-roles'))
                         <li>
                             <a class="treeview-item {{ request()->is('*roles*') ? 'active' : '' }}" href="{{ route('admin.managements.roles.index') }}">
-                                <i class="icon fa fa-circle"></i>@lang('site.roles')
+                                <i class="icon fa fa-circle"></i>@lang('menu.roles')
                             </a>
                         </li>
                     @endif
                     @if(permissionAdmin('read-languages'))
                         <li>
                             <a class="treeview-item {{ request()->is('*languages*') ? 'active' : '' }}" href="{{ route('admin.managements.languages.index') }}">
-                                <i class="icon fa fa-circle"></i>@lang('site.languages')
+                                <i class="icon fa fa-circle"></i>@lang('menu.languages')
                             </a>
                         </li>
                     @endif

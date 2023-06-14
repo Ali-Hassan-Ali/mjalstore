@@ -11,6 +11,7 @@ return [
     'phone'             => 'رقم الهاتف',
     'remember_me'   	=> 'تزكرتي',
     'password'    	  	=> 'كلمه المرور',
+    'password_confirmation'=> 'اعاده كلمة المرور',
     'forgot_password'   => 'هل نسيت كلمه المرور ؟',
     'password_invalid'  => 'كلمة المرور غير صحيحة',
     'reset'			    => 'ارسال',

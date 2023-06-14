@@ -11,6 +11,7 @@ return [
     'phone'             => 'phone',
     'remember_me'       => 'Remember Me',
     'password'          => 'Password',
+    'password_confirmation'=> 'Password Confirmation',
     'forgot_password'   => 'Forgot Password ?',
     'password_invalid'  => 'Password Invalid',
     'reset'             => 'RESET',

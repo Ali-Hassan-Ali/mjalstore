@@ -1,6 +1,6 @@
 <x-admin.layout.app>
     <x-slot name="title">
-        {{ trans('site.edit') . ' ' . trans('menu.roles') }}
+        {{ trans('admin.global.edit') . ' ' . trans('menu.roles') }}
     </x-slot>
 
     <div>
@@ -8,9 +8,9 @@
     </div>
 
     <ul class="breadcrumb mt-2">
-        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('admin.global.home')</a></li>
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.managements.roles.index') }}">@lang('menu.roles')</a></li>
-        <li class="breadcrumb-item">@lang('site.edit')</li>
+        <li class="breadcrumb-item">@lang('admin.global.edit')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.managements.roles.update', $role->id) }}" enctype="multipart/form-data">
@@ -26,9 +26,9 @@
                 <div class="tile shadow">
 
                     {{--name--}}
-                    <x-input.text required="true" name="name" label="site.name" :value="$role->name"/>
+                    <x-input.text required="true" name="name" label="admin.global.name" :value="$role->name"/>
 
-                    <h5>@lang('roles.permissions') <span class="text-danger">*</span></h5>
+                    <h5>@lang('menu.permissions') <span class="text-danger">*</span></h5>
 
                     @php
                         $models = ['admins', 'roles', 'languages', 'settings', 'categories', 'sub_categories'];
@@ -38,7 +38,7 @@
                         <thead>
                         <tr>
                             <th>@lang('roles.model')</th>
-                            <th>@lang('roles.permissions')</th>
+                            <th>@lang('menu.permissions')</th>
                         </tr>
                         </thead>
 
@@ -50,7 +50,7 @@
                                     <div class="animated-checkbox mx-2" style="display:inline-block;">
                                         <label class="m-0">
                                             <input type="checkbox" value="" name="" class="all-roles">
-                                            <span class="label-text">@lang('site.all')</span>
+                                            <span class="label-text">@lang('admin.global.all')</span>
                                         </label>
                                     </div>
 
@@ -92,7 +92,7 @@
                     </table><!-- end of table -->
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.edit')</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('admin.global.edit')</button>
                     </div>
 
                 </div><!-- end of tile -->

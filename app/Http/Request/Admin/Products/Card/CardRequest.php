@@ -39,6 +39,20 @@ class CardRequest extends FormRequest
 
     }//end of rules
 
+    public function attributes(): array
+    {
+        return [
+            'status'      => trans('admin.global.status'),
+            'quantity'    => trans('admin.products.cards.quantity'),
+            'balance'     => trans('admin.products.cards.balance'),
+            'price'       => trans('admin.global.price'),
+            'rating'      => trans('admin.products.cards.rating'),
+            'market_id'   => trans('menu.markets'),
+            'category_id' => trans('menu.categories'),
+        ];
+
+    }//end of attributes
+
     protected function prepareForValidation()
     {
         return request()->merge([

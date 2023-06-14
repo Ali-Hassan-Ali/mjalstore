@@ -7,7 +7,7 @@
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item">
             <a href="{{ route('admin.index') }}">
-                {{ trans('site.home') }}
+                {{ trans('admin.global.home') }}
             </a>
         </li>
         <li class="breadcrumb-item">{{ trans('menu.products') }}</li>
@@ -25,7 +25,7 @@
                     <div class="col-md-12">
 
                         @if(permissionAdmin('create-cards'))
-                            <a href="{{ route('admin.products.cards.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a>
+                            <a href="{{ route('admin.products.cards.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('admin.global.create')</a>
                         @endif
 
                         @if(permissionAdmin('create-cards'))
@@ -33,7 +33,7 @@
                                 @csrf
                                 @method('delete')
                                 <input type="hidden" name="record_ids" id="record-ids">
-                                <button type="submit" class="btn btn-danger" id="bulk-delete" disabled="true"><i class="fa fa-trash"></i> @lang('site.bulk_delete')</button>
+                                <button type="submit" class="btn btn-danger" id="bulk-delete" disabled="true"><i class="fa fa-trash"></i> @lang('admin.global.bulk_delete')</button>
                             </form><!-- end of form -->
                         @endif
 
@@ -45,7 +45,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" id="data-table-search" class="form-control" autofocus placeholder="@lang('site.search')">
+                            <input type="text" id="data-table-search" class="form-control" autofocus placeholder="@lang('admin.global.search')">
                         </div>
                     </div>
 

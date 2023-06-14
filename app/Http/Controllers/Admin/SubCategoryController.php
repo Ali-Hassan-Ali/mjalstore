@@ -28,12 +28,12 @@ class SubCategoryController extends Controller
                 'route' => route('admin.sub_categories.data'),
                 'route_status' => route('admin.sub_categories.status'),
                 'header'  => [
-                    'site.name',
-                    'site.category',
-                    'site.banner',
-                    'site.admin',
-                    'site.status',
-                    'site.has_market',
+                    'admin.global.name',
+                    'menu.categories',
+                    'admin.sub_category.banner',
+                    'admin.global.admin',
+                    'admin.global.status',
+                    'admin.sub_category.has_market',
                 ],
                 'columns' => [
                     'name'       => 'name',
@@ -110,7 +110,7 @@ class SubCategoryController extends Controller
 
         Category::create($requestData);
 
-        session()->flash('success', __('site.added_successfully'));
+        session()->flash('success', __('admin.global.added_successfully'));
         return redirect()->route('admin.sub_categories.index');
 
     }//end of store
@@ -139,7 +139,7 @@ class SubCategoryController extends Controller
         }
         $subCategory->update($requestData);
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->route('admin.sub_categories.index');
 
     }//end of update
@@ -149,8 +149,8 @@ class SubCategoryController extends Controller
         $subCategory->banner ? Storage::disk('public')->delete($subCategory->banner) : '';
         $subCategory->delete();
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of delete
 
@@ -160,8 +160,8 @@ class SubCategoryController extends Controller
         count($images) ? Storage::disk('public')->delete($images) : '';
         Category::destroy(request()->ids ?? []);
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of bulkDelete
 
@@ -170,8 +170,8 @@ class SubCategoryController extends Controller
         $subCategory = Category::find($request->id);
         $subCategory->update(['status' => !$subCategory->status]);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
+        return response(__('admin.global.updated_successfully'));
 
     }//end of status
 

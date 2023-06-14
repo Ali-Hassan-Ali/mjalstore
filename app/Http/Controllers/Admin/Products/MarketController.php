@@ -28,11 +28,11 @@ class MarketController extends Controller
                 'route' => route('admin.products.markets.data'),
                 'route_status' => route('admin.products.markets.status'),
                 'header'  => [
-                    'site.name',
-                    'site.flag',
-                    'site.admin',
-                    'site.sub_category',
-                    'site.status',
+                    'admin.global.name',
+                    'admin.global.flag',
+                    'admin.global.admin',
+                    'menu.sub_category',
+                    'admin.global.status',
                 ],
                 'columns' => [
                     'name'   => 'name',

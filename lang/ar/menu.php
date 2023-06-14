@@ -10,6 +10,7 @@ return [
     'admins'          => 'المشرفين',
     'role'            => 'صلاحيه',
     'roles'           => 'الصلاحيات',
+    'permissions'     => 'الصلاحيات',
     'languages'       => 'اللغات',
     'language'        => 'لغه',
     'management'      => 'الاداراه',

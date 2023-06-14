@@ -43,6 +43,16 @@ class PaymentMethodRequest extends FormRequest
 
     }//end of rules
 
+    public function attributes(): array
+    {
+        return [
+            'status' => trans('admin.global.status'),
+            'order'  => trans('admin.global.order'),
+            'image'  => trans('admin.global.image'),
+        ];
+
+    }//end of attributes
+
     protected function prepareForValidation()
     {
         return request()->merge([

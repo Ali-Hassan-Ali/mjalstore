@@ -30,11 +30,11 @@ class AdminController extends Controller
                 'route' => route('admin.managements.admins.data'),
                 'route_status' => route('admin.managements.admins.status'),
                 'header'  => [
-                    'site.name',
-                    'site.email',
-                    'site.image',
-                    'site.roles',
-                    'site.status',
+                    'admin.global.name',
+                    'admin.global.email',
+                    'admin.global.image',
+                    'menu.roles',
+                    'admin.global.status',
                 ],
                 'columns' => [
                     'name'   => 'name',

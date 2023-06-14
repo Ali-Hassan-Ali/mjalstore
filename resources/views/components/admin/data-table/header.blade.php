@@ -12,8 +12,8 @@
         @foreach($columns as $column)
             <th>{{ trans($column) }}</th>
         @endforeach
-        <th>{{ trans('site.created_at') }}</th>
-        <th>{{ trans('site.action') }}</th>
+        <th>{{ trans('admin.global.created_at') }}</th>
+        <th>{{ trans('admin.global.action') }}</th>
     </tr>
     </thead>
 @endif

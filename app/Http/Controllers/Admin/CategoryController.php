@@ -27,10 +27,10 @@ class CategoryController extends Controller
                 'route' => route('admin.categories.data'),
                 'route_status' => route('admin.categories.status'),
                 'header'  => [
-                    'site.name',
-                    'site.logo',
-                    'site.admin',
-                    'site.status',
+                    'admin.global.name',
+                    'admin.global.logo',
+                    'admin.global.admin',
+                    'admin.global.status',
                 ],
                 'columns' => [
                     'name'   => 'name',
@@ -99,7 +99,7 @@ class CategoryController extends Controller
 
         Category::create($requestData);
 
-        session()->flash('success', __('site.added_successfully'));
+        session()->flash('success', __('admin.global.added_successfully'));
         return redirect()->route('admin.categories.index');
 
     }//end of store
@@ -126,7 +126,7 @@ class CategoryController extends Controller
         }
         $category->update($requestData);
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->route('admin.categories.index');
 
     }//end of update
@@ -136,8 +136,8 @@ class CategoryController extends Controller
         $category->logo ? Storage::disk('public')->delete($category->logo) : '';
         $category->delete();
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of delete
 
@@ -147,8 +147,8 @@ class CategoryController extends Controller
         count($images) > 0 ? Storage::disk('public')->delete($images) : '';
         Category::destroy(request()->ids ?? []);
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of bulkDelete
 
@@ -157,8 +157,8 @@ class CategoryController extends Controller
         $slider = Category::find($request->id);
         $slider->update(['status' => !$slider->status]);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
+        return response(__('admin.global.updated_successfully'));
 
     }//end of status
 

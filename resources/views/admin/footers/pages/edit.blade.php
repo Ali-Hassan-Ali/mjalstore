@@ -1,6 +1,6 @@
 <x-admin.layout.app>
     <x-slot name="title">
-        {{ trans('site.edit') . ' ' . trans('menu.pages') }}
+        {{ trans('admin.global.edit') . ' ' . trans('menu.pages') }}
     </x-slot>
 
     <div>
@@ -8,10 +8,10 @@
     </div>
 
     <ul class="breadcrumb mt-2">
-        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('admin.global.home')</a></li>
         <li class="breadcrumb-item">@lang('menu.footers')</li>
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.footers.pages.index') }}">@lang('menu.pages')</a></li>
-        <li class="breadcrumb-item">@lang('site.edit')</li>
+        <li class="breadcrumb-item">@lang('admin.global.edit')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.footers.pages.update', $page->id) }}" enctype="multipart/form-data">
@@ -43,19 +43,19 @@
                                 {{--title--}}
                                 <x-input.text required="{{ $loop->first ? true : false }}" 
                                     name="title[{{ $language->code }}]" 
-                                    label="site.title" :value="$page->getTranslations('title')[$language->code] ?? ''"
+                                    label="admin.global.title" :value="$page->getTranslations('title')[$language->code] ?? ''"
                                     invalid="{{ 'title.' . $language->code }}" />
 
 								{{-- description_one --}}
                                 <x-input.textarea required="{{ $loop->first ? true : false }}" 
 	                                    name="description_one[{{ $language->code }}]" 
-	                                    label="site.description_one" :ckeditor='true' :value="old('description_one.' . $language->code, $page->getTranslations('description_one')[$language->code] ?? '')"
+	                                    label="admin.footers.pages.description_one" :ckeditor='true' :value="old('description_one.' . $language->code, $page->getTranslations('description_one')[$language->code] ?? '')"
 	                                    invalid="{{ 'description_one.' . $language->code }}" />
 
 								{{-- description_tow --}}
                                 <x-input.textarea required="{{ $loop->first ? true : false }}" 
 	                                    name="description_tow[{{ $language->code }}]" 
-	                                    label="site.description_tow" :ckeditor='true' :value="old('description_tow.' . $language->code, $page->getTranslations('description_one')[$language->code] ?? '')"
+	                                    label="admin.footers.pages.description_tow" :ckeditor='true' :value="old('description_tow.' . $language->code, $page->getTranslations('description_one')[$language->code] ?? '')"
 	                                    invalid="{{ 'description_tow.' . $language->code }}" />
 
                             </div>
@@ -81,7 +81,7 @@
                 	</div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.edit')</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('admin.global.edit')</button>
                     </div>
 
                 </div><!-- end of tile -->

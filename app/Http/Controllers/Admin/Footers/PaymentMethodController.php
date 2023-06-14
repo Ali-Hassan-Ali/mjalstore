@@ -28,10 +28,10 @@ class PaymentMethodController extends Controller
             [
                 'route' => route('admin.footers.payment_methods.data'),
                 'route_status' => route('admin.footers.payment_methods.status'),
-                'header'  => [
-                    'site.image',
-                    'site.admin',
-                    'site.status',
+                'header' => [
+                    'admin.global.image',
+                    'admin.global.admin',
+                    'admin.global.status',
                 ],
                 'columns' => [
                     'image'  => 'image',
@@ -104,7 +104,7 @@ class PaymentMethodController extends Controller
 
         PaymentMethod::create($requestData);
 
-        session()->flash('success', __('site.added_successfully'));
+        session()->flash('success', __('admin.global.added_successfully'));
         return redirect()->route('admin.footers.payment_methods.index');
 
     }//end of store
@@ -133,7 +133,7 @@ class PaymentMethodController extends Controller
 
         $paymentMethod->update($requestData);
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->route('admin.footers.payment_methods.index');
         
     }//end of update
@@ -146,8 +146,8 @@ class PaymentMethodController extends Controller
             $paymentMethod->delete();
         }
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of delete
 
@@ -157,8 +157,8 @@ class PaymentMethodController extends Controller
         count($images) > 0 ? Storage::disk('public')->delete($images) : '';
         PaymentMethod::destroy(request()->ids ?? []);
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of bulkDelete
 
@@ -167,8 +167,8 @@ class PaymentMethodController extends Controller
         $paymentMethod = PaymentMethod::find($request->id);
         $paymentMethod?->update(['status' => !$paymentMethod->status]);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
+        return response(__('admin.global.updated_successfully'));
         
     }//end of status
 
@@ -177,8 +177,8 @@ class PaymentMethodController extends Controller
         PaymentMethod::each(fn ($paymentMethod) => $paymentMethod->update(['default' => 0]));
         PaymentMethod::find($request->id)->update(['default' => 1, 'status' => 1]);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
+        return response(__('admin.global.updated_successfully'));
         
     }//end of status
 

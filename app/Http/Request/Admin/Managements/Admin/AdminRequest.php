@@ -55,6 +55,20 @@ class AdminRequest extends FormRequest
 
     }//end of rules
 
+    public function attributes(): array
+    {
+        return [
+            'status'                => trans('admin.global.status'),
+            'name'                  => trans('admin.global.name'),
+            'email'                 => trans('admin.global.email'),
+            'image'                 => trans('admin.global.image'),
+            'password'              => trans('auth.password'),
+            'password_confirmation' => trans('auth.password_confirmation'),
+            'roles.*'               => trans('menu.roles')
+        ];
+
+    }//end of attributes
+
     protected function prepareForValidation()
     {
         return request()->merge([

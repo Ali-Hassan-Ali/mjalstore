@@ -1,6 +1,6 @@
 <x-admin.layout.app>
     <x-slot name="title">
-        {{ trans('site.edit') . ' ' . trans('menu.category') }}
+        {{ trans('admin.global.edit') . ' ' . trans('menu.category') }}
     </x-slot>
 
     <div>
@@ -8,9 +8,9 @@
     </div>
 
     <ul class="breadcrumb mt-2">
-        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('admin.global.home')</a></li>
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.categories.index') }}">@lang('menu.categories')</a></li>
-        <li class="breadcrumb-item">@lang('site.edit')</li>
+        <li class="breadcrumb-item">@lang('admin.global.edit')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.categories.update', $category->id) }}" enctype="multipart/form-data">
@@ -23,7 +23,7 @@
 
                 <div class="tile shadow">
 
-                    @include('admin.dataTables.image_privew', ['name' => 'logo', 'imagepath' => $category->image_path, 'label' => 'logo'])
+                    @include('admin.dataTables.image_privew', ['name' => 'logo', 'imagepath' => $category->image_path, 'admin.global.label' => 'logo'])
 
                 </div><!-- end of tile -->
 
@@ -52,7 +52,7 @@
 
                                 <x-input.text required="{{ $loop->first }}" 
                                     name="name[{{ $language->code }}]" 
-                                    label="site.name"
+                                    label="admin.global.name"
                                     value="{{ $category->getTranslations('name')[$language->code] ?? '' }}"
                                     invalid="{{ 'name.' . $language->code }}" />
 
@@ -64,7 +64,7 @@
                     <x-input.checkbox :required="true" name="status" label="admin.global.status" value="{{ $category->status }}"/>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.edit')</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('admin.globa.edit')</button>
                     </div>
 
                 </div><!-- end of tile -->

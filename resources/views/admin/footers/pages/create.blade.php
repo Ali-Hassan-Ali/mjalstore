@@ -1,6 +1,6 @@
 <x-admin.layout.app>
     <x-slot name="title">
-        {{ trans('site.create') . ' ' . trans('menu.pages') }}
+        {{ trans('admin.global.create') . ' ' . trans('menu.pages') }}
     </x-slot>
 
     <div>
@@ -8,10 +8,10 @@
     </div>
 
     <ul class="breadcrumb mt-2">
-        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('admin.global.home')</a></li>
         <li class="breadcrumb-item">@lang('menu.footers')</li>
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.footers.pages.index') }}">@lang('menu.pages')</a></li>
-        <li class="breadcrumb-item">@lang('site.create')</li>
+        <li class="breadcrumb-item">@lang('admin.global.create')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.footers.pages.store') }}" enctype="multipart/form-data">
@@ -43,19 +43,19 @@
                                 {{--title--}}
                                 <x-input.text required="{{ $loop->first ? true : false }}" 
                                     name="title[{{ $language->code }}]" 
-                                    label="site.title"
+                                    label="admin.global.title"
                                     invalid="{{ 'title.' . $language->code }}" />
 
 								{{-- description_one --}}
                                 <x-input.textarea required="{{ $loop->first ? true : false }}" 
 	                                    name="description_one[{{ $language->code }}]" 
-	                                    label="site.description_one" :ckeditor='true' :value="old('description_one.' . $language->code)"
+	                                    label="admin.footers.pages.description_one" :ckeditor='true' :value="old('description_one.' . $language->code)"
 	                                    invalid="{{ 'description_one.' . $language->code }}" />
 
 								{{-- description_tow --}}
                                 <x-input.textarea required="{{ $loop->first ? true : false }}" 
 	                                    name="description_tow[{{ $language->code }}]" 
-	                                    label="site.description_tow" :ckeditor='true' :value="old('description_tow.' . $language->code)"
+	                                    label="admin.footers.pages.description_tow" :ckeditor='true' :value="old('description_tow.' . $language->code)"
 	                                    invalid="{{ 'description_tow.' . $language->code }}" />
 
                             </div>
@@ -81,7 +81,7 @@
                 	</div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('admin.global.create')</button>
                     </div>
 
                 </div><!-- end of tile -->

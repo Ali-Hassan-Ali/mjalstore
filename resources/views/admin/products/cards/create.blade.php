@@ -1,7 +1,7 @@
 <x-admin.layout.app>
 
     <x-slot name="title">
-        {{ trans('site.create') . ' - ' . trans('menu.cards') }}
+        {{ trans('admin.global.create') . ' - ' . trans('menu.cards') }}
     </x-slot>
 
     <x-slot name="style">
@@ -13,10 +13,10 @@
     </div>
 
     <ul class="breadcrumb mt-2">
-        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('admin.global.home')</a></li>
         <li class="breadcrumb-item">@lang('menu.products')</li>
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.products.cards.index') }}">@lang('menu.cards')</a></li>
-        <li class="breadcrumb-item">@lang('site.create')</li>
+        <li class="breadcrumb-item">@lang('admin.global.create')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.products.cards.store') }}" enctype="multipart/form-data">
@@ -46,25 +46,25 @@
                     <div class="row">
 
                         {{--categories--}}
-                        <x-input.option required="true" name="category_id" label="site.sub_categories" :lists="$categories" :value="old('category')" col="col-md"/>
+                        <x-input.option required="true" name="category_id" label="menu.sub_categories" :lists="$categories" :value="old('category')" col="col-md"/>
 
                         {{--sub categories--}}
-                        <x-input.option required="true" name="sub_category" :disabled='old("sub_category") ? false : true' label="site.sub_categories" :lists="[]" :value="old('sub_category')" col="col-md"/>
+                        <x-input.option required="true" name="sub_category" :disabled='old("sub_category") ? false : true' label="menu.sub_categories" :lists="[]" :value="old('sub_category')" col="col-md"/>
 
                         {{--markets--}}
-                        <x-input.option name="market_id" label="site.markets" :lists="[]" :hidden='old("market_id") ? false : true' :value="old('market_id')" col="col-md"/>
+                        <x-input.option name="market_id" label="menu.markets" :lists="[]" :hidden='old("market_id") ? false : true' :value="old('market_id')" col="col-md"/>
 
                         {{--price--}}
-                        <x-input.text type="number" required="true" name="price" label="site.price" col="col-md-6"/>
+                        <x-input.text type="number" required="true" name="price" label="admin.global.price" col="col-md-6"/>
 
                         {{--quantity--}}
-                        <x-input.text type="number" required="true" name="quantity" label="site.quantity" col="col-md-6"/>
+                        <x-input.text type="number" required="true" name="quantity" label="admin.products.cards.quantity" col="col-md-6"/>
 
                         {{--balance--}}
-                        <x-input.text type="number" required="true" name="balance" label="site.balance" col="col-md-6"/>
+                        <x-input.text type="number" required="true" name="balance" label="admin.products.cards.balance" col="col-md-6"/>
 
                         {{--rating--}}
-                        <x-input.option required="true" name="rating" label="site.rating" :lists="[1,2,3,4,5,6,7]" :value="old('rating')" col="col-md-6"/>
+                        <x-input.option required="true" name="rating" label="admin.products.cards.rating" :lists="[1,2,3,4,5,6,7]" :value="old('rating')" col="col-md-6"/>
 
                         {{--status--}}
                         <x-input.checkbox :required="true" name="status" label="admin.global.status" col="col-md"/>
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('admin.global.create')</button>
                     </div>
 
                 </div><!-- end of tile -->

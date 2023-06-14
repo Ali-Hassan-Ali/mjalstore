@@ -29,12 +29,12 @@ class CardController extends Controller
                 'route' => route('admin.products.cards.data'),
                 'route_status' => route('admin.products.cards.status'),
                 'header'  => [
-                    'site.sub_category',
-                    'site.market',
-                    'site.rating',
-                    'site.price',
-                    'site.admin',
-                    'site.status',
+                    'menu.sub_categories',
+                    'menu.markets',
+                    'admin.products.cards.rating',
+                    'admin.global.price',
+                    'admin.global.admin',
+                    'admin.global.status',
                 ],
                 'columns' => [
                     'sub_category' => 'sub_category',

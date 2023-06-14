@@ -10,6 +10,7 @@ return [
     'admins'          => 'Admins',
     'Role'            => 'Role',
     'Roles'           => 'Roles',
+    'permissions'     => 'Permissions',
     'languages'       => 'Languages',
     'language'        => 'Language',
     'management'      => 'Management',

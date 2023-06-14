@@ -34,12 +34,12 @@ class MarketRequest extends FormRequest
             
             $market = request()->route()->parameter('market');
 
-            $rules['name.' . app()->getLocale()] = ['required','string','min:2','max:15', UniqueTranslationRule::for('markets', 'name')->ignore($market?->id)];
+            $rules['name.' . getLanguages('default')->code] = ['required','string','min:2','max:15', UniqueTranslationRule::for('markets', 'name')->ignore($market?->id)];
             $rules['flag']                       = ['nullable','image'];
 
         } else {
 
-            $rules['name.' . app()->getLocale()] = ['required','string','min:2','max:15', UniqueTranslationRule::for('markets', 'name')];
+            $rules['name.' . getLanguages('default')->code] = ['required','string','min:2','max:15', UniqueTranslationRule::for('markets', 'name')];
             $rules['flag']                       = ['required','image'];
 
         } //end of if
@@ -47,6 +47,20 @@ class MarketRequest extends FormRequest
         return $rules;
 
     }//end of rules
+
+    public function attributes(): array
+    {
+        $rules = [
+            'status'           => trans('admin.global.status'),
+            'flag'             => trans('admin.global.flag'),
+            'sub_categories.*' => trans('menu.sub_categories'),
+        ];
+
+        $rules['name.' . getLanguages('default')->code] = trans('admin.global.by', ['name' => trans('admin.global.name'), 'lang' => getLanguages('default')->name]);
+
+        return $rules;
+
+    }//end of attributes
 
     protected function prepareForValidation()
     {

@@ -28,12 +28,12 @@ class CurrencyController extends Controller
                 'route' => route('admin.products.currencies.data'),
                 'route_status' => route('admin.products.currencies.status'),
                 'header'  => [
-                    'site.name',
-                    'site.code',
-                    'site.flag',
-                    'site.default',
-                    'site.admin',
-                    'site.status',
+                    'admin.global.name',
+                    'admin.global.code',
+                    'admin.global.flag',
+                    'admin.global.default',
+                    'admin.global.admin',
+                    'admin.global.status',
                 ],
                 'columns' => [
                     'name'   => 'name',

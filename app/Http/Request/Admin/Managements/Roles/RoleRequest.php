@@ -47,6 +47,16 @@ class RoleRequest extends FormRequest
 
     }//end of rules
 
+    public function attributes(): array
+    {
+        return [
+            'name' => trans('admin.global.name'),
+            'permissions' => trans('menu.permissions'),
+            'admin_id' => trans('menu.admin'),
+        ];
+
+    }//end of rules
+
     protected function prepareForValidation()
     {
         return request()->merge([

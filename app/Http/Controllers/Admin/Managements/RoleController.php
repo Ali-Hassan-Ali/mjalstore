@@ -28,9 +28,9 @@ class RoleController extends Controller
             [
                 'route' => route('admin.managements.roles.data'),
                 'header'  => [
-                    'site.name',
-                    'site.admin',
-                    'site.admins',
+                    'admin.global.name',
+                    'admin.global.admin',
+                    'menu.admins',
                 ],
                 'columns' => [
                     'name'    => 'name',

@@ -1,6 +1,6 @@
 <x-admin.layout.app>
     <x-slot name="title">
-        {{ trans('site.create') . ' ' . trans('menu.admins') }}
+        {{ trans('admin.global.create') . ' ' . trans('menu.admins') }}
     </x-slot>
 
     <div>
@@ -8,9 +8,9 @@
     </div>
 
     <ul class="breadcrumb mt-2">
-        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('admin.global.home')</a></li>
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.managements.admins.index') }}">@lang('menu.admins')</a></li>
-        <li class="breadcrumb-item">@lang('site.create')</li>
+        <li class="breadcrumb-item">@lang('admin.global.create')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.managements.admins.store') }}" enctype="multipart/form-data">
@@ -25,7 +25,7 @@
 
                 <div class="tile shadow">
 
-                    @include('admin.dataTables.image_privew', ['name' => 'image', 'label' => 'image', 'required' => true])
+                    @include('admin.dataTables.image_privew', ['name' => 'image', 'label' => 'admin.global.image', 'required' => true])
 
                 </div><!-- end of tile -->
 
@@ -33,31 +33,36 @@
 
             <div class="col-12 col-md-8">
 
-                <div class="tile shadow row">
+                <div class="tile shadow">
 
-					{{--name--}}
-                    <x-input.text required="true" name="name" label="site.name" col="col-md-6"/>
+                    <div class="row">
 
-                    {{--email--}}
-                    <x-input.text required="true" name="email" label="site.email" col="col-md-6" type="email"/>
+    					{{--name--}}
+                        <x-input.text required="true" name="name" label="admin.global.name" col="col-md-6"/>
 
-                    {{-- password --}}
-                    <x-input.text required="true" name="password" label="site.password" col="col-md-6" type="password"/>
+                        {{--email--}}
+                        <x-input.text required="true" name="email" label="admin.global.email" col="col-md-6" type="email"/>
 
-                    {{-- password_confirmation --}}
-                    <x-input.text required="true" name="password_confirmation" label="site.password_confirmation" col="col-md-6" type="password"/>
+                        {{-- password --}}
+                        <x-input.text required="true" name="password" label="auth.password" col="col-md-6" type="password"/>
 
-                    {{--roles--}}
-                    <x-input.option required="true" name="roles[]" invalid="roles" label="site.roles" :lists="$roles" :multiple="true" :value="old('roles')"/>
+                        {{-- password_confirmation --}}
+                        <x-input.text required="true" name="password_confirmation" label="auth.password_confirmation" col="col-md-6" type="password"/>
 
-                    {{--status--}}
-                    <x-input.checkbox :required="true" name="status" label="admin.global.status"/>
+                        {{--roles--}}
+                        <x-input.option required="true" name="roles[]" invalid="" label="menu.roles" :lists="$roles" :multiple="true" col="col-md-6" :value="old('roles')"/>
+
+                        {{--status--}}
+                        <x-input.checkbox :required="true" name="status" label="admin.global.status" col="col-md-6"/>
+
+                    </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('admin.global.create')</button>
                     </div>
 
                 </div><!-- end of tile -->
+
 
             </div><!-- end of col -->
 

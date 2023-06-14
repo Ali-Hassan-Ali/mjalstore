@@ -33,12 +33,12 @@ class CategoryRequest extends FormRequest
             
             $category = request()->route()->parameter('category');
 
-            $rules['name.' . app()->getLocale()] = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')->ignore($category?->id)];
+            $rules['name.' . getLanguages('default')->code] = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')->ignore($category?->id)];
             $rules['logo']                       = ['nullable','image'];
 
         } else {
 
-            $rules['name.' . app()->getLocale()] = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')];
+            $rules['name.' . getLanguages('default')->code] = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')];
             $rules['logo']                       = ['required','image'];
 
         } //end of if
@@ -46,6 +46,18 @@ class CategoryRequest extends FormRequest
         return $rules;
 
     }//end of rules
+
+    public function attributes(): array
+    {
+        $rules = [];
+
+        $rules['name.' . getLanguages('default')->code] = trans('admin.global.by', ['name' => trans('admin.global.name'), 'lang' => getLanguages('default')->name]);
+        $rules['logo']                                  = trans('admin.global.logo');
+        $rules['status']                                = trans('admin.global.status');
+
+        return $rules;
+
+    }//end of attributes
 
     protected function prepareForValidation()
     {

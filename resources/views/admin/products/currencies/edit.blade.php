@@ -1,7 +1,7 @@
 <x-admin.layout.app>
 
     <x-slot name="title">
-        {{ trans('site.edit') . ' - ' . trans('menu.currencies') }}
+        {{ trans('admin.global.edit') . ' - ' . trans('menu.currencies') }}
     </x-slot>
 
     <div>
@@ -9,10 +9,10 @@
     </div>
 
     <ul class="breadcrumb mt-2">
-        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('admin.global.home')</a></li>
         <li class="breadcrumb-item">@lang('menu.products')</li>
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.products.currencies.index') }}">@lang('menu.currencies')</a></li>
-        <li class="breadcrumb-item">@lang('site.edit')</li>
+        <li class="breadcrumb-item">@lang('admin.global.edit')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.products.currencies.update', $currency->id) }}" enctype="multipart/form-data">
@@ -41,7 +41,7 @@
 
                             {{--name--}}
                             <x-input.text required="{{ $loop->first ? true : false }}" 
-                                name="name[{{ $language->code }}]" label="site.name" 
+                                name="name[{{ $language->code }}]" label="admin.global.name" 
                                 :value="$currency->getTranslations('name')[$language->code] ?? ''"
                                 invalid="{{ 'name.' . $language->code }}" />
 
@@ -59,10 +59,10 @@
                 <div class="row">
 
                     {{--code--}}
-                    <x-input.text required="true" name="code" label="site.code" col="col-md" :value='$currency->code'/>
+                    <x-input.text required="true" name="code" label="admin.global.code" col="col-md" :value='$currency->code'/>
 
                     {{--flag--}}
-                    <x-input.text required="true" name="flag" label="site.flag" col="col-md" :value='$currency->flag'/>
+                    <x-input.text required="true" name="flag" label="admin.global.flag" col="col-md" :value='$currency->flag'/>
 
                 </div>
 
@@ -77,7 +77,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.edit')</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('admin.global.edit')</button>
                 </div>
 
             </div><!-- end of tile -->

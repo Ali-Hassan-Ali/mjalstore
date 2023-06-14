@@ -1,6 +1,6 @@
 <x-admin.layout.app>
     <x-slot name="title">
-        {{ trans('site.create') . ' ' . trans('menu.payment_methods') }}
+        {{ trans('admin.global.create') . ' ' . trans('menu.payment_methods') }}
     </x-slot>
 
     <div>
@@ -8,10 +8,10 @@
     </div>
 
     <ul class="breadcrumb mt-2">
-        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('admin.global.home')</a></li>
         <li class="breadcrumb-item">@lang('menu.footers')</li>
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.footers.payment_methods.index') }}">@lang('menu.payment_methods')</a></li>
-        <li class="breadcrumb-item">@lang('site.create')</li>
+        <li class="breadcrumb-item">@lang('admin.global.create')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.footers.payment_methods.store') }}" enctype="multipart/form-data">
@@ -24,7 +24,7 @@
 
                 <div class="tile shadow">
 
-                    @include('admin.dataTables.image_privew', ['name' => 'image', 'label' => 'image', 'required' => true])
+                    @include('admin.dataTables.image_privew', ['name' => 'image', 'label' => 'admin.global.image', 'required' => true])
 
                 </div><!-- end of tile -->
 
@@ -45,7 +45,7 @@
                 	</div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('admin.global.create')</button>
                     </div>
 
                 </div><!-- end of tile -->

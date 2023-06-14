@@ -1,7 +1,7 @@
 <x-admin.layout.app>
 
     <x-slot name="title">
-        {{ trans('site.create') . ' - ' . trans('menu.currencies') }}
+        {{ trans('admin.global.create') . ' - ' . trans('menu.currencies') }}
     </x-slot>
 
     <div>
@@ -9,10 +9,10 @@
     </div>
 
     <ul class="breadcrumb mt-2">
-        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('admin.global.home')</a></li>
         <li class="breadcrumb-item">@lang('menu.products')</li>
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.products.currencies.index') }}">@lang('menu.currencies')</a></li>
-        <li class="breadcrumb-item">@lang('site.create')</li>
+        <li class="breadcrumb-item">@lang('admin.global.create')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.products.currencies.store') }}" enctype="multipart/form-data">
@@ -40,7 +40,7 @@
                         <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $language->code }}" role="tabpanel" aria-labelledby="{{ $language->code }}-tab">
 
                             {{--name--}}
-                            <x-input.text required="{{ $loop->first ? true : false }}" name="name[{{ $language->code }}]" label="site.name" invalid="{{ 'name.' . $language->code }}" />
+                            <x-input.text required="{{ $loop->first ? true : false }}" name="name[{{ $language->code }}]" label="admin.global.name" invalid="{{ 'name.' . $language->code }}" />
 
                         </div>
                     @endforeach
@@ -56,10 +56,10 @@
 
                 <div class="row">
                     {{--code--}}
-                    <x-input.text required="true" name="code" label="site.code" col="col-md"/>
+                    <x-input.text required="true" name="code" label="admin.global.code" col="col-md"/>
 
                     {{--flag--}}
-                    <x-input.text required="true" name="flag" label="site.flag" col="col-md"/>
+                    <x-input.text required="true" name="flag" label="admin.global.flag" col="col-md"/>
 
                 </div>
 
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('admin.global.create')</button>
                 </div>
 
             </div><!-- end of tile -->

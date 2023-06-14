@@ -29,10 +29,10 @@ class PageController extends Controller
                 'route' => route('admin.footers.pages.data'),
                 'route_status' => route('admin.footers.pages.status'),
                 'header'  => [
-                    'site.title',
-                    'site.description',
-                    'site.admin',
-                    'site.status',
+                    'admin.global.title',
+                    'admin.global.description',
+                    'admin.global.admin',
+                    'admin.global.status',
                 ],
                 'columns' => [
                     'title'   => 'title',

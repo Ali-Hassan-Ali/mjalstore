@@ -37,23 +37,42 @@ class SubCategoryRequest extends FormRequest
             
             $subCategory = request()->route()->parameter('sub_category');
 
-            $rules['name.' . app()->getLocale()]        = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')->ignore($subCategory?->id)];
-            $rules['title_card.' . app()->getLocale()]  = ['required','string','min:2','max:255', UniqueTranslationRule::for('categories', 'title_card')->ignore($subCategory?->id)];
-            $rules['description.' . app()->getLocale()] = ['required','string','min:2','max:900'];
-            $rules['banner']                            = ['nullable','image'];
+            $rules['name.' . getLanguages('default')->code]        = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')->ignore($subCategory?->id)];
+            $rules['title_card.' . getLanguages('default')->code]  = ['required','string','min:2','max:255', UniqueTranslationRule::for('categories', 'title_card')->ignore($subCategory?->id)];
+            $rules['description.' . getLanguages('default')->code] = ['required','string','min:2','max:900'];
+            $rules['banner'] = ['nullable','image'];
 
         } else {
 
-            $rules['name.' . app()->getLocale()]        = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')];
-            $rules['title_card.' . app()->getLocale()]  = ['required','string','min:2','max:255', UniqueTranslationRule::for('categories', 'title_card')];
-            $rules['description.' . app()->getLocale()] = ['required','string','min:2','max:900'];
-            $rules['banner']                            = ['required','image'];
+            $rules['name.' . getLanguages('default')->code]        = ['required','string','min:2','max:15', UniqueTranslationRule::for('categories', 'name')];
+            $rules['title_card.' . getLanguages('default')->code]  = ['required','string','min:2','max:255', UniqueTranslationRule::for('categories', 'title_card')];
+            $rules['description.' . getLanguages('default')->code] = ['required','string','min:2','max:900'];
+            $rules['banner'] = ['required','image'];
 
         } //end of if
 
         return $rules;
 
     }//end of rules
+
+    public function attributes(): array
+    {
+        $rules = [
+            'status'     => trans('admin.global.status'),
+            'has_market' => trans('admin.sub_category.has_market'),
+            'parent_id'  => trans('menu.category'),
+            'color_1'    => trans('admin.sub_category.color_1'),
+            'color_2'    => trans('admin.sub_category.color_2'),
+            'banner'     => trans('admin.sub_category.banner'),
+        ];
+
+        $rules['name.' . getLanguages('default')->code] = trans('admin.global.by', ['name' => trans('admin.global.name'), 'lang' => getLanguages('default')->name]);
+        $rules['description.' . getLanguages('default')->code] = trans('admin.global.by', ['name' => trans('admin.global.description'), 'lang' => getLanguages('default')->name]);
+        $rules['title_card.' . getLanguages('default')->code] = trans('admin.global.by', ['name' => trans('admin.sub_category.title_card'), 'lang' => getLanguages('default')->name]);
+
+        return $rules;
+
+    }//end of attributes
 
     protected function prepareForValidation()
     {

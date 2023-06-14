@@ -49,6 +49,21 @@ class CurrencyRequest extends FormRequest
 
     }//end of rules
 
+    public function attributes(): array
+    {  
+        $rules = [
+            'status'  => trans('admin.global.status'),
+            'default' => trans('admin.global.default'),
+            'flag'    => trans('admin.global.flag'),
+            'code'    => trans('admin.global.code'),
+        ];
+
+        $rules['name.' . getLanguages('default')->code] = trans('admin.global.by', ['name' => trans('admin.global.name'), 'lang' => getLanguages('default')->name]);
+
+        return $rules;
+
+    }//end of attributes
+
     protected function prepareForValidation()
     {
         return request()->merge([

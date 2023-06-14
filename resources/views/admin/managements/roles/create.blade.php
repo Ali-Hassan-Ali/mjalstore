@@ -1,6 +1,6 @@
 <x-admin.layout.app>
     <x-slot name="title">
-        {{ trans('site.create') . ' ' . trans('menu.roles') }}
+        {{ trans('admin.global.create') . ' ' . trans('menu.roles') }}
     </x-slot>
 
     <div>
@@ -8,9 +8,9 @@
     </div>
 
     <ul class="breadcrumb mt-2">
-        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('admin.global.home')</a></li>
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.managements.roles.index') }}">@lang('menu.roles')</a></li>
-        <li class="breadcrumb-item">@lang('site.create')</li>
+        <li class="breadcrumb-item">@lang('admin.global.create')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.managements.roles.store') }}" enctype="multipart/form-data">
@@ -30,10 +30,9 @@
                         @include('partials._errors')
 
                         {{--name--}}
-                        {{--name--}}
-                        <x-input.text required="true" name="name" label="site.name"/>
+                        <x-input.text required="true" name="name" label="admin.global.name"/>
 
-                        <h5>@lang('roles.permissions') <span class="text-danger">*</span></h5>
+                        <h5>@lang('menu.permissions') <span class="text-danger">*</span></h5>
 
                         @php
                             $models = ['home', 'admins', 'roles', 'languages', 'settings', 'categories', 'sub_categories'];
@@ -42,20 +41,20 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>@lang('roles.model')</th>
-                                <th>@lang('roles.permissions')</th>
+                                <th>@lang('admin.global.model')</th>
+                                <th>@lang('menu.permissions')</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            @foreach ($models as $model)
+                            @foreach($models as $model)
                                 <tr>
                                     <td>@lang($model . '.' . $model)</td>
                                     <td>
                                         <div class="animated-checkbox mx-2" style="display:inline-block;">
                                             <label class="m-0">
                                                 <input type="checkbox" value="" name="" class="all-roles">
-                                                <span class="label-text">@lang('site.all')</span>
+                                                <span class="label-text">@lang('admin.global.all')</span>
                                             </label>
                                         </div>
 
@@ -64,7 +63,7 @@
                                             $permissionMaps = ['create','read','update','delete','status'];
                                         @endphp
 
-                                        @if ($model == 'statistics')
+                                        @if($model == 'statistics')
                                             @php
                                                 $permissionMaps = ['read'];
                                             @endphp
@@ -86,7 +85,7 @@
                         </table><!-- end of table -->
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('admin.global.create')</button>
                         </div>
 
                     </form><!-- end of form -->

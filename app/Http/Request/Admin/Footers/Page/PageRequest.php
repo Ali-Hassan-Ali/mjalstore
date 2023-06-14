@@ -50,6 +50,24 @@ class PageRequest extends FormRequest
 
     }//end of rules
 
+    public function attributes(): array
+    {
+        $rules = [
+            'slug'   => trans('admin.global.slug'),
+            'status' => trans('admin.global.status'),
+            'status' => trans('admin.global.status'),
+            'order'  => trans('admin.global.order'),
+        ];
+
+        $rules['title.' . getLanguages('default')->code] = trans('admin.global.by', ['name' => trans('admin.global.title'), 'lang' => getLanguages('default')->name]);
+        $rules['description_one.' . getLanguages('default')->code] = trans('admin.global.by', ['name' => trans('admin.footers.pages.description_one'), 'lang' => getLanguages('default')->name]);
+        $rules['description_tow.' . getLanguages('default')->code] = trans('admin.global.by', ['name' => trans('admin.footers.pages.description_tow'), 'lang' => getLanguages('default')->name]);
+
+        return $rules;
+
+    }//end of attributes
+
+
     protected function prepareForValidation()
     {
         return request()->merge([

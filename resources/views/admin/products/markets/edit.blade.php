@@ -1,6 +1,6 @@
 <x-admin.layout.app>
     <x-slot name="title">
-        {{ trans('site.edit') . ' ' . trans('menu.markets') }}
+        {{ trans('admin.global.edit') . ' ' . trans('menu.markets') }}
     </x-slot>
 
     <div>
@@ -8,10 +8,10 @@
     </div>
 
     <ul class="breadcrumb mt-2">
-        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('site.home')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.index') }}">@lang('admin.global.home')</a></li>
         <li class="breadcrumb-item">@lang('menu.products')</li>
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.products.markets.index') }}">@lang('menu.markets')</a></li>
-        <li class="breadcrumb-item">@lang('site.edit')</li>
+        <li class="breadcrumb-item">@lang('admin.global.edit')</li>
     </ul>
 
     <form method="post" action="{{ route('admin.products.markets.update', $market->id) }}" enctype="multipart/form-data">
@@ -24,7 +24,7 @@
 
                 <div class="tile shadow">
 
-                    @include('admin.dataTables.image_privew', ['name' => 'flag', 'imagepath' => $market->image_path, 'label' => 'flag'])
+                    @include('admin.dataTables.image_privew', ['name' => 'flag', 'imagepath' => $market->image_path, 'label' => 'admin.global.flag'])
 
                 </div><!-- end of tile -->
 
@@ -53,7 +53,7 @@
                                 {{--name--}}
                                 <x-input.text required="{{ $loop->first ? true : false }}" 
                                     name="name[{{ $language->code }}]" 
-                                    label="site.name" :value="$market->getTranslations('name')[$language->code] ?? ''"
+                                    label="admin.global.name" :value="$market->getTranslations('name')[$language->code] ?? ''"
                                     invalid="{{ 'name.' . $language->code }}" />
 
                             </div>
@@ -65,13 +65,13 @@
                 <div class="tile shadow">
 
                     {{--categories--}}
-                    <x-input.option required="true" name="sub_categories[]" label="site.sub_categories" :lists="$subCategories" multiple="true" :value="old('sub_categories', $market->subCategories->pluck('id')->toArray())"/>
+                    <x-input.option required="true" name="sub_categories[]" label="menu.sub_categories" :lists="$subCategories" multiple="true" :value="old('sub_categories', $market->subCategories->pluck('id')->toArray())"/>
 
                     {{--status--}}
                     <x-input.checkbox :required="true" name="status" label="admin.global.status" col="col-md" :value="$market->status"/>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.edit')</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('admin.global.edit')</button>
                     </div>
 
                 </div><!-- end of tile -->

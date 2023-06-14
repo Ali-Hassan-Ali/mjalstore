@@ -20,4 +20,12 @@ class StatusRequest extends FormRequest
 
     }//end of rules
 
+    public function attributes(): array
+    {
+        return [
+            'id' => trans('admin.global.item'),
+        ];        
+
+    }//end of attributes
+
 }//end of class
