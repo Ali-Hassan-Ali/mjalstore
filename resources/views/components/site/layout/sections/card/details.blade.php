@@ -16,9 +16,9 @@
                 <h2>{{ $subCategory->name }}</h2>
                 <p>{!! $subCategory->description !!}</p>
                 <div class="rate-line">
-                    @for($star=0; $star < 7; $star ++)
-                        <span class="zmdi zmdi-star {{ $card->rating <= $star ? 'checked' : '' }}"></span>
-                    @endfor
+                    @foreach([1,2,3,4,5,6,7] as $star)
+                        <span class="zmdi zmdi-star {{ $card->rating >= $star ? 'checked' : '' }}"></span>
+                    @endforeach
                 </div>
                 <ul class="option-card">
                     <li><a class="btn-site btn-shop"><img src="{{ asset('site_assets/images/shop-white.png') }}" /><span>اشتري الان</span></a></li>

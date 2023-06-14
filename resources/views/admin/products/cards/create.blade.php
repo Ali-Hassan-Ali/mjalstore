@@ -64,7 +64,7 @@
                         <x-input.text type="number" required="true" name="balance" label="admin.products.cards.balance" col="col-md-6"/>
 
                         {{--rating--}}
-                        <x-input.option required="true" name="rating" label="admin.products.cards.rating" :lists="[1,2,3,4,5,6,7]" :value="old('rating')" col="col-md-6"/>
+                        <x-input.option required="true" name="rating" label="admin.products.cards.rating" :lists="$ratings" :value="old('rating')" col="col-md-6"/>
 
                         {{--status--}}
                         <x-input.checkbox :required="true" name="status" label="admin.global.status" col="col-md"/>

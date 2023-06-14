@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Products;
 
 use App\Http\Controllers\Controller;
+use App\Enums\Admin\RatingCard;
 use App\Models\Card;
 use App\Models\Category;
 use App\Http\Request\Admin\Products\Card\CardRequest;
@@ -89,8 +90,9 @@ class CardController extends Controller
         }
 
         $categories = Category::category()->pluck('name', 'id');
+        $ratings    = RatingCard::array();
 
-        return view('admin.products.cards.create', compact('categories'));
+        return view('admin.products.cards.create', compact('categories', 'ratings'));
 
     }//end of create
 
@@ -115,8 +117,9 @@ class CardController extends Controller
         $categories    = Category::category()->pluck('name', 'id');
         $subCategories = Category::find($categoryId)?->subCategoriesRelation()->pluck('name', 'id');
         $markets       = old('market_id') ? Category::find($card?->category_id)->markets->pluck('name', 'id')->toArray() : [];
+        $ratings       = RatingCard::array();
 
-        return view('admin.products.cards.edit', compact('markets', 'subCategories', 'categories', 'categoryId', 'card'));
+        return view('admin.products.cards.edit', compact('markets', 'subCategories', 'categories', 'categoryId', 'ratings', 'card'));
 
     }//end of edit
 
