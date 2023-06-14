@@ -45,7 +45,7 @@
                 $('#title-card').text(data.titleCard);
                 $('#color').val(style);
 
-                if(data.items) {
+                if(data.has_market) {
 
                     $('#market_id-hidden').attr('hidden', false);
                     $('#market_id').empty('').attr('disabled', false).append(`<option selected disabled>Choose</option>`);

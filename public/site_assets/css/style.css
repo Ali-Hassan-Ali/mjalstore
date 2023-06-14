@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 
 @font-face {
   font-family: 'DIN-Next-Regular';
@@ -1030,7 +1030,7 @@ li.offers-m > a > span{
     margin-top: -400px;
 }
 .box-card {
-    background: linear-gradient(180deg, rgba(25,154,254,1) 0%, rgba(143,6,250,1) 100%);
+/*    background: linear-gradient(180deg, rgba(25,154,254,1) 0%, rgba(143,6,250,1) 100%);*/
     padding: 40px 20px 10px;
     border-radius: 20px;
     text-align: center;

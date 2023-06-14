@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\IndexController;
 use App\Http\Controllers\Site\ProductController;
+use App\Http\Controllers\Site\FastPurchaseController;
 use App\Http\Controllers\Site\FooterController;
 
 
@@ -22,6 +23,13 @@ Route::controller(ProductController::class)->group(function () {
         Route::get('sub_category/{sub_category:slug}/market/{market:slug}', 'market')->name('market');
         Route::get('sub_category/{sub_category:slug}/market/{market:slug}/card/{card:slug}', 'marketShowCard')->name('show.market.card');
         Route::get('sub_category/{sub_category:slug}/card/{card:slug}', 'show')->name('show.card');
+
+    });
+
+//product
+Route::controller(FastPurchaseController::class)->group(function () {
+
+        Route::get('fast_purchase', 'index')->name('fast_purchase.index');
 
     });
 

@@ -174,6 +174,7 @@ class CardController extends Controller
     {
         return response([
             'items'     => $subCategory->markets->pluck('name', 'id')->toArray(),
+            'has_market'=> $subCategory->has_market,
             'color1'    => $subCategory->color_1,
             'color2'    => $subCategory->color_2,
             'titleCard' => $subCategory->title_card,

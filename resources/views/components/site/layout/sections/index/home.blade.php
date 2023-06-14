@@ -5,7 +5,7 @@
                 <h2>تسوق بأمان</h2>
                 <span class="shape-site">مع مجال ستور</span>
                 <p>هذا نص تجريبي لاختبار شكل و حجم النصوص و طريقة عرضهاi في هذا المكان و حجم و لون الخطحيث يتم التحكم في هذا النص وامكانية تغييرة في اي وقت عن طريق ادارة الموقع . يتم اضافة</p>
-                <a class="btn-site" href=""><span>الشراء السريع</span></a>
+                <a class="btn-site" href="{{ route('site.fast_purchase.index') }}"><span>الشراء السريع</span></a>
             </div>
             <figure><img src="{{ asset('site_assets/images/slide-home.svg') }}"/></figure>
         </div>
