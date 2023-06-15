@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
 use App\Models\Category;
 use App\Models\market;
 use App\Models\Card;
 
 class ProductController extends Controller
 {
-    public function index(Category $subCategory)
+    public function index(Category $subCategory): View
     {
         $breadcrumb = ['#' => $subCategory->name];
 
@@ -17,7 +18,7 @@ class ProductController extends Controller
 
     }//end of index
 
-    public function market(Category $subCategory, market $market)
+    public function market(Category $subCategory, market $market): View
     {
         $breadcrumb = [route('site.sub_category', $subCategory->slug) => $subCategory->name, '#' => $market->name];
 
@@ -25,7 +26,7 @@ class ProductController extends Controller
 
     }//end of market
 
-    public function marketShowCard(Category $subCategory, market $market, Card $card)
+    public function marketShowCard(Category $subCategory, market $market, Card $card): View
     {
         $cards      = $subCategory->cards()->limit(4)->inRandomOrder()->get();
         $breadcrumb = [
@@ -38,7 +39,7 @@ class ProductController extends Controller
 
     }//end of marketShowCard
 
-    public function show(Category $subCategory, Card $card)
+    public function show(Category $subCategory, Card $card): View
     {
         $cards = $subCategory->cards()->limit(4)->inRandomOrder()->get();
 

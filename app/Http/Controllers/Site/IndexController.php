@@ -3,18 +3,20 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Language;
 use App\Models\Currency;
 
 class IndexController extends Controller
 {
-    public function index()
+    public function index(): View
     {
     	return view('site.index.index');
 
     }//end of index
 
-    public function changeLanguage(Language $language)
+    public function changeLanguage(Language $language): RedirectResponse
     {
         if (!in_array($language->code, Language::pluck('code')->toArray())) {
             abort(400);
@@ -27,7 +29,7 @@ class IndexController extends Controller
 
     }//end of changeLanguage
 
-    public function changeCurrency(Currency $currency)
+    public function changeCurrency(Currency $currency): RedirectResponse
     {
         if (!in_array($currency->code, Currency::pluck('code')->toArray())) {
             abort(400);
