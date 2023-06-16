@@ -31,6 +31,9 @@
         .swal-title:not(:first-child) {
             padding-bottom: 35px;
         }
+        .swal-footer {
+            text-align: center;
+        }
     </style>
     {{ $style ?? '' }}
 
@@ -79,6 +82,9 @@
         <x-site.layout.sections.auth.scripts/>
         <!--scriptsl-auth-->
     @endif
+    
+    <x-site.layout.sections.products.cart.script/>
+    <!--scriptsl-cart-->
 
     {{ $scripts ?? '' }}
 

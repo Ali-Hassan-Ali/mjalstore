@@ -233,11 +233,11 @@
             e.preventDefault();
 
             var n = new Noty({
-                text: "@lang('site.confirm_delete')",
+                text: "@lang('admin.global.confirm_delete')",
                 type: "alert",
                 killer: true,
                 buttons: [
-                    Noty.button("@lang('site.yes')", 'btn btn-success mr-2', function () {
+                    Noty.button("@lang('admin.global.yes')", 'btn btn-success mr-2', function () {
                         let url = that.closest('form').attr('action');
                         let data = new FormData(that.closest('form').get(0));
 
@@ -286,7 +286,7 @@
 
                     }),
 
-                    Noty.button("@lang('site.no')", 'btn btn-danger mr-2', function () {
+                    Noty.button("@lang('admin.global.no')", 'btn btn-danger mr-2', function () {
                         n.close();
                     })
                 ]

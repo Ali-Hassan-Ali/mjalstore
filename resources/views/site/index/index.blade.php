@@ -1,6 +1,6 @@
 <x-site.layout.app>
 
-<x-slot name="title">{{ trans('site.home') }}</x-slot>
+<x-slot name="title">{{ trans('site.global.home') }}</x-slot>
 
     
     <x-site.layout.sections.index.home/>

@@ -1,6 +1,6 @@
 @if(!empty($permissions['update']) && !empty($routeEdit))
     <a href="{{ $routeEdit }}" class="btn btn-warning btn-sm">
-        <i class="fa fa-edit"></i> @lang('site.edit')
+        <i class="fa fa-edit"></i> @lang('admin.global.edit')
     </a>
 @endif
 
@@ -9,6 +9,6 @@
         @csrf
         @method('delete')
 
-        <button type="submit" class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i> @lang('site.delete')</button>
+        <button type="submit" class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i> @lang('admin.global.delete')</button>
     </form>
 @endif

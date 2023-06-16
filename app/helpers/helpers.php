@@ -78,6 +78,9 @@ if (!function_exists('getCurrency')) {
     
     function getImageSetting($key)
     {
+        if ($key == 'websit_logo' && empty(getSetting($key))) {
+            return asset('site_assets/images/logo.svg');    
+        }
         return asset('storage/' . getSetting($key));
 
     }//en dof fun

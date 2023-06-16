@@ -9,11 +9,12 @@ use Illuminate\View\Component;
 class Card extends Component
 {
     public function __construct(
-        public $subCategory = '',
-        public $card        = '',
+        public $subCategory = [],
+        public $card        = [],
+        public $type        = 'card',
+        public $col         = '',
     ){
-        $this->subCategory = $subCategory;
-        $this->card        = $card;
+        $this->col = $type == 'card' ? 'col-md-3' : 'col-12';
 
     }//end of fun
 

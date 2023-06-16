@@ -16,7 +16,7 @@
                         @if($category->subCategoriesRelation)
                             <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                                 @foreach($category->subCategoriesRelation as $subCategory)
-                                    <li><a href="{{ route('site.sub_category', $subCategory->slug) }}">{{ $subCategory->name }}</a></li>
+                                    <li><a href="{{ route('site.products.sub_category', $subCategory->slug) }}">{{ $subCategory->name }}</a></li>
                                 @endforeach
                             </ul>
                         @endif
@@ -25,8 +25,8 @@
                 @endif
                 <li class="login-btn">
                     <img src="{{ asset('site_assets/images/icon-user.svg') }}" alt="{{ getTransSetting('websit_title', app()->getLocale()) }}"/>
-                    <a data-toggle="modal" data-target="#exampleModal">تسجيل الدخول</a>
-                    <a data-toggle="modal" data-target="#exampleModal">انشاء حساب</a>
+                    <a data-toggle="modal" data-target="#exampleModal">{{ trans('auth.sign_in') }}</a>
+                    <a data-toggle="modal" data-target="#exampleModal">{{ trans('auth.sign_up') }}</a>
                 </li>
             </ul>
         </div>
