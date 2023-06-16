@@ -1,5 +1,5 @@
 <li>
-    <a class="purchase-now">
+    <a href="{{ route('site.products.cart.add', $card->id) }}" class="purchase-now">
         <img src="{{ asset('site_assets/images/surface.svg') }}" />
         <span>{{ trans('site.products.carts.purchase_now') }}</span>
     </a>

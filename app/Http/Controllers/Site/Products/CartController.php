@@ -9,14 +9,32 @@ use App\Helpers\Cart;
 
 class CartController extends Controller
 {
+    public function cart()
+    {
+        $breadcrumb = ['#' => trans('site.products.carts.cart')];
+
+        return view('site.products.cart', compact('breadcrumb'));
+
+    }//end of fun cart page
+
     public function add(Card $card)
     {
-    	return response([
-            'item'     => Cart::add($card), 
-            'count'    => Cart::count(), 
-            'subtotal' => Cart::subtotal(), 
-            'message'  => __('admin.global.added_successfully')
-        ]);
+        if (request()->ajax()) {
+            
+        	return response([
+                'item'     => Cart::add($card), 
+                'count'    => Cart::count(), 
+                'subtotal' => Cart::subtotal(), 
+                'message'  => __('admin.global.added_successfully')
+            ]);
+
+        } else {
+
+            Cart::add($card);
+
+            return redirect()->route('site.products.cart.index');
+
+        }//end of if
 
     }//end of add
 

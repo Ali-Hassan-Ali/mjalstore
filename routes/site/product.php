@@ -7,9 +7,11 @@ use App\Http\Controllers\Site\Products\ProductController;
 
 //cart
 Route::controller(CartController::class)
-		->prefix('cart')->name('cart.')->group(function () {
+	->prefix('cart')->name('cart.')->group(function () {
 
-        Route::post('add/{card}', 'add')->name('add');
+        Route::get('/', 'cart')->name('index');
+        Route::get('purchase_now/{card}', 'add')->name('add.purchase_now');
+        Route::get('add/{card}', 'add')->name('add');
         Route::delete('delete/{card}', 'delete')->name('delete');
         Route::put('update', 'update')->name('update');
 

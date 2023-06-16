@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dd', function () {
-
+        dd(route('site.products.cart.index'));
         return session()->forget('cart_item');
         return session()->get('cart_item');
         if (session()->has('cart_item')) {
