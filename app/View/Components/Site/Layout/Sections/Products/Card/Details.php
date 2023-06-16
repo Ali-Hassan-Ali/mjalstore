@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Site\Layout\Sections\Card;
+namespace App\View\Components\Site\Layout\Sections\Products\Card;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -19,7 +19,7 @@ class Details extends Component
 
     public function render(): View | Closure | string
     {
-        return view('components.site.layout.sections.card.details');
+        return view('components.site.layout.sections.products.card.details');
 
     }//ebd of render
 

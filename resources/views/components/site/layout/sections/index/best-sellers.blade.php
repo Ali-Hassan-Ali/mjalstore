@@ -8,7 +8,7 @@
 
             @foreach($cards as $card)
                 <div class="item">
-                    <x-site.layout.sections.card.card type="items" :card="$card"/>
+                    <x-site.layout.sections.products.card.card type="items" :card="$card"/>
                     <!--card-->
                 </div>
             @endforeach

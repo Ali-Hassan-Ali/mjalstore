@@ -5,7 +5,7 @@
     <x-site.layout.includes.breadcrumb :breadcrumb="$breadcrumb"/>
     <!--breadcrumb-->
 
-	<x-site.layout.sections.card.details :sub-category="$subCategory" :card="$card"/>
+	<x-site.layout.sections.products.card.details :sub-category="$subCategory" :card="$card"/>
     <!--card details-->
 
     <section class="section_all_products">
@@ -16,7 +16,7 @@
             </div>
             <div class="row">
 				@foreach($cards as $card)
-					<x-site.layout.sections.card.card :sub-category="$subCategory" :card="$card"/>
+					<x-site.layout.sections.products.card.card :sub-category="$subCategory" :card="$card"/>
 					<!--card-->
 				@endforeach  
             </div>
