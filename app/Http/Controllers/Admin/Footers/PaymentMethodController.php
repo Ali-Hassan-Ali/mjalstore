@@ -71,9 +71,7 @@ class PaymentMethodController extends Controller
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
             ->addColumn('status', function(PaymentMethod $paymentMethod) use($permissions) {
-                if(!$paymentMethod->default) {
-                    return view('admin.dataTables.status', ['models' => $paymentMethod, 'permissions' => $permissions]);
-                }
+                return view('admin.dataTables.status', ['models' => $paymentMethod, 'permissions' => $permissions]);
             })
             ->rawColumns(['record_select', 'actions', 'status'])
             ->addIndexColumn()

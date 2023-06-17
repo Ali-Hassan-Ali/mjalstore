@@ -17,6 +17,7 @@ class Checkbox extends Component
         public $required = false,
         public $disabled = false,
         public $hidden   = false,
+        public $readonly = false,
     ){}
 
     

@@ -18,6 +18,7 @@ class Text extends Component
         public $required = false,
         public $disabled = false,
         public $hidden   = false,
+        public $readonly = false,
         public $invalid  = '',
     ){
         $this->id = str_replace('.', '-', !empty($invalid) ? $invalid : $name);

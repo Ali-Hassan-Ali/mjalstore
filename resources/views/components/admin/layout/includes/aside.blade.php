@@ -117,7 +117,7 @@
             </li>
         @endif
 
-        @if(permissionAdmin('read-pages') || permissionAdmin('read-payment_methods'))
+        @if(permissionAdmin('read-pages') || permissionAdmin('read-payment_methods') || permissionAdmin('read-contact_us'))
             {{-- footers --}}
             <li class="treeview {{ request()->is('*footers*') ? 'is-expanded' : '' }}">
                 <a class="app-menu__item" href="#" data-toggle="treeview">
@@ -126,18 +126,27 @@
                     <i class="treeview-indicator fa fa-angle-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    
+                    @if(permissionAdmin('read-pages'))
                     <li>
                         <a class="treeview-item {{ request()->is('*pages*') ? 'active' : '' }}" href="{{ route('admin.footers.pages.index') }}">
                             <i class="icon fa fa-circle"></i>@lang('menu.pages')
                         </a>
                     </li>
-
+                    @endif
+                    @if(permissionAdmin('read-payment_methods'))
                     <li>
                         <a class="treeview-item {{ request()->is('*payment_methods*') ? 'active' : '' }}" href="{{ route('admin.footers.payment_methods.index') }}">
                             <i class="icon fa fa-circle"></i>@lang('menu.payment_methods')
                         </a>
                     </li>
+                    @endif
+                    @if(permissionAdmin('read-contact_us'))
+                    <li>
+                        <a class="treeview-item {{ request()->is('*contact_us*') ? 'active' : '' }}" href="{{ route('admin.footers.contact_us.index') }}">
+                            <i class="icon fa fa-circle"></i>@lang('menu.contact_us')
+                        </a>
+                    </li>
+                    @endif
                     
                 </ul>
             </li>

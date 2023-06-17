@@ -18,6 +18,7 @@ class Textarea extends Component
         public $disabled = false,
         public $hidden   = false,
         public $ckeditor = false,
+        public $readonly = false,
         public $invalid  = '',
         public $rows     = '3',
     ){}

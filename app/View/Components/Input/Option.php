@@ -18,6 +18,7 @@ class Option extends Component
         public $disabled = false,
         public $hidden   = false,
         public $multiple = false,
+        public $readonly = false,
         public $invalid  = '',
         public $lists    = [],
     ){}

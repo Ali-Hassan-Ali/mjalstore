@@ -8,6 +8,7 @@ return array('global' =>
                 '1'           => '😊Yes',
                 '0'           => '😞No',
                 'by'          => ':name By :lang',
+                'back'        => 'Back', 
                 'admin'       => 'Admin', 
                 'items'       => 'Ttems', 
                 'name'        => 'name', 
@@ -78,6 +79,10 @@ return array('global' =>
                         'order'           => 'order',
                         'description_one' => 'Description One',
                         'description_tow' => 'Description Tow',
+                  ),
+                  'contact_us' => array(
+                        'subject'     => 'subject',
+                        'body'        => 'body',
                   ),
             ),
         );//manin

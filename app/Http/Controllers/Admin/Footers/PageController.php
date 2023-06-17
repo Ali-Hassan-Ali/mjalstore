@@ -69,9 +69,7 @@ class PageController extends Controller
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
             ->addColumn('status', function(Page $page) use($permissions) {
-                if(!$page->default) {
-                    return view('admin.dataTables.status', ['models' => $page, 'permissions' => $permissions]);
-                }
+                return view('admin.dataTables.status', ['models' => $page, 'permissions' => $permissions]);
             })
             ->rawColumns(['record_select', 'actions', 'status', 'description'])
             ->addIndexColumn()

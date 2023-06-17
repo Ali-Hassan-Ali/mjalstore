@@ -30,5 +30,6 @@ return [
     'footers'         => 'Footers',
     'pages'           => 'الصفحات',
     'payment_methods' => 'وسائل الدفع',
+    'contact_us'      => 'تواصل معنا',
 
 ];

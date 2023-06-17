@@ -30,5 +30,6 @@ return [
     'footers'         => 'Footers',
     'pages'           => 'Pages',
     'payment_methods' => 'Payment Methods',
+    'contact_us'      => 'Contact Us',
 
 ];

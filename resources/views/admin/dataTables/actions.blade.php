@@ -12,3 +12,9 @@
         <button type="submit" class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i> @lang('admin.global.delete')</button>
     </form>
 @endif
+
+@if(!empty($permissions['read']) && !empty($routeRead))
+    <a href="{{ $routeRead }}" class="btn btn-info btn-sm">
+        <i class="fa fa-eye"></i> @lang('admin.global.show')
+    </a>
+@endif
