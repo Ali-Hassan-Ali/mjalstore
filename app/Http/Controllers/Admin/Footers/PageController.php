@@ -27,7 +27,9 @@ class PageController extends Controller
         $datatables = (new DatatableServices())->header(
             [
                 'route' => route('admin.footers.pages.data'),
-                'route_status' => route('admin.footers.pages.status'),
+                'checkbox' => [
+                    'status' => route('admin.footers.pages.status'),
+                ],
                 'header'  => [
                     'admin.global.title',
                     'admin.global.description',
@@ -69,7 +71,7 @@ class PageController extends Controller
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
             ->addColumn('status', function(Page $page) use($permissions) {
-                return view('admin.dataTables.status', ['models' => $page, 'permissions' => $permissions]);
+                return view('admin.dataTables.checkbox', ['models' => $page, 'permissions' => $permissions, 'type' => 'status']);
             })
             ->rawColumns(['record_select', 'actions', 'status', 'description'])
             ->addIndexColumn()
@@ -92,7 +94,7 @@ class PageController extends Controller
     {
         Page::create(request()->all());
 
-        session()->flash('success', __('site.added_successfully'));
+        session()->flash('success', __('admin.global.added_successfully'));
         return redirect()->route('admin.footers.pages.index');
 
     }//end of store
@@ -111,7 +113,7 @@ class PageController extends Controller
     {
         $page->update(request()->all());
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->route('admin.footers.pages.index');
         
     }//end of update
@@ -120,8 +122,8 @@ class PageController extends Controller
     {
         $page->delete();
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of delete
 
@@ -129,8 +131,8 @@ class PageController extends Controller
     {
         Page::destroy(request()->ids ?? []);
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of bulkDelete
 
@@ -139,8 +141,8 @@ class PageController extends Controller
         $page = Page::find($request->id);
         $page->update(['status' => !$page->status]);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
+        return response(__('admin.global.updated_successfully'));
         
     }//end of status
 

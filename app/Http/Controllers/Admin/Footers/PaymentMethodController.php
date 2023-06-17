@@ -27,7 +27,9 @@ class PaymentMethodController extends Controller
         $datatables = (new DatatableServices())->header(
             [
                 'route' => route('admin.footers.payment_methods.data'),
-                'route_status' => route('admin.footers.payment_methods.status'),
+                'checkbox' => [
+                    'status' => route('admin.footers.payment_methods.status'),
+                ],
                 'header' => [
                     'admin.global.image',
                     'admin.global.admin',
@@ -71,7 +73,7 @@ class PaymentMethodController extends Controller
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
             ->addColumn('status', function(PaymentMethod $paymentMethod) use($permissions) {
-                return view('admin.dataTables.status', ['models' => $paymentMethod, 'permissions' => $permissions]);
+                return view('admin.dataTables.checkbox', ['models' => $paymentMethod, 'permissions' => $permissions, 'type' => 'status']);
             })
             ->rawColumns(['record_select', 'actions', 'status'])
             ->addIndexColumn()

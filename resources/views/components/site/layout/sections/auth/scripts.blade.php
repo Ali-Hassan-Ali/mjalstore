@@ -1,5 +1,32 @@
 <script type="text/javascript">
+
     $(document).ready(function () {
+
+        var input   = document.querySelector("#error-register-phone");
+        var myPhone = window.intlTelInput(input, {
+          // allowDropdown: false,
+          autoHideDialCode: false,
+          // autoPlaceholder: "off",
+          // dropdownContainer: document.body,
+          // excludeCountries: ["us"],
+          // formatOnDisplay: false,
+          // geoIpLookup: function(callback) {
+          //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+          //     var countryCode = (resp && resp.country) ? resp.country : "";
+          //     callback(countryCode);
+          //   });
+          // },
+          // hiddenInput: "full_number",
+          initialCountry: "sd",
+          // W`localizedCountries: { 'de': 'Deutschland' },
+          // nationalMode: false,
+          // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+          // placeholderNumberType: "MOBILE",
+          // preferredCountries: ['cn', 'jp'],
+          separateDialCode: true,
+          utilsScript: "{{ asset('site_assets/plugins/tel-input/js/utils.js') }}",
+        });
+
         $(document).on('click', '.model-auth', function (e) {
             e.preventDefault();
 
@@ -89,17 +116,25 @@
         $(document).on('submit', '#auth-register', function (e) {
             e.preventDefault();
 
+            $('#phone-code').val(myPhone.selectedCountryData.dialCode);
+            $('#country-name').val(myPhone.selectedCountryData.name);
+            $('#country-code').val(myPhone.selectedCountryData.iso2);
+
             let url    = $(this).attr('action');
             let method = $(this).attr('method');
-            let data   = $(this).serialize();
+            var data   = $(this).serialize();
             var items  = $(this).serializeArray();
 
             $.each(items, function(index, item) {
 
-                $('#error-register-' + item.name).removeClass('is-invalid');
-                $('#error-register-' + item.name).css('border', '1px solid #E3E3E3');
-                $('#error-register-' + item.name).css('background-image', 'url()');
-                $('#error-register-' + item.name + '-message').text('');
+                if (name != 'phone_country_code' || name != 'phone_code') {
+
+                    $('#error-register-' + item.name).removeClass('is-invalid');
+                    $('#error-register-' + item.name).css('border', '1px solid #E3E3E3');
+                    $('#error-register-' + item.name).css('background-image', 'url()');
+                    $('#error-register-' + item.name + '-message').text('');
+                }
+
 
             }); //end of each
 
@@ -127,10 +162,14 @@
 
                     $.each(data.responseJSON.errors, function(name, message) {
 
-                        $('#error-register-' + name).addClass('is-invalid');
-                        $('#error-register-' + name).css('border', '1px solid red');
-                        $('#error-register-' + name).css('background-image', 'url()');
-                        $('#error-register-' + name + '-message').text(message);
+                        if (name != 'phone_country_code' || name != 'phone_code') {
+
+                            $('#error-register-' + name).addClass('is-invalid');
+                            $('#error-register-' + name).css('border', '1px solid red');
+                            $('#error-register-' + name).css('background-image', 'url()');
+                            $('#error-register-' + name + '-message').text(message);
+                        }
+
 
                     }); //end of each
 

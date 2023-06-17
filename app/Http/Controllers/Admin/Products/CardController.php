@@ -28,7 +28,9 @@ class CardController extends Controller
         $datatables = (new DatatableServices())->header(
             [
                 'route' => route('admin.products.cards.data'),
-                'route_status' => route('admin.products.cards.status'),
+                'checkbox' => [
+                    'status' => route('admin.products.cards.status'),
+                ],
                 'header'  => [
                     'menu.sub_categories',
                     'menu.markets',
@@ -74,7 +76,7 @@ class CardController extends Controller
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
             ->addColumn('status', function(Card $card) use($permissions) {
-                return view('admin.dataTables.status', ['models' => $card, 'permissions' => $permissions]);
+                return view('admin.dataTables.checkbox', ['models' => $card, 'permissions' => $permissions, 'type' => 'status']);
             })
             ->addColumn('name', fn(Card $card) => $card->name ?? '')
             ->rawColumns(['record_select', 'actions', 'status'])
@@ -102,7 +104,7 @@ class CardController extends Controller
         $requestData['category_id'] = request()->sub_category;
         Card::create($requestData);
 
-        session()->flash('success', __('site.added_successfully'));
+        session()->flash('success', __('admin.global.added_successfully'));
         return redirect()->route('admin.products.cards.index');
 
     }//end of store
@@ -129,7 +131,7 @@ class CardController extends Controller
         $requestData['category_id'] = request()->sub_category;
         $card->update($requestData);
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->route('admin.products.cards.index');
 
     }//end of update
@@ -141,8 +143,8 @@ class CardController extends Controller
         }
         $card->delete();
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of delete
 
@@ -152,8 +154,8 @@ class CardController extends Controller
         Storage::disk('public')->delete($images) ?? '';
         Card::destroy(request()->ids ?? []);
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of bulkDelete
 
@@ -162,8 +164,8 @@ class CardController extends Controller
         $card = Card::find($request->id);
         $card->update(['status' => !$card->status]);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
+        return response(__('admin.global.updated_successfully'));
 
     }//end of status
 

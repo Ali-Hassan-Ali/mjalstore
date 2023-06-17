@@ -37,7 +37,7 @@ class FooterController extends Controller
         saveTransSetting('about_page_title', $request->about_page_title ?? '');
         saveTransSetting('about_page_description', $request->about_page_description ?? '');
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->back();
 
     }//end of store
@@ -86,7 +86,7 @@ class FooterController extends Controller
 
         }
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->back();
 
     }//end of store

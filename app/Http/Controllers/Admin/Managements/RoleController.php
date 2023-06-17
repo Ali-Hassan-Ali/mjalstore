@@ -91,7 +91,7 @@ class RoleController extends Controller
         $role = \Spatie\Permission\Models\Role::create($validated);
         $role->syncPermissions($request->permissions ?? []);
 
-        session()->flash('success', __('site.added_successfully'));
+        session()->flash('success', __('admin.global.added_successfully'));
         return redirect()->route('admin.managements.roles.index');
 
     }//end of store
@@ -115,7 +115,7 @@ class RoleController extends Controller
         $role->update($validated);
         $role->syncPermissions($request->permissions ?? []);
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->route('admin.managements.roles.index');
         
     }//end of update
@@ -128,8 +128,8 @@ class RoleController extends Controller
             $role->delete();
         }
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of delete
 
@@ -139,8 +139,8 @@ class RoleController extends Controller
         Storage::disk('public')->delete($images) ?? '';
         Role::where('default', 0)->destroy(request()->ids ?? []);
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of bulkDelete
 

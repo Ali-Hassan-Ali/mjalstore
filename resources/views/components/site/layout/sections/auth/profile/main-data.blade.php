@@ -14,29 +14,30 @@
             <span id="error-profile-main-image-message" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label><i class="fa fa-user"></i> {{ trans('site.profile.full_name') }}</label>
+            <label><i class="fa fa-user"></i> {{ trans('auth.name') }}</label>
             <input type="text" id="error-profile-main-name" name="name" class="form-control" value="{{ auth()->user()->name }}" />
             <span id="error-profile-main-name-message" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label><i class="fa fa-envelope"></i> {{ trans('site.profile.email') }}</label>
+            <label><i class="fa fa-envelope"></i> {{ trans('auth.email') }}</label>
             <input type="email" id="error-profile-main-email" name="email" class="form-control" value="{{ auth()->user()->email }}" />
             <span id="error-profile-main-email-message" class="text-danger"></span>
         </div>
-        <p>لتعديل الأسم أو بريدك الإلكتروني قم بفتح <strong>تذكرة دعم فني</strong></p>
+
         <div class="form-group">
-            <label><i class="fa fa-phone"></i> رقم الجوال</label>
-            <div class="flex20">
-                <input type="text" class="form-control" value="0595285462" />
-                <select>
-                    <option>970</option>
-                    <option style="background-image:url(images/saudi-arabia.png);">970</option>
-                    <option>970</option>
-                    <option>970</option>
-                </select>
-            </div>
+            <label><i class="fa fa-envelope"></i> {{ trans('auth.phone') }}</label>
+            <input type="tel" id="error-profile-main-phone" name="phone" class="form-control" value="{{ auth()->user()->phone }}" />
+            <input id="phone-code" name="phone_code" type="tel" hidden>
+            <input id="country-code" name="country_code" type="text" hidden>
+            <input id="country-name" name="country_name" type="text" hidden>
+            <span id="error-profile-main-phone-message" class="text-danger"></span>
         </div>
-        <button class="btn btn-primary">add</button>
+
+        <p>لتعديل الأسم أو بريدك الإلكتروني قم بفتح <strong>تذكرة دعم فني</strong></p>
+
+        <button class="btn-site btn-shop">
+            <span>{{ trans('admin.global.save') }}</span>
+        </button>
     </form>
     <div class="form-group"><strong>معلومات الأمن</strong></div>
     <div class="form-group">

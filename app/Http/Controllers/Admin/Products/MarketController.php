@@ -26,7 +26,9 @@ class MarketController extends Controller
         $datatables = (new DatatableServices())->header(
             [
                 'route' => route('admin.products.markets.data'),
-                'route_status' => route('admin.products.markets.status'),
+                'checkbox' => [
+                    'status' => route('admin.products.markets.status'),
+                ],
                 'header'  => [
                     'admin.global.name',
                     'admin.global.flag',
@@ -74,7 +76,7 @@ class MarketController extends Controller
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
             ->addColumn('status', function(Market $market) use($permissions) {
-                return view('admin.dataTables.status', ['models' => $market, 'permissions' => $permissions]);
+                return view('admin.dataTables.checkbox', ['models' => $market, 'permissions' => $permissions, 'type' => 'status']);
             })
             ->addColumn('name', fn(Market $market) => $market->name ?? '')
             ->rawColumns(['record_select', 'actions', 'status', 'name', 'flag'])
@@ -108,7 +110,7 @@ class MarketController extends Controller
         $market = Market::create($requestData);
         $market->subCategories()->sync($request->sub_categories);
 
-        session()->flash('success', __('site.added_successfully'));
+        session()->flash('success', __('admin.global.added_successfully'));
         return redirect()->route('admin.products.markets.index');
 
     }//end of store
@@ -138,7 +140,7 @@ class MarketController extends Controller
         $market->update($requestData);
         $market->subCategories()->sync($request->sub_categories);
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->route('admin.products.markets.index');
 
     }//end of update
@@ -148,8 +150,8 @@ class MarketController extends Controller
         $market->flag ? Storage::disk('public')->delete($market->flag) : '';
         $market->delete();
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of delete
 
@@ -159,8 +161,8 @@ class MarketController extends Controller
         count($images) > 0 ? Storage::disk('public')->delete($images) : '';
         Market::destroy(request()->ids ?? []);
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of bulkDelete
 
@@ -169,8 +171,8 @@ class MarketController extends Controller
         $market = Market::find($request->id);
         $market->update(['status' => !$market->status]);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
+        return response(__('admin.global.updated_successfully'));
 
     }//end of status
 

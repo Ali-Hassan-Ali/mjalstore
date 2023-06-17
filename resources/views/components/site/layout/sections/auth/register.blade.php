@@ -15,6 +15,9 @@
     <div class="form-group">
         <label><i class="fa fa-phone"></i> {{ trans('auth.phone') }}</label>
         <input type="number" class="form-control" name="phone" id="error-register-phone" placeholder="{{ trans('auth.phone') }}" />
+        <input id="phone-code" name="phone_code" type="tel" hidden>
+        <input id="country-code" name="country_code" type="text" hidden>
+        <input id="country-name" name="country_name" type="text" hidden>
         <span class="text-danger" id="error-register-phone-message"></span>
     </div>
     <div class="form-group">

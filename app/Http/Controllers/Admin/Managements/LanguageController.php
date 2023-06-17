@@ -28,7 +28,9 @@ class LanguageController extends Controller
         $datatables = (new DatatableServices())->header(
             [
                 'route' => route('admin.managements.languages.data'),
-                'route_status' => route('admin.managements.languages.status'),
+                'checkbox' => [
+                    'status' => route('admin.managements.languages.status'),
+                ],
                 'header'  => [
                     'admin.global.name',
                     'admin.managements.languages.dir',
@@ -81,7 +83,7 @@ class LanguageController extends Controller
             })
             ->addColumn('status', function(Language $language) use($permissions) {
                 if(!$language->default) {
-                    return view('admin.dataTables.status', ['models' => $language, 'permissions' => $permissions]);
+                    return view('admin.dataTables.checkbox', ['models' => $language, 'permissions' => $permissions, 'type' => 'status']);
                 }
             })
             ->addColumn('default', function(Language $language) {
@@ -118,7 +120,7 @@ class LanguageController extends Controller
 
         Language::create($requestData);
 
-        session()->flash('success', __('site.added_successfully'));
+        session()->flash('success', __('admin.global.added_successfully'));
         return redirect()->route('admin.managements.languages.index');
 
     }//end of store
@@ -149,7 +151,7 @@ class LanguageController extends Controller
 
         $language->update($requestData);
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->route('admin.managements.languages.index');
         
     }//end of update
@@ -162,8 +164,8 @@ class LanguageController extends Controller
             $language->delete();
         }
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of delete
 
@@ -173,8 +175,8 @@ class LanguageController extends Controller
         count($images) > 0 ? Storage::disk('public')->delete($images) : '';
         Language::destroy(request()->ids ?? []);
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of bulkDelete
 
@@ -183,8 +185,8 @@ class LanguageController extends Controller
         $language = Language::find($request->id);
         $language?->update(['status' => !$language->status]);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
+        return response(__('admin.global.updated_successfully'));
         
     }//end of status
 
@@ -193,8 +195,8 @@ class LanguageController extends Controller
         Language::each(fn ($language) => $language->update(['default' => 0]));
         Language::find($request->id)->update(['default' => 1, 'status' => 1]);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
+        return response(__('admin.global.updated_successfully'));
         
     }//end of status
 

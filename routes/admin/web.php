@@ -84,6 +84,7 @@ Route::middleware([
 
             Route::get('data', 'data')->name('data');
             Route::post('status', 'status')->name('status');
+            Route::post('has_market', 'hasMarket')->name('has_market');
             Route::delete('bulk_delete', 'bulkDelete')->name('bulk_delete');
 
         });

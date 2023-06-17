@@ -27,7 +27,7 @@ class MediaController extends Controller
         saveTransSetting('media_google_play', $request->media_google_play ?? '');
         saveTransSetting('media_apple_store', $request->media_apple_store ?? '');
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->back();
 
     }//end of index

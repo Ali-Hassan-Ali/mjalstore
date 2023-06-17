@@ -14,8 +14,37 @@
         readURL(this);
     });
 
+    var input   = document.querySelector("#error-profile-main-phone");
+    var myPhone = window.intlTelInput(input, {
+      // allowDropdown: false,
+      autoHideDialCode: false,
+      // autoPlaceholder: "off",
+      // dropdownContainer: document.body,
+      // excludeCountries: ["us"],
+      // formatOnDisplay: false,
+      // geoIpLookup: function(callback) {
+      //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+      //     var countryCode = (resp && resp.country) ? resp.country : "";
+      //     callback(countryCode);
+      //   });
+      // },
+      // hiddenInput: "full_number",
+      initialCountry: "{{ auth()->user()->country_code }}",
+      // W`localizedCountries: { 'de': 'Deutschland' },
+      // nationalMode: false,
+      // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+      // placeholderNumberType: "MOBILE",
+      // preferredCountries: ['cn', 'jp'],
+      separateDialCode: true,
+      utilsScript: "{{ asset('site_assets/plugins/tel-input/js/utils.js') }}",
+    });
+
     $(document).on('submit', '#profile-main', function (e) {
         e.preventDefault();
+
+        $('#phone-code').val(myPhone.selectedCountryData.dialCode);
+        $('#country-name').val(myPhone.selectedCountryData.name);
+        $('#country-code').val(myPhone.selectedCountryData.iso2);
 
         let url      = $(this).attr('action');
         let method   = $(this).attr('method');

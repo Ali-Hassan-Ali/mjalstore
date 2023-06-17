@@ -29,36 +29,46 @@
         Table.search(this.value).draw();
     })
 
-    if(datatable.route_status) {
+    $(document).on('change', '.checkbox', function (e) {
+        e.preventDefault();
 
-        $(document).on('change', '.status', function (e) {
-            e.preventDefault();
+        let type   = $(this).data('type');
+        let url    = datatable.checkbox[type];
+        let method = 'post';
+        let id     = $(this).data('id');
 
-            let url    = datatable.route_status;
-            let method = 'post';
-            let id     = $(this).data('id');
+        $.ajax({
+            url: url,
+            data: {id: id},
+            method: method,
+            success: function (response) {
 
-            $.ajax({
-                url: url,
-                data: {id: id},
-                method: method,
-                success: function (response) {
+                $('.datatable').DataTable().ajax.reload();
 
-                    $('.datatable').DataTable().ajax.reload();
+                new Noty({
+                    layout: 'topRight',
+                    type: 'alert',
+                    text: response,
+                    killer: true,
+                    timeout: 2000,
+                }).show();
 
-                    new Noty({
-                        layout: 'topRight',
-                        type: 'alert',
-                        text: response,
-                        killer: true,
-                        timeout: 2000,
-                    }).show();
-                },
+            },error: function (response) {
 
-            });//end of ajax call
+                    data = response.responseJSON.message;
 
-        });//end of delete
+                    swal({
+                        title: data + '😥',
+                        type: 'error',
+                        icon: 'error',
+                        buttons: false,
+                        timer: 15000
+                    }); //end of swal
 
-    }//end of check route status
+                }, //end of error - success
+
+        });//end of ajax call
+
+    });//end of delete
 
 </script>

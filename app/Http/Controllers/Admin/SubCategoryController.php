@@ -25,8 +25,11 @@ class SubCategoryController extends Controller
 
         $datatables = (new DatatableServices())->header(
             [
-                'route' => route('admin.sub_categories.data'),
-                'route_status' => route('admin.sub_categories.status'),
+                'route'    => route('admin.sub_categories.data'),
+                'checkbox' => [
+                    'status'     => route('admin.sub_categories.status'),
+                    'has_market' => route('admin.sub_categories.has_market'),
+                ],
                 'header'  => [
                     'admin.global.name',
                     'menu.categories',
@@ -58,28 +61,28 @@ class SubCategoryController extends Controller
             'delete' => permissionAdmin('delete-sub_categories'),
         ];
         
-        $category = Category::subCategory();
+        $subCategory = Category::subCategory();
 
-        return dataTables()->of($category)
+        return dataTables()->of($subCategory)
             ->addColumn('record_select', 'admin.dataTables.record_select')
-            ->addColumn('created_at', fn(Category $category) => $category->created_at->format('Y-m-d'))
-            ->addColumn('admin', fn(Category $category) => $category?->admin?->name)
-            ->addColumn('category', fn(Category $category) => $category?->categoryRelation?->name)
-            ->editColumn('banner', function(Category $category) {
-                return view('admin.dataTables.image', ['models' => $category]);
+            ->addColumn('created_at', fn(Category $subCategory) => $subCategory->created_at->format('Y-m-d'))
+            ->addColumn('admin', fn(Category $subCategory) => $subCategory?->admin?->name)
+            ->addColumn('category', fn(Category $subCategory) => $subCategory?->categoryRelation?->name)
+            ->editColumn('banner', function(Category $subCategory) {
+                return view('admin.dataTables.image', ['models' => $subCategory]);
             })
-            ->addColumn('actions', function(Category $category) use($permissions) {
-                $routeEdit   = route('admin.sub_categories.edit', $category->id);
-                $routeDelete = route('admin.sub_categories.destroy', $category->id);
+            ->addColumn('actions', function(Category $subCategory) use($permissions) {
+                $routeEdit   = route('admin.sub_categories.edit', $subCategory->id);
+                $routeDelete = route('admin.sub_categories.destroy', $subCategory->id);
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
-            ->addColumn('status', function(Category $category) use($permissions) {
-                return view('admin.dataTables.status', ['models' => $category, 'permissions' => $permissions]);
+            ->addColumn('status', function(Category $subCategory) use($permissions) {
+                return view('admin.dataTables.checkbox', ['models' => $subCategory, 'permissions' => $permissions, 'type' => 'status']);
             })
-            ->addColumn('has_market', function(Category $category) use($permissions) {
-                return view('admin.dataTables.status', ['models' => $category, 'permissions' => $permissions]);
+            ->addColumn('has_market', function(Category $subCategory) use($permissions) {
+                return view('admin.dataTables.checkbox', ['models' => $subCategory, 'permissions' => $permissions, 'type' => 'has_market']);
             })
-            ->addColumn('name', fn(Category $category) => $category->name ?? '')
+            ->addColumn('name', fn(Category $subCategory) => $subCategory->name ?? '')
             ->rawColumns(['record_select', 'actions', 'status', 'has_market', 'name', 'banner'])
             ->addIndexColumn()
             ->toJson();
@@ -137,6 +140,7 @@ class SubCategoryController extends Controller
             $requestData['banner'] = request()->file('banner')->store('sub_categories', 'public');
 
         }
+        $requestData['has_market'] = $subCategory->cards->count() ? $subCategory->has_market : request()->has_market;
         $subCategory->update($requestData);
 
         session()->flash('success', __('admin.global.updated_successfully'));
@@ -169,6 +173,16 @@ class SubCategoryController extends Controller
     {
         $subCategory = Category::find($request->id);
         $subCategory->update(['status' => !$subCategory->status]);
+
+        session()->flash('success', __('admin.global.updated_successfully'));
+        return response(__('admin.global.updated_successfully'));
+
+    }//end of status
+
+    public function hasMarket(StatusRequest $request): Application | Response | ResponseFactory
+    {
+        $subCategory = Category::find($request->id);
+        $subCategory->update(['has_market' => !$subCategory->has_market]);
 
         session()->flash('success', __('admin.global.updated_successfully'));
         return response(__('admin.global.updated_successfully'));

@@ -8,6 +8,7 @@ return array('global' =>
                 '1'           => '😊Yes',
                 '0'           => '😞No',
                 'by'          => ':name By :lang',
+                'save'        => 'Save', 
                 'back'        => 'Back', 
                 'admin'       => 'Admin', 
                 'items'       => 'Ttems', 

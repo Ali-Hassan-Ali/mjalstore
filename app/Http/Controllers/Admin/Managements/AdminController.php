@@ -28,7 +28,9 @@ class AdminController extends Controller
         $datatables = (new DatatableServices())->header(
             [
                 'route' => route('admin.managements.admins.data'),
-                'route_status' => route('admin.managements.admins.status'),
+                'checkbox' => [
+                    'status' => route('admin.managements.admins.status'),
+                ],
                 'header'  => [
                     'admin.global.name',
                     'admin.global.email',
@@ -76,7 +78,7 @@ class AdminController extends Controller
             })
             ->addColumn('status', function(Admin $admin) use($permissions) {
                 if(!$admin->default) {
-                    return view('admin.dataTables.status', ['models' => $admin, 'permissions' => $permissions]);
+                    return view('admin.dataTables.checkbox', ['models' => $admin, 'permissions' => $permissions, 'type' => 'status']);
                 }
             })
             ->rawColumns(['record_select', 'actions', 'status', 'roles'])
@@ -120,7 +122,7 @@ class AdminController extends Controller
             $admin->assignRole(request()->roles);
         }
 
-        session()->flash('success', __('site.added_successfully'));
+        session()->flash('success', __('admin.global.added_successfully'));
         return redirect()->route('admin.managements.admins.index');
 
     }//end of store
@@ -161,7 +163,7 @@ class AdminController extends Controller
             $admin->update(['password' => bcrypt(request()->password)]);
         }
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->route('admin.managements.admins.index');
         
     }//end of update
@@ -171,8 +173,8 @@ class AdminController extends Controller
         $admin->image ? Storage::disk('public')->delete($admin->image) : '';
         $admin->delete();
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of delete
 
@@ -182,8 +184,8 @@ class AdminController extends Controller
         count($images) > 0 ? Storage::disk('public')->delete($images) : '';
         Admin::destroy(request()->ids ?? []);
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of bulkDelete
 
@@ -192,8 +194,8 @@ class AdminController extends Controller
         $admin = Admin::find($request->id);
         $admin->update(['status' => !$admin->status]);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
+        return response(__('admin.global.updated_successfully'));
         
     }//end of status
 

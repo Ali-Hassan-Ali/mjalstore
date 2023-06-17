@@ -41,7 +41,7 @@ class WebsitController extends Controller
             saveSetting('websit_logo', $logo);
         }
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->back();
 
     }//end of index

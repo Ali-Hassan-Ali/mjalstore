@@ -25,7 +25,9 @@ class CategoryController extends Controller
         $datatables = (new DatatableServices())->header(
             [
                 'route' => route('admin.categories.data'),
-                'route_status' => route('admin.categories.status'),
+                'checkbox' => [
+                    'status' => route('admin.categories.status'),
+                ],
                 'header'  => [
                     'admin.global.name',
                     'admin.global.logo',
@@ -68,7 +70,7 @@ class CategoryController extends Controller
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete'));
             })
             ->addColumn('status', function(Category $category) use($permissions) {
-                return view('admin.dataTables.status', ['models' => $category, 'permissions' => $permissions]);
+                return view('admin.dataTables.checkbox', ['models' => $category, 'permissions' => $permissions, 'type' => 'status']);
             })
             ->addColumn('name', fn(Category $category) => $category->name ?? '')
             ->rawColumns(['record_select', 'actions', 'status', 'name', 'logo'])

@@ -26,7 +26,9 @@ class CurrencyController extends Controller
         $datatables = (new DatatableServices())->header(
             [
                 'route' => route('admin.products.currencies.data'),
-                'route_status' => route('admin.products.currencies.status'),
+                'checkbox' => [
+                    'status' => route('admin.products.currencies.status'),
+                ],
                 'header'  => [
                     'admin.global.name',
                     'admin.global.code',
@@ -75,7 +77,7 @@ class CurrencyController extends Controller
             })
             ->addColumn('status', function(Currency $currency) use($permissions) {
                 if(!$currency->default) {
-                    return view('admin.dataTables.status', ['models' => $currency, 'permissions' => $permissions]);
+                    return view('admin.dataTables.checkbox', ['models' => $currency, 'permissions' => $permissions, 'type' => 'status']);
                 }
             })
             ->addColumn('default', function(Currency $currency) {
@@ -102,7 +104,7 @@ class CurrencyController extends Controller
     {
         Currency::create(request()->all());
 
-        session()->flash('success', __('site.added_successfully'));
+        session()->flash('success', __('admin.global.added_successfully'));
         return redirect()->route('admin.products.currencies.index');
 
     }//end of store
@@ -121,7 +123,7 @@ class CurrencyController extends Controller
     {
         $currency->update(request()->all());
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->route('admin.products.currencies.index');
         
     }//end of update
@@ -134,8 +136,8 @@ class CurrencyController extends Controller
             $currency->delete();
         }
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of delete
 
@@ -145,8 +147,8 @@ class CurrencyController extends Controller
         // Storage::disk('public')->delete($images) ?? '';
         Currency::destroy(request()->ids ?? []);
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of bulkDelete
 
@@ -155,8 +157,8 @@ class CurrencyController extends Controller
         $currency = Currency::find($request->id);
         $currency?->update(['status' => !$currency->status]);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
+        return response(__('admin.global.updated_successfully'));
         
     }//end of status
 
@@ -165,8 +167,8 @@ class CurrencyController extends Controller
         Currency::each(fn ($currency) => $currency->update(['default' => 0]));
         Currency::find($request->id)->update(['default' => 1, 'status' => 1]);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
+        return response(__('admin.global.updated_successfully'));
         
     }//end of status
 

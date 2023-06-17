@@ -13,11 +13,13 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $fillable = ['name', 'username', 'email','password', 'image', 'phone'];
+    protected $fillable = ['name', 'username', 'email', 'email_verified_at',
+                            'password', 'image', 'phone', 'phone_code', 'country_code',
+                            'phone_verified_at', 'country_name', 'provider', 'provider_id'];
 
     protected $hidden   = ['password','remember_token'];
 
-    protected $casts    = ['email_verified_at' => 'datetime'];
+    protected $casts    = ['email_verified_at' => 'datetime', 'phone_verified_at' => 'datetime'];
 
     protected function imagePath(): Attribute
     {
@@ -26,5 +28,13 @@ class User extends Authenticatable
         );
 
     }//end of get ImagePath Attribute
+
+    protected function FullPhone(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->phone_code . $this->phone,
+        );
+
+    }//end of get FullPhone Attribute
 
 }//end of model

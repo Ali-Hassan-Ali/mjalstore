@@ -26,7 +26,9 @@ class ContactUsController extends Controller
         $datatables = (new DatatableServices())->header(
             [
                 'route' 	   => route('admin.footers.contact_us.data'),
-                'route_status' => route('admin.footers.contact_us.status'),
+                'checkbox' => [
+                    'status' => route('admin.footers.contact_us.status'),
+                ],
                 'header'  => [
                     'admin.global.name',
                     'admin.global.email',
@@ -69,7 +71,7 @@ class ContactUsController extends Controller
                 return view('admin.dataTables.actions', compact('permissions', 'routeEdit', 'routeDelete', 'routeRead'));
             })
             ->addColumn('status', function(ContactUs $contactU) use($permissions) {
-                return view('admin.dataTables.status', ['models' => $contactU, 'permissions' => $permissions]);
+                return view('admin.dataTables.checkbox', ['models' => $contactU, 'permissions' => $permissions, 'type' => 'status']);
             })
             ->rawColumns(['record_select', 'actions', 'status', 'description'])
             ->addIndexColumn()
@@ -91,8 +93,8 @@ class ContactUsController extends Controller
     {
         $contactU->delete();
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of delete
 
@@ -100,8 +102,8 @@ class ContactUsController extends Controller
     {
         ContactUs::destroy(request()->ids ?? []);
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('admin.global.deleted_successfully'));
+        return response(__('admin.global.deleted_successfully'));
 
     }//end of bulkDelete
 
@@ -110,8 +112,8 @@ class ContactUsController extends Controller
         $contactU = ContactUs::find($request->id);
         $contactU->update(['status' => !$contactU->status]);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return response(__('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
+        return response(__('admin.global.updated_successfully'));
         
     }//end of status
 

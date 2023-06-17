@@ -27,6 +27,9 @@
     {{-- sweetalert2 --}}
     <link href="{{ asset('site_assets/plugins/sweetalert/sweetalert2.min.css') }}" rel="stylesheet">
 
+    {{-- plugin  tel-input css--}}
+    <link rel="stylesheet" href="{{ asset('site_assets/plugins/tel-input/css/intlTelInput.css') }}">
+
     <style type="text/css">
         .swal-title:not(:first-child) {
             padding-bottom: 35px;
@@ -66,8 +69,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
     <script src="{{ asset('site_assets/js/wow.js') }}"></script>
     <script src="{{ asset('site_assets/js/script.js') }}"></script>
-    <script src="{{ asset('site_assets/plugins/sweetalert/sweetalert2.all.min.js') }}"></script>
     {{-- sweetalert2 --}}
+    <script src="{{ asset('site_assets/plugins/sweetalert/sweetalert2.all.min.js') }}"></script>
+    {{-- plugins tel-input js--}}
+    <script src="{{ asset('site_assets/plugins/tel-input/js/intlTelInput.js') }}"></script>
     
     <script>
         $.ajaxSetup({
@@ -89,4 +94,4 @@
     {{ $scripts ?? '' }}
 
 </body>
-</html> 
+</html>

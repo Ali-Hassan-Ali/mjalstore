@@ -25,7 +25,7 @@ class ContactController extends Controller
         saveTransSetting('contact_address', $request->contact_address ?? '');
         saveTransSetting('contact_address_link', $request->contact_address_link ?? '');
 
-        session()->flash('success', __('site.updated_successfully'));
+        session()->flash('success', __('admin.global.updated_successfully'));
         return redirect()->back();
 
     }//end of index
