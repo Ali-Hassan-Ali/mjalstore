@@ -2,6 +2,8 @@
 
     $(document).ready(function () {
 
+        var choose = "{{ trans('admin.global.choose') }}";
+
         $(document).on('change', '#categories', function (e) {
             e.preventDefault();
 
@@ -15,6 +17,8 @@
                 
                 $('#sub_categories-hidden').attr('hidden', false);
                 $('#sub_categories').attr('disabled', false).empty('');
+
+                $('#sub_categories').append(`<option selected disabled value="">${choose}</option>`);
 
                 $.each(subCategoriesGroupBy[id], function(index, item) {
                     
@@ -59,6 +63,8 @@
 
                 $('.nav-market').attr('hidden', false);
 
+                $('#market_id').append(`<option selected disabled value="">${choose}</option>`);
+
                 $.each(subCategories[id][0].markets, function(index, item) {
                     
                     $('#market_id').append(`<option value="${item.id}">${item.name[lang]}</option>`);
@@ -75,6 +81,8 @@
                 $('#card_id').attr('disabled', false).empty();
 
                 $('.nav-market').attr('hidden', true);
+
+                $('#card_id').append(`<option selected disabled value="">${choose}</option>`);
 
                 $.each(cardsCategory[id], function(index, item) {
                     
@@ -103,7 +111,9 @@
 
                 $('#card_id-hidden').attr('hidden', false);
                 $('#card_id').attr('disabled', false).empty();
-                console.log(cards[id]);
+
+                $('#card_id').append(`<option selected disabled value="">${choose}</option>`);
+
                 $.each(cards[id], function(index, item) {
                     
                     $('#card_id').append(`<option value="${item.id}">${item.price}</option>`);
@@ -129,9 +139,50 @@
 
             $('.card-price').text(price);
 
-            $('#btn-next').attr('hidden', false);
+            $('#btn-next').attr('hidden', false).attr('disabled', false);
 
             $('.nav-card').addClass('puchDone');
+
+        });//end of change market_id
+
+        $(document).on('click', '#btn-next', function (e) {
+            e.preventDefault();
+
+            let id     = $('#card_id').find(':selected').val();
+            let url    = `/cart/add/${id}`; 
+            let method = 'get';
+
+            $.ajax({
+                url: url,
+                method: method,
+                success: function (cart) {
+
+                    swal({
+                        title: cart.message,
+                        type: 'success',
+                        icon: 'success',
+                        buttons: false,
+                        timer: 15000
+                    }); //end of swal
+
+                    location.reload();
+
+                },
+                error: function (response) {
+
+                    data = response.responseJSON.message;
+
+                    swal({
+                        title: data + '😥',
+                        type: 'error',
+                        icon: 'error',
+                        buttons: false,
+                        timer: 15000
+                    }); //end of swal
+
+                }, //end of success
+                
+            });//end of ajax
 
         });//end of change market_id
 

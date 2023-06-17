@@ -2,7 +2,8 @@
 
 return array('global' => 
             array(
-                'home'        => 'Home', 
+                'home'          => 'Home', 
+                'fast_purchase' => 'Fast Purchase', 
             ),
             'products' => array(
                   'carts' => array(

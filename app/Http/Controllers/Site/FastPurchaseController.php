@@ -11,7 +11,7 @@ class FastPurchaseController extends Controller
 {
     public function index(): View
     {
-    	$breadcrumb = ['#' => trans('site.fast_purchase')];
+    	$breadcrumb = ['#' => trans('site.global.fast_purchase')];
 
     	return view('site.index.fast_purchase', compact('breadcrumb'));
 

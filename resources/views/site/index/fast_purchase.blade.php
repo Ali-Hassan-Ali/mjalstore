@@ -1,6 +1,6 @@
 <x-site.layout.app>
 
-<x-slot name="title">{{ trans('site.fast_purchase') }}</x-slot>
+<x-slot name="title">{{ trans('site.global.fast_purchase') }}</x-slot>
 
     
     <x-site.layout.includes.breadcrumb :breadcrumb="$breadcrumb"/>

@@ -2,7 +2,8 @@
 
 return array('global' => 
             array(
-                'home'        => 'الرئسية', 
+                'home'          => 'الرئسية', 
+                'fast_purchase' => 'الشرا السريع', 
             ),
             'products' => array(
                   'carts' => array(
