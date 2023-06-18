@@ -84,7 +84,7 @@
     </form><!-- end of form -->
 
     <x-slot name="scripts">
-        @include('admin.products.cards.components.scripts')
+        @include('admin.products.cards.components.scripts', ['card' => []])
     </x-slot>
 
 </x-admin.layout.app>

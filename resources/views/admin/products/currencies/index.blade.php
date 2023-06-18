@@ -74,35 +74,6 @@
     </div><!-- end of row -->
 
     <x-slot name="scripts">
-        <script>
-            $(document).on('change', '.default', function (e) {
-                e.preventDefault();
-
-                let url    = "{{ route('admin.products.currencies.default') }}";
-                let method = 'post';
-                let id     = $(this).data('id');
-
-                $.ajax({
-                    url: url,
-                    data: {id: id},
-                    method: method,
-                    success: function (response) {
-
-                        $('.datatable').DataTable().ajax.reload();
-
-                        new Noty({
-                            layout: 'topRight',
-                            type: 'alert',
-                            text: response,
-                            killer: true,
-                            timeout: 2000,
-                        }).show();
-                    },
-
-                });//end of ajax call
-
-            });//end of delete
-        </script>
         <x-admin.datatable.script :datatables='$datatables'/>
     </x-slot>
 

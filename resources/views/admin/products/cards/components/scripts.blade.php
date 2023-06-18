@@ -103,11 +103,11 @@
 
     }//end of if
 
-    if("{{ old('market_id') }}") {
+    if("{{ old('market_id', !empty($card) ? $card?->market_id : '') }}") {
 
         let subCategoryMarkets = @json($subCategoryMarkets);
-        let subCategoryId      = "{{ old('sub_category') }}";
-        let MarketsId          = "{{ old('market_id') }}";
+        let subCategoryId      = "{{ old('sub_category', !empty($card) ? $card?->category_id : '') }}";
+        let MarketsId          = "{{ old('market_id', !empty($card) ? $card?->market_id : '') }}";
         let lang               = "{{ app()->getLocale() }}";
 
         if(subCategoryMarkets[subCategoryId][0]['markets'].length) {
@@ -123,9 +123,15 @@
 
             });//end of each
 
+        } else {
+
+            $('#market_id-hidden').attr('hidden', true);
+            $('#market_id').empty('').attr('disabled', true).append(`<option selected disabled>Choose</option>`);
+
+
         }//end of check markets
 
-    }//end of if
+    } //end of if
 
 
     if($('#sub_category').find(':selected').text()) {

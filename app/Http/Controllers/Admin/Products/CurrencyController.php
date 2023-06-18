@@ -28,6 +28,7 @@ class CurrencyController extends Controller
                 'route' => route('admin.products.currencies.data'),
                 'checkbox' => [
                     'status' => route('admin.products.currencies.status'),
+                    'default'=> route('admin.products.currencies.default'),
                 ],
                 'header'  => [
                     'admin.global.name',
@@ -80,8 +81,10 @@ class CurrencyController extends Controller
                     return view('admin.dataTables.checkbox', ['models' => $currency, 'permissions' => $permissions, 'type' => 'status']);
                 }
             })
-            ->addColumn('default', function(Currency $currency) {
-                return view('admin.products.currencies.data_tables.check_default', compact('currency'));
+            ->addColumn('default', function(Currency $currency) use($permissions) {
+                if(!$currency->default) {
+                    return view('admin.dataTables.checkbox', ['models' => $currency, 'permissions' => $permissions, 'type' => 'default']);
+                }
             })
             ->rawColumns(['record_select', 'actions', 'status'])
             ->addIndexColumn()
@@ -170,6 +173,6 @@ class CurrencyController extends Controller
         session()->flash('success', __('admin.global.updated_successfully'));
         return response(__('admin.global.updated_successfully'));
         
-    }//end of status
+    }//end of changeDefault
 
 }//end of controller
