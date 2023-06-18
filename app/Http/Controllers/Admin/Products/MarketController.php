@@ -148,6 +148,7 @@ class MarketController extends Controller
     public function destroy(Market $market): Application | Response | ResponseFactory
     {
         $market->flag ? Storage::disk('public')->delete($market->flag) : '';
+        $market->cards()?->delete();
         $market->delete();
 
         session()->flash('success', __('admin.global.deleted_successfully'));
@@ -159,6 +160,7 @@ class MarketController extends Controller
     {
         $images = Market::find(request()->ids ?? [])->whereNotNull('flag')->pluck('flag')->toArray();
         count($images) > 0 ? Storage::disk('public')->delete($images) : '';
+        Market::find(request()->ids ?? [])?->with('cards')->each(fn ($market) => $market->cards()?->delete());
         Market::destroy(request()->ids ?? []);
 
         session()->flash('success', __('admin.global.deleted_successfully'));
@@ -168,7 +170,7 @@ class MarketController extends Controller
 
     public function status(StatusRequest $request): Application | Response | ResponseFactory
     {
-        $market = Market::find($request->id);
+        $market = Market::find($request->id);   
         $market->update(['status' => !$market->status]);
 
         session()->flash('success', __('admin.global.updated_successfully'));

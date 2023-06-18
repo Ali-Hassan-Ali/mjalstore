@@ -169,7 +169,7 @@ class SubCategoryController extends Controller
     {
         $images = Category::subCategory()->find(request()->ids ?? [])->whereNotNull('banner')->pluck('banner')->toArray();
         count($images) ? Storage::disk('public')->delete($images) : '';
-        Category::subCategory()->with('cards', 'markets')->each(fn ($subCategory) => [$subCategory->cards()?->delete(), $subCategory->markets()?->delete()]);
+        Category::subCategory()->with('cards', 'markets')->find(request()->ids ?? [])?->each(fn ($subCategory) => [$subCategory->cards()?->delete(), $subCategory->markets()?->delete()]);
         Category::destroy(request()->ids ?? []);
 
         session()->flash('success', __('admin.global.deleted_successfully'));

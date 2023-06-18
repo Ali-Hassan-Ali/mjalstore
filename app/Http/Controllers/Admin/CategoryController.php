@@ -153,7 +153,7 @@ class CategoryController extends Controller
     {
         $images = Category::find(request()->ids ?? [])->whereNotNull('logo')->pluck('logo')->toArray();
         count($images) > 0 ? Storage::disk('public')->delete($images) : '';
-        Category::with('subCategoriesRelation.cards', 'subCategoriesRelation.markets')->each(fn ($category) => 
+        Category::with('subCategoriesRelation.cards', 'subCategoriesRelation.markets')?->find(request()->ids ?? [])?->each(fn ($category) => 
             $category->subCategoriesRelation()?->each(fn ($subCategory) => 
                 [
                     $subCategory->cards()?->delete(),
