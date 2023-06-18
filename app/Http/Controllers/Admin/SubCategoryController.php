@@ -80,7 +80,9 @@ class SubCategoryController extends Controller
                 return view('admin.dataTables.checkbox', ['models' => $subCategory, 'permissions' => $permissions, 'type' => 'status']);
             })
             ->addColumn('has_market', function(Category $subCategory) use($permissions) {
-                return view('admin.dataTables.checkbox', ['models' => $subCategory, 'permissions' => $permissions, 'type' => 'has_market']);
+                if (!$subCategory->cards->count()) {
+                    return view('admin.dataTables.checkbox', ['models' => $subCategory, 'permissions' => $permissions, 'type' => 'has_market']);
+                }
             })
             ->addColumn('name', fn(Category $subCategory) => $subCategory->name ?? '')
             ->rawColumns(['record_select', 'actions', 'status', 'has_market', 'name', 'banner'])
@@ -132,7 +134,8 @@ class SubCategoryController extends Controller
 
     public function update(SubCategoryRequest $request, Category $subCategory): RedirectResponse
     {
-        $requestData = request()->except('banner');
+        $requestData = request()->except('banner', 'has_market');
+
         if(request()->file('banner')) {
 
             $subCategory->banner ? Storage::disk('public')->delete($subCategory->banner) : '';
@@ -140,7 +143,9 @@ class SubCategoryController extends Controller
             $requestData['banner'] = request()->file('banner')->store('sub_categories', 'public');
 
         }
+
         $requestData['has_market'] = $subCategory->cards->count() ? $subCategory->has_market : request()->has_market;
+
         $subCategory->update($requestData);
 
         session()->flash('success', __('admin.global.updated_successfully'));
@@ -182,7 +187,10 @@ class SubCategoryController extends Controller
     public function hasMarket(StatusRequest $request): Application | Response | ResponseFactory
     {
         $subCategory = Category::find($request->id);
-        $subCategory->update(['has_market' => !$subCategory->has_market]);
+
+        if (!$subCategory->cards->count()) {
+            $subCategory->update(['has_market' => !$subCategory->has_market]);
+        }
 
         session()->flash('success', __('admin.global.updated_successfully'));
         return response(__('admin.global.updated_successfully'));

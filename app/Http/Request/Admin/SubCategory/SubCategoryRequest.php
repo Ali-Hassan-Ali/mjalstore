@@ -80,7 +80,7 @@ class SubCategoryRequest extends FormRequest
             'admin_id'  => auth('admin')->id(),
             'slug'      => str()->slug(request()->name[getLanguages('default')->code] ?? '', '-'),
             'status'    => request()->has('status'),
-            'has_market'=> request()->has('status'),
+            'has_market'=> request()->has('has_market'),
         ]);
 
     }//end of prepare for validation

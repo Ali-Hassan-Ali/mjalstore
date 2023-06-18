@@ -699,7 +699,7 @@ li.offers-m > a > span{
 .dropdown-cart-shooping .dropdown-menu {
     min-width: 20rem;
     padding: 15px;
-    transform: translate3d(-230px, 36px, 20px) !important;
+/*    transform: translate3d(-230px, 36px, 20px) !important;*/
 }
 .dropdown-cart-shooping .dropdown-menu li {
     display: flex;
