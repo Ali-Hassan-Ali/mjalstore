@@ -12,14 +12,22 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <!-- Stylesheets -->
-    <link href="{{ asset('site_assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    @if(session('dir') == 'LTR')
+        <link href="{{ asset('site_assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    @else
+        <link href="{{ asset('site_assets/bootstrap-rtl/css/bootstrap.rtl.css') }}" rel="stylesheet">
+    @endif
     <link href="{{ asset('site_assets/css/material-design-iconic-font.css') }}" rel="stylesheet">
     <link href="{{ asset('site_assets/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('site_assets/css/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('site_assets/css/owl.theme.default.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css">
     <link href="{{ asset('site_assets/css/animate.css') }}" rel="stylesheet" type="text/css" />
+    {{-- <link href="{{ asset('site_assets/css/style.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('site_assets/css/style.css') }}" rel="stylesheet">
+    @if(session('dir') == 'LTR')
+        <link href="{{ asset('site_assets/css/ltr-style.css') }}" rel="stylesheet">
+    @endif
     <!-- Responsive -->
     <link href="{{ asset('site_assets/css/responsive.css') }}" rel="stylesheet">
     
@@ -39,6 +47,7 @@
         }
     </style>
     {{ $style ?? '' }}
+
 
 </head>
 <body>
