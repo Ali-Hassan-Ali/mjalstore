@@ -91,10 +91,12 @@ class CardController extends Controller
             return abort(403);
         }
 
-        $categories = Category::category()->pluck('name', 'id');
-        $ratings    = RatingCard::array();
+        $categories         = Category::category()->pluck('name', 'id');
+        $subcategory        = old('category_id') ? Category::subcategory()->where('parent_id', old('category_id'))->pluck('name', 'id') : [];
+        $subCategoryMarkets = collect(Category::subCategory()->with('markets')->get())->groupBy('id');
+        $ratings            = RatingCard::array();
 
-        return view('admin.products.cards.create', compact('categories', 'ratings'));
+        return view('admin.products.cards.create', compact('categories', 'ratings', 'subcategory', 'subCategoryMarkets'));
 
     }//end of create
 
@@ -114,14 +116,13 @@ class CardController extends Controller
         if(!permissionAdmin('update-cards')) {
             return abort(403);
         }
-        $categoryId = $card?->subCategory?->parent_id;
 
-        $categories    = Category::category()->pluck('name', 'id');
-        $subCategories = Category::find($categoryId)?->subCategoriesRelation()->pluck('name', 'id');
-        $markets       = old('market_id') ? Category::find($card?->category_id)->markets->pluck('name', 'id')->toArray() : [];
-        $ratings       = RatingCard::array();
+        $categories         = Category::category()->pluck('name', 'id');
+        $subcategory        = old('category_id', $card->subCategory->parent_id) ? Category::subcategory()->where('parent_id', old('category_id', $card->subCategory->parent_id))->pluck('name', 'id') : [];
+        $subCategoryMarkets = collect(Category::subCategory()->with('markets')->get())->groupBy('id');
+        $ratings            = RatingCard::array();
 
-        return view('admin.products.cards.edit', compact('markets', 'subCategories', 'categories', 'categoryId', 'ratings', 'card'));
+        return view('admin.products.cards.edit', compact('card', 'categories', 'ratings', 'subcategory', 'subCategoryMarkets'));
 
     }//end of edit
 
@@ -138,9 +139,6 @@ class CardController extends Controller
 
     public function destroy(Card $card): Application | Response | ResponseFactory
     {
-        if($card->flag) {
-            Storage::disk('public')->delete($card->flag);
-        }
         $card->delete();
 
         session()->flash('success', __('admin.global.deleted_successfully'));
@@ -150,8 +148,6 @@ class CardController extends Controller
 
     public function bulkDelete(DeleteRequest $request): Application | Response | ResponseFactory
     {
-        $images = Card::find(request()->ids ?? [])->pluck('flag')->toArray();
-        Storage::disk('public')->delete($images) ?? '';
         Card::destroy(request()->ids ?? []);
 
         session()->flash('success', __('admin.global.deleted_successfully'));

@@ -49,10 +49,10 @@
                         <x-input.option required="true" name="category_id" label="menu.sub_categories" :lists="$categories" :value="old('category', $card?->subCategory?->parent_id)" col="col-md"/>
 
                         {{--sub categories--}}
-                        <x-input.option required="true" name="sub_category" :disabled='old("sub_category", $card?->category_id) ? false : true' label="menu.sub_categories" :lists="$subCategories" :value="old('sub_category', $card?->category_id)" col="col-md"/>
+                        <x-input.option required="true" name="sub_category" :disabled='old("sub_category", $card?->category_id) ? false : true' label="menu.sub_categories" :lists="$subcategory" :value="old('sub_category', $card?->category_id)" col="col-md"/>
 
                         {{--markets--}}
-                        <x-input.option name="market_id" label="menu.markets" :lists="$markets" :hidden='old("market_id", $card->market_id) ? false : true' :value="old('market_id', $card->market_id)" col="col-md"/>
+                        <x-input.option name="market_id" label="menu.markets" :lists="[]" :hidden='old("market_id", $card->market_id) ? false : true' :value="old('market_id', $card->market_id)" col="col-md"/>
 
                         {{--price--}}
                         <x-input.text type="number" required="true" name="price" label="admin.global.price" :value="$card->price" col="col-md-6"/>

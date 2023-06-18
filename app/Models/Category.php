@@ -20,6 +20,7 @@ class Category extends Model
     use HasTranslations;
 
     protected $guarded = [];
+    protected $casts   = ['parent_id' => 'integer'];
 
     public array $translatable = ['name', 'title_card', 'description'];
 

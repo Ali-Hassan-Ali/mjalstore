@@ -49,7 +49,7 @@
                         <x-input.option required="true" name="category_id" label="menu.sub_categories" :lists="$categories" :value="old('category')" col="col-md"/>
 
                         {{--sub categories--}}
-                        <x-input.option required="true" name="sub_category" :disabled='old("sub_category") ? false : true' label="menu.sub_categories" :lists="[]" :value="old('sub_category')" col="col-md"/>
+                        <x-input.option required="true" name="sub_category" :disabled='old("sub_category") ? false : true' label="menu.sub_categories" :lists="$subcategory" :value="old('sub_category')" col="col-md"/>
 
                         {{--markets--}}
                         <x-input.option name="market_id" label="menu.markets" :lists="[]" :hidden='old("market_id") ? false : true' :value="old('market_id')" col="col-md"/>
