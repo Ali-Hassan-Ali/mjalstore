@@ -156,6 +156,8 @@ class SubCategoryController extends Controller
     public function destroy(Category $subCategory): Application | Response | ResponseFactory
     {
         $subCategory->banner ? Storage::disk('public')->delete($subCategory->banner) : '';
+        $subCategory->cards()?->delete();
+        $subCategory->markets()?->delete();
         $subCategory->delete();
 
         session()->flash('success', __('admin.global.deleted_successfully'));
@@ -165,8 +167,9 @@ class SubCategoryController extends Controller
 
     public function bulkDelete(DeleteRequest $request): Response | ResponseFactory
     {
-        $images = Category::find(request()->ids ?? [])->whereNotNull('banner')->pluck('banner')->toArray();
+        $images = Category::subCategory()->find(request()->ids ?? [])->whereNotNull('banner')->pluck('banner')->toArray();
         count($images) ? Storage::disk('public')->delete($images) : '';
+        Category::subCategory()->with('cards', 'markets')->each(fn ($subCategory) => [$subCategory->cards()?->delete(), $subCategory->markets()?->delete()]);
         Category::destroy(request()->ids ?? []);
 
         session()->flash('success', __('admin.global.deleted_successfully'));
@@ -176,7 +179,7 @@ class SubCategoryController extends Controller
 
     public function status(StatusRequest $request): Application | Response | ResponseFactory
     {
-        $subCategory = Category::find($request->id);
+        $subCategory = Category::subCategory()->find($request->id);
         $subCategory->update(['status' => !$subCategory->status]);
 
         session()->flash('success', __('admin.global.updated_successfully'));
@@ -186,7 +189,7 @@ class SubCategoryController extends Controller
 
     public function hasMarket(StatusRequest $request): Application | Response | ResponseFactory
     {
-        $subCategory = Category::find($request->id);
+        $subCategory = Category::subCategory()->find($request->id);
 
         if (!$subCategory->cards->count()) {
             $subCategory->update(['has_market' => !$subCategory->has_market]);

@@ -136,6 +136,12 @@ class CategoryController extends Controller
     public function destroy(Category $category): Application | Response | ResponseFactory
     {
         $category->logo ? Storage::disk('public')->delete($category->logo) : '';
+        $category->subCategoriesRelation()?->each(fn ($subCategory) => 
+                [
+                    $subCategory->cards()?->delete(),
+                    $subCategory->markets()?->delete(),
+                    $subCategory->delete()
+                ]);
         $category->delete();
 
         session()->flash('success', __('admin.global.deleted_successfully'));
@@ -147,6 +153,14 @@ class CategoryController extends Controller
     {
         $images = Category::find(request()->ids ?? [])->whereNotNull('logo')->pluck('logo')->toArray();
         count($images) > 0 ? Storage::disk('public')->delete($images) : '';
+        Category::with('subCategoriesRelation.cards', 'subCategoriesRelation.markets')->each(fn ($category) => 
+            $category->subCategoriesRelation()?->each(fn ($subCategory) => 
+                [
+                    $subCategory->cards()?->delete(),
+                    $subCategory->markets()?->delete(),
+                    $subCategory->delete()
+                ])
+        );
         Category::destroy(request()->ids ?? []);
 
         session()->flash('success', __('admin.global.deleted_successfully'));
