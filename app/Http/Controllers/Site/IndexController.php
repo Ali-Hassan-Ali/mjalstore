@@ -24,6 +24,15 @@ class IndexController extends Controller
 
         session()->put('code', $language->code);
         session()->put('dir', $language->dir);
+
+        $name = json_decode(\DB::table('currencies')->where('code', session('currency_code'))->first()?->name, true);
+
+        if ($name) {
+            
+            session()->has('currency_name') ? session()->put('currency_name', $name[$language->code]) : '';
+
+        }
+
         
         return redirect()->back();
 
@@ -35,9 +44,22 @@ class IndexController extends Controller
             abort(400);
         }
 
-        session()->put('currency_code', $language->code);
-        session()->put('currency_name', $language->name);
-        session()->put('currency_flag', $language->flag);
+        if ($currency->currencyPrice()->count()) {
+            
+            session()->put('currency_code', $currency->code);
+            session()->put('currency_price', $currency->currencyPrice->price);
+            session()->put('currency_name', $currency->name);
+            session()->put('currency_flag', $currency->flag);
+
+        } else {
+
+            session()->forget(['currency_code', 'currency_price', 'currency_name', 'currency_flag']);
+            session()->forget('currency_code');
+            session()->forget('currency_name');
+            session()->forget('currency_name');
+            session()->forget('currency_flag');
+
+        }//end of if
         
         return redirect()->back();
 

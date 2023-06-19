@@ -113,6 +113,14 @@
                             </a>
                         </li>
                     @endif
+
+                    @if(permissionAdmin('read-currency_prices'))
+                        <li>
+                            <a class="treeview-item {{ request()->is('*currency_prices*') ? 'active' : '' }}" href="{{ route('admin.products.currency_prices.index') }}">
+                                <i class="icon fa fa-circle"></i>@lang('menu.currency_prices')
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif

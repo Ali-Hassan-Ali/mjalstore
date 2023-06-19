@@ -19,8 +19,7 @@ class Card extends Model
     protected function newPrice(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->price,
-            // get: fn () => session('currency_code') == getCurrency('default')?->code ? $this->price : (number_format($this->price * session('currency'), 2)),
+            get: fn () => session()->has('currency_price') ? (number_format((int) $this->price * (int) session('currency_price'), 2) . ' ' . session('currency_name')) : ($this->price . ' $'),
         );
 
     }//end of get new price Attribute

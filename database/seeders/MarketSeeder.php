@@ -54,7 +54,7 @@ class MarketSeeder extends Seeder
         ];
 
         Market::insert($data);
-        $subCategories = Category::subCategory()->get()->random(rand(2, 6))->pluck('id')->toArray();
+        $subCategories = Category::where('has_market', 1)->subCategory()->get()->random(3)->pluck('id')->toArray();
         Market::each(fn($market) => $market->subCategories()->sync($subCategories));
 
     }//end of run

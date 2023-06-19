@@ -47,6 +47,9 @@
             let subCategories = @json($subCategories);
             let cardsCategory = @json($cardsCategory);
 
+            let currencyPrice = "{{ session('currency_price') ?? 0 }}";
+            let currencyName  = "{{ session('currency_name') ?? '$' }}";
+
             if (subCategories[id]) {
 
                 let styleColor = `background: linear-gradient(180deg, ${subCategories[id][0].color_1} 0%, ${subCategories[id][0].color_2} 100%);`;
@@ -85,8 +88,10 @@
                 $('#card_id').append(`<option selected disabled value="">${choose}</option>`);
 
                 $.each(cardsCategory[id], function(index, item) {
+
+                    var newPrice = currencyPrice * item.price;
                     
-                    $('#card_id').append(`<option value="${item.id}">${item.price}</option>`);
+                    $('#card_id').append(`<option value="${item.id}">${newPrice + ' ' + currencyName}</option>`);
 
                 });
 
@@ -103,6 +108,10 @@
             let name  = $(this).find(':selected').text();
             let lang  = "{{ app()->getLocale() }}";
             let cards = @json($cards);
+            
+            let currencyPrice = "{{ session('currency_price') ?? 0 }}"
+            let currencyName  = "{{ session('currency_name') ?? '$' }}"
+
 
             $('.card-market').text(name);
 
@@ -115,8 +124,10 @@
                 $('#card_id').append(`<option selected disabled value="">${choose}</option>`);
 
                 $.each(cards[id], function(index, item) {
+
+                    var newPrice = currencyPrice * item.price;
                     
-                    $('#card_id').append(`<option value="${item.id}">${item.price}</option>`);
+                    $('#card_id').append(`<option value="${item.id}">${newPrice + ' ' + currencyName}</option>`);
 
                 });
 

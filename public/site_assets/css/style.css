@@ -652,7 +652,7 @@ li.offers-m > a > span{
     text-align: center;
     box-shadow: 0 0 4px 1px rgb(0 0 0 / .16);
     border-radius: 20px;
-    transform: translate3d(-45px, 36px, 20px) !important;   
+/*    transform: translate3d(-45px, 36px, 20px) !important;   */
     border: 0;
 }
 .topHmenu-left .dropdown-menu {
@@ -662,7 +662,7 @@ li.offers-m > a > span{
     text-align: center;
     box-shadow: 0 0 4px 1px rgb(0 0 0 / .16);
     border-radius: 20px;
-    transform: translate3d(-45px, 21px, 20px) !important;   
+/*    transform: translate3d(-45px, 21px, 20px) !important;   */
     border: 0;
 }
 .menu-st > li.active .dropdown-menu li a,

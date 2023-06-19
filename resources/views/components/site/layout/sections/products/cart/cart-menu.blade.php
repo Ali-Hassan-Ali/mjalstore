@@ -23,7 +23,7 @@
                     <div class="title-cart">
                         <p><a href="#">{{ $cart['title_card'] }}</a></p>
                         <div class="price-counter">
-                            <strong class="total-price-{{ $cart['uuid'] }}">{{ $cart['total_price'] }}</strong>
+                            <strong class="total-price-{{ $cart['uuid'] }}">{{ getNewPrice($cart['total_price']) }}</strong>
                             <div class="quantity-item">
                                 <div class="quantity">
                                     <input type="text" name="count-quat1" class="count-quat quantity-{{ $cart['uuid'] }}" id="quantity-menu-{{ $cart['uuid'] }}" value="{{ $cart['quantity'] }}">

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Products\MarketController;
 use App\Http\Controllers\Admin\Products\CardController;
 use App\Http\Controllers\Admin\Products\CurrencyController;
+use App\Http\Controllers\Admin\Products\CurrencyPriceController;
 
 //cards
 Route::controller(CardController::class)
@@ -44,3 +45,15 @@ Route::controller(CurrencyController::class)
 
     });
 Route::resource('currencies', CurrencyController::class);
+
+
+//currency_prices
+Route::controller(CurrencyPriceController::class)
+    ->prefix('currency_prices')->name('currency_prices.')
+    ->group(function () {
+
+        Route::get('data', 'data')->name('data');
+        Route::delete('bulk_delete', 'bulkDelete')->name('bulk_delete');
+
+    });
+Route::resource('currency_prices', CurrencyPriceController::class);

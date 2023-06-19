@@ -27,6 +27,7 @@ return [
     'markets'         => 'متاجر',
     'currencies'      => 'العملات',
     'currency'        => 'عملة',
+    'currency_prices' => 'اسعار العملات',
     'footers'         => 'Footers',
     'pages'           => 'الصفحات',
     'payment_methods' => 'وسائل الدفع',

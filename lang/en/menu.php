@@ -27,6 +27,7 @@ return [
     'markets'         => 'Markets',
     'currencies'      => 'Currencies',
     'currency'        => 'Currency',
+    'currency_prices' => 'Currency Prices',
     'footers'         => 'Footers',
     'pages'           => 'Pages',
     'payment_methods' => 'Payment Methods',

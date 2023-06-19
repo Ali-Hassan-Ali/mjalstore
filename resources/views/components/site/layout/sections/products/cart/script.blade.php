@@ -25,6 +25,11 @@
                         timer: 15000
                     }); //end of swal
 
+                    let currencyPrice = "{{ session('currency_price') ?? 0 }}";
+                    let currencyName  = "{{ session('currency_name') ?? '$' }}";
+
+                    var newPrice = currencyPrice * cart.item.total_price;
+
                     if ($('.remove-cart-' + cart.item.uuid).length === 1) {
 
                         $('.total-price-' + cart.item.uuid).text(cart.item.total_price);
@@ -40,7 +45,7 @@
                                         <div class="title-cart">
                                             <p><a href="#">${cart.item.title_card}</a></p>
                                             <div class="price-counter">
-                                                <strong class="total-price-${cart.item.uuid}">${cart.item.total_price}</strong>
+                                                <strong class="total-price-${cart.item.uuid}">${newPrice + ' ' + currencyName}</strong>
                                                 <div class="quantity-item">
                                                     <div class="quantity">
                                                         <input type="text" name="count-quat1" class="count-quat quantity-${cart.item.uuid}" value="${cart.item.quantity}">
@@ -153,8 +158,13 @@
                     //     timer: 15000
                     // }); //end of swal
 
+                    let currencyPrice = "{{ session('currency_price') ?? 0 }}";
+                    let currencyName  = "{{ session('currency_name') ?? '$' }}";
+
+                    var newPrice = currencyPrice * cart.item.total_price;
+
                     $('.cart-total').text(cart.subtotal);
-                    $('.total-price-' + cart.item.uuid).html(cart.item.total_price);
+                    $('.total-price-' + cart.item.uuid).html(newPrice + ' ' + currencyName);
                     $('.quantity-' + cart.item.uuid).val(cart.item.quantity);
 
                 },

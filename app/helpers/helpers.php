@@ -42,6 +42,19 @@ if (!function_exists('getCurrency')) {
 
 }//end of exists
 
+if (!function_exists('getNewPrice')) {
+
+    function getNewPrice($price = 0)
+    {
+        $currencyPrice = session('currency_price') ?? 0;
+        $currencyName  = session('currency_name') ?? '$';
+
+        return number_format(preg_replace('/,/', '', $price * $currencyPrice), 2) . ' ' . $currencyName;
+
+    }//en dof fun
+
+}//end of exists
+
 //////////////////////////////// Setting //////////////////////
 
  if(!function_exists('getSetting')) {

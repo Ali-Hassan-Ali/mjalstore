@@ -93,7 +93,10 @@ class Cart
 
             }//end of foreach
 
-            return number_format(preg_replace('/,/', '', $subtotal));
+            $currencyPrice = session('currency_price') ?? 0;
+            $currencyName  = session('currency_name') ?? '$';
+
+            return number_format(preg_replace('/,/', '', $subtotal * $currencyPrice), 2) . ' ' . $currencyName;
 
         } else {
 

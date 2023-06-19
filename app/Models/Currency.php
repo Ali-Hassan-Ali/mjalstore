@@ -7,6 +7,7 @@ use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Scopes\StatusScope;
 
 class Currency extends Model
@@ -22,6 +23,12 @@ class Currency extends Model
     public function admin(): BelongsTo
     {
         return $this->belongsTo(Admin::class);
+
+    }//end of admin
+
+    public function currencyPrice(): HasOne
+    {
+        return $this->hasOne(CurrencyPrice::class)->latest();
 
     }//end of admin
 

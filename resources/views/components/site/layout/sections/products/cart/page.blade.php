@@ -28,7 +28,7 @@
                                             <div class="btn button-count dec jsQuantityDecrease disabled" minimum="1" data-uuid="{{ $cart['uuid'] }}" data-type="page"><i class="fa fa-minus" aria-hidden="true"></i></div>
                                         </div>
                                     </div>
-                                    <p class="total-price-{{ $cart['uuid'] }}">{{ $cart['total_price'] }}</p>
+                                    <p class="total-price-{{ $cart['uuid'] }}">{{ getNewPrice($cart['total_price']) }}</p>
                                     <a class="remove-pr" data-uuid="{{ $cart['uuid'] }}"><i class="fa fa-trash"></i></a>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                     </td>
-                    <td class="total-price-{{ $cart['uuid'] }}">{{ $cart['total_price'] }}</td>
+                    <td class="total-price-{{ $cart['uuid'] }}">{{ getNewPrice($cart['total_price']) }}</td>
                     <td><a class="remove-pr" data-uuid="{{ $cart['uuid'] }}"><i class="fa fa-trash"></i></a></td>
                 </tr>
                 @endforeach

@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('currency_prices', function (Blueprint $table) {
             $table->id();
 
-            $table->string('code')->nullable();
             $table->double('price')->nullable();
+
+            $table->foreignId('currency_id')->constrained();
 
             $table->foreignId('admin_id')->constrained();
 

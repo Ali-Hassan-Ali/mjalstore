@@ -6,6 +6,8 @@
     $.each(datatable.columns, (key, value) => myColumns.push({data: key, name: value}));
     myColumns.push({data: 'created_at', name: 'created_at', searchable: false});
     myColumns.push({data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'});
+    
+    @php($lang = in_array(app()->getLocale(), ['ar', 'en']) ? app()->getLocale() : 'en')
 
     let Table = $('#data-table').DataTable({
         dom: "tiplr",
@@ -14,7 +16,7 @@
         scrollCollapse: true,
         serverSide: true,
         processing: true,
-        language: {url: "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"},
+        language: {url: "{{ asset('admin_assets/datatable-lang/' . $lang . '.json') }}"},
         ajax: {url: datatable.route},
         columns: myColumns,
         drawCallback: function (settings) {
@@ -29,7 +31,9 @@
         Table.search(this.value).draw();
     })
 
-    $(document).on('change', '.checkbox', function (e) {
+    if (datatable.checkbox) {
+
+        $(document).on('change', '.checkbox', function (e) {
         e.preventDefault();
 
         let type   = $(this).data('type');
@@ -70,5 +74,7 @@
         });//end of ajax call
 
     });//end of delete
+
+    }//end of if
 
 </script>
