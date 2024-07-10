@@ -32,5 +32,6 @@ return [
     'pages'           => 'Pages',
     'payment_methods' => 'Payment Methods',
     'contact_us'      => 'Contact Us',
+    'cupons'          => 'Cupons',
 
 ];

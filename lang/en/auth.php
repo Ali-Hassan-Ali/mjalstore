@@ -19,5 +19,6 @@ return [
     'create_acount'     => 'Create Acount',
     'logout'            => 'Logout',
     'profile'           => 'Profile',
+    'phone_not_active'  => 'Phone Not Active! 😞',
 
 ];

@@ -32,5 +32,6 @@ return [
     'pages'           => 'الصفحات',
     'payment_methods' => 'وسائل الدفع',
     'contact_us'      => 'تواصل معنا',
+    'cupons'          => 'كوبون',
 
 ];

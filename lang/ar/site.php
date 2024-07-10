@@ -4,6 +4,8 @@ return array('global' =>
             array(
                 'home'          => 'الرئسية', 
                 'fast_purchase' => 'الشرا السريع', 
+                'copyright'     => 'جميع الحقوق محفوظه لدي @ ', 
+                'mjal_store'    => 'مجال استور , ',
             ),
             'products' => array(
                   'carts' => array(
@@ -16,6 +18,9 @@ return array('global' =>
                         'subtotal'     => 'المجموع',
                         'total'        => 'المجموع',
                         'quantity'     => 'الكمية',
+                        'cupon_code'   => 'كوبون الخصم',
+                        'cupon'        => 'كوبون',
+                        'search_card'  => 'بحث عن بطاقة',
                   ),
             ),
         );//manin

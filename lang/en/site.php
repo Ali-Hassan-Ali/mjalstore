@@ -4,6 +4,8 @@ return array('global' =>
             array(
                 'home'          => 'Home', 
                 'fast_purchase' => 'Fast Purchase', 
+                'copyright'     => 'Copyright © ', 
+                'mjal_store'    => ' , MJAL STORE ', 
             ),
             'products' => array(
                   'carts' => array(
@@ -16,6 +18,9 @@ return array('global' =>
                         'subtotal'     => 'Subtotal',
                         'total'        => 'Total',
                         'quantity'     => 'Quantity',
+                        'cupon_code'   => 'Cupon Code',
+                        'cupon'        => 'Cupon',
+                        'search_card'  => 'Search On Card',
                   ),
             ),
         );//manin

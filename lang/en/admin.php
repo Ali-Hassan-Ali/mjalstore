@@ -45,6 +45,7 @@ return array('global' =>
                 'total'       => 'Total',
                 'price'       => 'Price',
                 'DT_RowIndex' => 'number',
+                'code_not_found'       => 'Code Not Found 😥',
                 'no_data_found'        => 'Sorry No Data found 😪',
                 'added_successfully'   => 'Record Added Successfully 😎',
                 'updated_successfully' => 'Record Updated Successfully 🥱',
@@ -73,6 +74,12 @@ return array('global' =>
                         'quantity'  => 'Quantity',
                         'balance'   => 'Balance',
                         'rating'    => 'Rating',
+                  ),
+                  'cupons' => array(
+                        'end_date'  => 'End Date',
+                        'start_date'=> 'Start Date',
+                        'price'     => 'Price',
+                        'code  '    => 'Code',
                   ),
             ),
             'footers' => array(
