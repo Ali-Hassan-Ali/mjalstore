@@ -96,7 +96,16 @@ class Cart
             $currencyPrice = session('currency_price') ?? 0;
             $currencyName  = session('currency_name') ?? '$';
 
-            return number_format(preg_replace('/,/', '', $subtotal * $currencyPrice), 2) . ' ' . $currencyName;
+            if($currencyPrice === 0) {
+
+                return number_format(preg_replace('/,/', '', $subtotal), 2) . '$';
+
+            } else {
+
+                return number_format(preg_replace('/,/', '', $subtotal * $currencyPrice), 2) . ' ' . $currencyName;
+
+            }//end of if
+
 
         } else {
 
