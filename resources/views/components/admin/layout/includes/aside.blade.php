@@ -15,7 +15,7 @@
         <li>
             <a class="app-menu__item {{ request()->is('*home*') ? 'active' : '' }}" href="{{ route('admin.index') }}">
                 <i class="app-menu__icon fa fa-home"></i>
-                <span class="app-menu__label">@lang('menu.home')</span>
+                <span class="app-menu__label">@lang('admin.global.home')</span>
             </a>
         </li>
 
@@ -81,7 +81,7 @@
             </li>
         @endif
 
-        @if(permissionAdmin('read-cards') || permissionAdmin('read-markets') || permissionAdmin('read-currencies'))
+        @if(permissionAdmin('read-cards') || permissionAdmin('read-markets') || permissionAdmin('read-currencies') || permissionAdmin('read-currency_prices') || permissionAdmin('read-cupons'))
             {{-- products --}}
             <li class="treeview {{ request()->is('*products*') ? 'is-expanded' : '' }}">
                 <a class="app-menu__item" href="#" data-toggle="treeview">
@@ -118,6 +118,14 @@
                         <li>
                             <a class="treeview-item {{ request()->is('*currency_prices*') ? 'active' : '' }}" href="{{ route('admin.products.currency_prices.index') }}">
                                 <i class="icon fa fa-circle"></i>@lang('menu.currency_prices')
+                            </a>
+                        </li>
+                    @endif
+
+                    @if(permissionAdmin('read-cupons'))
+                        <li>
+                            <a class="treeview-item {{ request()->is('*cupons*') ? 'active' : '' }}" href="{{ route('admin.products.cupons.index') }}">
+                                <i class="icon fa fa-circle"></i>@lang('menu.cupons')
                             </a>
                         </li>
                     @endif

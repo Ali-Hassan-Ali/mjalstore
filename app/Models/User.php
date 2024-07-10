@@ -37,4 +37,10 @@ class User extends Authenticatable
 
     }//end of get FullPhone Attribute
 
+    public function checkActivePhone(): bool
+    {
+        return (bool) $this->phone_verified_at;
+
+    }//end of get FullPhone Attribute
+
 }//end of model

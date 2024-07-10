@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Products\MarketController;
 use App\Http\Controllers\Admin\Products\CardController;
 use App\Http\Controllers\Admin\Products\CurrencyController;
 use App\Http\Controllers\Admin\Products\CurrencyPriceController;
+use App\Http\Controllers\Admin\Products\CuponController;
 
 //cards
 Route::controller(CardController::class)
@@ -57,3 +58,15 @@ Route::controller(CurrencyPriceController::class)
 
     });
 Route::resource('currency_prices', CurrencyPriceController::class);
+
+//cupons
+Route::controller(CuponController::class)
+    ->prefix('cupons')->name('cupons.')
+    ->group(function () {
+
+        Route::get('data', 'data')->name('data');
+        Route::post('status', 'status')->name('status');
+        Route::delete('bulk_delete', 'bulkDelete')->name('bulk_delete');
+
+    });
+Route::resource('cupons', CuponController::class);

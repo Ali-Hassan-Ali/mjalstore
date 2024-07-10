@@ -4,7 +4,7 @@
         <th>
             <div class="animated-checkbox">
                 <label class="m-0">
-                    <input type="checkbox" id="record__select-all">
+                    <input type="checkbox" id="record__select-all form-check-input">
                     <span class="label-text"></span>
                 </label>
             </div>

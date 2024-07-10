@@ -14,6 +14,9 @@ Route::controller(CartController::class)
         Route::get('add/{card}', 'add')->name('add');
         Route::delete('delete/{card}', 'delete')->name('delete');
         Route::put('update', 'update')->name('update');
+        Route::get('cupon', 'cupon')->name('cupon');
+        Route::delete('cupon/delete', 'cuponDelete')->name('cupon.delete');
+        Route::get('search', 'search')->name('search');
 
     });
 

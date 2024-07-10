@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,6 +24,20 @@ class Card extends Model
         );
 
     }//end of get new price Attribute
+
+    //scope
+    public function scopeSearch(Builder $query, $search)
+    {
+        return $query;
+        return $query->when($search, fn ($query) =>
+
+            $query->where('slug' , 'like', "%$search%")
+                  ->orWhere('id', 'like', "%$search%")
+            
+        );
+        // return $query->when(request()->search, fn ($query) => request()->search);
+
+    }// end of scope Role
 
     public function admin(): BelongsTo
     {

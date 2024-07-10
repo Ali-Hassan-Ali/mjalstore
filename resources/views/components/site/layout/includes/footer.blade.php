@@ -21,7 +21,9 @@
                 <div class="col-md-4">
                     <div class="log-soci">
                         <div class="logo-ft">
-                            <figure><img src="{{ getImageSetting('websit_logo') }}" alt="{{ getTransSetting('websit_title', app()->getLocale()) }}" /></figure>
+                            <figure>
+                                <a href="/"><img src="{{ getImageSetting('websit_logo') }}" alt="{{ getTransSetting('websit_title', app()->getLocale()) }}" /></a>
+                            </figure>
                             <p>{{ getTransSetting('websit_description', app()->getLocale()) }}</p>
                         </div>
                         <ul class="social-media">
@@ -58,7 +60,7 @@
                                 <p>
                                     <a href="{{ getSetting('contact_address_link') }}" target="_blank" class="text-dark">
                                         {{ getSetting('contact_address') }}
-                                    </a>
+                                    </a>+
                                 </p>
                             </li>
                         @endif
@@ -82,7 +84,7 @@
     <div class="bottom-ft">
         <div class="container">
             <div class="copyright">
-                <p>Copyright © {{ now()->month }} , MJAL STORE</p>
+                <p>{{ trans('site.global.copyright') . now()->year . trans('site.global.mjal_store') }}</p>
             </div>
         </div>
     </div>

@@ -38,8 +38,8 @@
                     </a>
                 </div>
                 <div class="col-md-5 col-sm-5">
-                    <form class="form-search-head" action="#">
-                        <input type="text" class="form-control" placeholder="بحث عن بطاقة">
+                    <form class="form-search-head" action="{{ route('site.products.cart.search') }}" method="get">
+                        <input type="text" value="{{ request()->search }}" name="search" class="form-control" placeholder="{{ trans('site.products.carts.search_card') }}">
                         <button type="submit" class="btn btn-submit-search"><i class="zmdi zmdi-search" aria-hidden="true"></i></button>
                     </form>
                 </div>

@@ -42,7 +42,7 @@
         </div>
         <div class="option-cart">
             <a href="{{ route('site.products.cart.index') }}" class="btn-site-bg"><small>{{ trans('site.products.carts.cart_detile') }}</small></a>
-            <a href="checkout.html" class="btn-site outline"><small>{{ trans('site.products.carts.purchase_now') }}</small></a>
+            <a href="{{ route('site.fast_purchase.index') }}" class="btn-site outline"><small>{{ trans('site.products.carts.purchase_now') }}</small></a>
         </div>
     </ul>
 </li>

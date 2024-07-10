@@ -1,4 +1,5 @@
 @if($count)
+
     <section class="section_ticit_supp">
         <div class="container">
             <div class="sec_head text-center">
@@ -48,33 +49,78 @@
                 </tr>
                 @endforeach
                 <tr>
-                 <td>
-                     <div class="option-table-cart">
-                      <div class="total-cart"><p>{{ trans('site.products.carts.total') }}:</p><strong class="cart-total">{{ $total }}</strong></div>
-                          <ul>
-                              <li><span>كوبون الخصم</span><form><input type="text" class="form-control" placeholder="..." /></form></li>
-                              <li><a class="btn-site btn-shop"><span>{{ trans('site.products.carts.purchase_now') }}</span></a></li>
-                          </ul>
-                     </div>
-                 </td>
-              </tr>
+                    <td>
+                        <div class="option-table-cart">
+                            <div class="total-cart">
+                                <p>{{ trans('site.products.carts.total') }}:</p>
+                                <strong class="cart-total">{{ $total }}</strong>
+                            </div>
+                            <ul>
+                            @if(!session()->has('cupon_code'))
+                                <li><span>{{ trans('site.products.carts.cupon_code') }}</span>
+                                    <form id="cupon-cart">
+                                        <input type="text" id="cupon-cart-input" class="form-control" placeholder="{{ trans('site.products.carts.cupon') }}"/>
+                                    </form>
+                                </li>
+                                <li>
+                                    <a class="btn-site btn-shop" href="{{ route('site.fast_purchase.index') }}">
+                                        <span>{{ trans('site.products.carts.purchase_now') }}</span>
+                                    </a>
+                                </li>
+                            @else
+
+                                <li>
+                                    <form id="cupon-delete-cart" style="display: flex;">
+                                        <button class="btn">
+                                            <h4><i class="fa fa-trash text-danger"></i></h4>
+                                        </button>
+                                        <input type="text" id="cupon-cart-input" class="form-control" value="{{ session()->get('cupon_code') }}" placeholder="{{ session()->get('cupon_code') . ' ' . session()->get('cupon_price') }}" disabled readonly/>
+                                    </form>
+                                </li>
+                                <li>
+                                    <a class="btn-site btn-shop" href="{{ route('site.fast_purchase.index') }}">
+                                        <span>{{ trans('site.products.carts.purchase_now') }}</span>
+                                    </a>
+                                </li>
+
+                            @endif
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
                 </table>
             </div>
 
-            @if(auth('web')->check())
+            @if(auth('web')->check() && !auth('web')->user()->checkActivePhone())
+
 
                 <div class="not-mobail">
                     <div class="sec-title">
-                        <img src="images/005-warning.svg" alt="" />
-                        <h2>يحتاج رقم الجوال الى تفعيل!</h2>
+                        <img src="{{ assert('site_assets/images/005-warning.svg') }}" alt="" />
+                        <h2>{{ trans('auth.phone_not_active') }}</h2>
                     </div>
-                    <figure><img src="images/not-mobail.png" alt="" /></figure>
+                    <figure><img src="{{ asset('site_assets/images/not-mobail.png') }}" alt="" /></figure>
+                </div>
+
+            @else
+            
+                <div class="col-md-4 col-sm-4 mx-auto my-4">
+                    <div class="clearfix">
+                        <ul class="menu-purches clearfix">
+                            <li class="login-btn">
+                                <img src="{{ asset('site_assets/images/icon-user.svg') }}" alt="{{ getTransSetting('websit_title', app()->getLocale()) }}" />
+                                <a class="model-auth" data-type="login" data-toggle="modal" data-target="#exampleModal">{{ trans('auth.sign_in') }}</a>
+                                <a class="model-auth" data-type="register" data-toggle="modal" data-target="#exampleModal">{{ trans('auth.create_acount') }}</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
             @endif
             
         </div>
     </section>
+
 @else
 
     <h2 class="text-center">{{ trans('admin.global.no_data_found') }}</h2>

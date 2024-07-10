@@ -146,8 +146,6 @@ class CurrencyController extends Controller
 
     public function bulkDelete(DeleteRequest $request)
     {
-        // $images = Currency::where('default', 0)->find(request()->ids ?? [])->pluck('flag')->toArray();
-        // Storage::disk('public')->delete($images) ?? '';
         Currency::destroy(request()->ids ?? []);
 
         session()->flash('success', __('admin.global.deleted_successfully'));

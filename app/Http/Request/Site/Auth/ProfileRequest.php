@@ -18,9 +18,9 @@ class ProfileRequest extends FormRequest
         $rules = [
             'name'          => ['required','min:2','max:30'],
             'email'         => ['required','email','min:2','max:255', Rule::unique('users')->ignore(auth()->id())],
-            'phone'         => ['required', 'string','min:2','max:25', 'unique:users'],
-            'phone_code'    => ['required', 'numeric','min:2'],
-            'country_code'  => ['required', 'string','min:2'],
+            'phone'         => ['required', 'string','min:2','max:25', Rule::unique('users')->ignore(auth()->id())],
+            'phone_code'    => ['required', 'numeric','min:1'],
+            'country_code'  => ['required', 'string','min:1'],
             'country_name'  => ['required', 'string','min:2'],
             'image'         => ['nullable','sometimes','nullable','image'],
         ];

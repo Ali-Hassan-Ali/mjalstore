@@ -91,44 +91,48 @@
                 dangerMode: true
             }).then((willDelete) => {
 
-                let uuid   = $(this).data('uuid');
-                let url    = `/cart/delete/${uuid}`; 
-                let method = 'delete';
+                if (willDelete) {
 
-                $('.remove-cart-' + uuid).remove();
+                    let uuid   = $(this).data('uuid');
+                    let url    = `/cart/delete/${uuid}`; 
+                    let method = 'delete';
 
-                $.ajax({
-                    url: url,
-                    method: method,
-                    success: function (cart) {
+                    $('.remove-cart-' + uuid).remove();
 
-                        $('#cart-menu-count').text(cart.count);
-                        $('.cart-total').text(cart.subtotal);
+                    $.ajax({
+                        url: url,
+                        method: method,
+                        success: function (cart) {
 
-                        swal({
-                            title: cart.message,
-                            type: 'success',
-                            icon: 'success',
-                            buttons: false,
-                            timer: 15000
-                        }); //end of swal
+                            $('#cart-menu-count').text(cart.count);
+                            $('.cart-total').text(cart.subtotal);
 
-                    },
-                    error: function (response) {
+                            swal({
+                                title: cart.message,
+                                type: 'success',
+                                icon: 'success',
+                                buttons: false,
+                                timer: 15000
+                            }); //end of swal
 
-                        data = response.responseJSON.message;
+                        },
+                        error: function (response) {
 
-                        swal({
-                            title: data + '😥',
-                            type: 'error',
-                            icon: 'error',
-                            buttons: false,
-                            timer: 15000
-                        }); //end of swal
+                            data = response.responseJSON.message;
 
-                    }, //end of success
-                    
-                });//end of ajax
+                            swal({
+                                title: data + '😥',
+                                type: 'error',
+                                icon: 'error',
+                                buttons: false,
+                                timer: 15000
+                            }); //end of swal
+
+                        }, //end of success
+                        
+                    });//end of ajax
+
+                }//end of willDelete
 
             }); //then
 
@@ -185,6 +189,102 @@
             });//end of ajax
 
         });//end of change-quantity
+
+        $(document).on('submit levup', '#cupon-cart', function (e) {
+            e.preventDefault();
+
+            let value  = $('#cupon-cart-input').val();
+            let url    = `/cart/cupon`;
+            let method = 'get';
+
+            $.ajax({
+                url: url,
+                method: method,
+                data: {code: value},
+                success: function (data) {
+
+                    swal({
+                        title: data.message,
+                        type: data.code == 200 ? 'success' : 'error',
+                        icon: data.code == 200 ? 'success' : 'error',
+                        buttons: false,
+                        timer: 15000
+                    }); //end of swal
+
+                    data.code == 200 ? location.reload() : '';
+                },
+                error: function (response) {
+
+                    data = response.responseJSON.message;
+
+                    swal({
+                        title: data + '😥',
+                        type: 'error',
+                        icon: 'error',
+                        buttons: false,
+                        timer: 15000
+                    }); //end of swal
+
+                }, //end of success
+                
+            });//end of ajax
+
+        });//end of submit cupon-cart
+
+        $(document).on('submit', '#cupon-delete-cart', function (e) {
+            e.preventDefault();
+
+            swal({
+                title: "{{ trans('admin.global.confirm') }}",
+                type: 'error',
+                icon: 'warning',
+                buttons: {cancel: "{{ trans('admin.global.no') }}", defeat: "{{ trans('admin.global.yes') }}"},
+                dangerMode: true
+            }).then((willDelete) => {
+
+                if (willDelete) {
+
+                    let value  = $('#cupon-cart-input').val();
+                    let url    = `/cart/cupon/delete`;
+                    let method = 'delete';
+
+                    $.ajax({
+                url: url,
+                method: method,
+                data: {code: value},
+                success: function (data) {
+
+                    swal({
+                        title: data.message,
+                        type: data.code == 200 ? 'success' : 'error',
+                        icon: data.code == 200 ? 'success' : 'error',
+                        buttons: false,
+                        timer: 15000
+                    }); //end of swal
+
+                    data.code == 200 ? location.reload() : '';
+                },
+                error: function (response) {
+
+                    data = response.responseJSON.message;
+
+                    swal({
+                        title: data + '😥',
+                        type: 'error',
+                        icon: 'error',
+                        buttons: false,
+                        timer: 15000
+                    }); //end of swal
+
+                }, //end of success
+                
+            });//end of ajax
+
+                }//end of willDelete
+
+            }); //then
+
+        });//end of submit cupon-cart
 
     });//end of document ready
 

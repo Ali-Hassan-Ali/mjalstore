@@ -74,4 +74,10 @@
 
     </form><!-- end of form -->
 
+    <x-slot name="script">
+        <script>
+            alert('fdf');
+        </script>
+    </x-slot>
+
 </x-admin.layout.app>
